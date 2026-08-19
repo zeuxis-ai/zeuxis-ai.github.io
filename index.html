@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zeuxis — the brief already contains the building</title>
+<meta name="description" content="Zeuxis reads the brief, the zoning code and the site, generates every volume that satisfies them, simulates each one, and returns the few worth looking at.">
+<meta property="og:title" content="Zeuxis">
+<meta property="og:description" content="The brief already contains the building.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230e0e0f'/><rect x='9' y='7' width='5' height='18' fill='%23d08a4e'/><rect x='17' y='12' width='5' height='13' fill='%23ece7df'/></svg>">
+<style>
+  :root{
+    --ink:#ece7df;
+    --ink-dim:#9a948b;
+    --ink-faint:#5c5850;
+    --bg:#0e0e0f;
+    --accent:#d08a4e;
+    --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua','Times New Roman',serif;
+    --sans:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:clamp(2.5rem,7vw,6rem) clamp(1.5rem,5vw,2rem) 4rem;
+  }
+
+  /* masthead */
+  header{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:1rem;
+    padding-bottom:clamp(3rem,9vw,6rem);
+  }
+  .mark{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:.95rem;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    margin:0;
+  }
+  .meta{
+    font-size:.78rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0;
+  }
+
+  /* thesis */
+  h1{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(2.1rem,6.4vw,3.9rem);
+    line-height:1.08;
+    letter-spacing:-.015em;
+    margin:0 0 1.6rem;
+    max-width:15ch;
+  }
+  h1 em{font-style:italic;color:var(--accent)}
+
+  .lede{
+    font-size:clamp(1.05rem,2.4vw,1.22rem);
+    line-height:1.55;
+    color:var(--ink);
+    max-width:52ch;
+    margin:0 0 2.6rem;
+  }
+
+  /* canvas */
+  figure{margin:0 0 .9rem}
+  canvas{
+    display:block;
+    width:100%;
+    height:auto;
+    border:1px solid #232326;
+    background:#111112;
+  }
+  figcaption{
+    font-size:.76rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-top:.7rem;
+  }
+
+  /* rules + sections */
+  hr{
+    border:0;
+    border-top:1px solid #232326;
+    margin:clamp(3rem,8vw,4.5rem) 0 clamp(1.6rem,4vw,2.2rem);
+  }
+  h2{
+    font-family:var(--sans);
+    font-size:.76rem;
+    font-weight:600;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 1.1rem;
+  }
+  p{max-width:62ch;margin:0 0 1.15rem;color:var(--ink)}
+  p.dim{color:var(--ink-dim)}
+  .serif-note{
+    font-family:var(--serif);
+    font-size:1.05rem;
+    line-height:1.62;
+    color:var(--ink-dim);
+    max-width:58ch;
+  }
+  .serif-note b{color:var(--ink);font-weight:400;font-style:italic}
+
+  ol{
+    counter-reset:step;
+    list-style:none;
+    padding:0;
+    margin:0;
+    max-width:62ch;
+  }
+  ol li{
+    counter-increment:step;
+    position:relative;
+    padding-left:2.6rem;
+    margin-bottom:1.15rem;
+  }
+  ol li::before{
+    content:counter(step,decimal-leading-zero);
+    position:absolute;
+    left:0;
+    top:.15rem;
+    font-size:.76rem;
+    letter-spacing:.08em;
+    color:var(--accent);
+    font-variant-numeric:tabular-nums;
+  }
+  li b{font-weight:600}
+
+  footer{
+    margin-top:clamp(3.5rem,9vw,5.5rem);
+    padding-top:1.6rem;
+    border-top:1px solid #232326;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.6rem 2.2rem;
+    align-items:baseline;
+    font-size:.85rem;
+    color:var(--ink-faint);
+  }
+  a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink-faint);padding-bottom:1px}
+  a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
+  @media (prefers-reduced-motion:reduce){
+    canvas{opacity:.9}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="mark">Zeuxis</p>
+    <p class="meta">Zürich</p>
+  </header>
+
+  <h1>The brief already <em>contains</em> the building.</h1>
+
+  <p class="lede">
+    A developer wants a return. The city regulates the geometry. The environment sets the targets.
+    Six hundred pages of brief, zoning and landscape law, and thousands of hours spent composing one
+    volume out of everything it has to be.
+  </p>
+
+  <figure>
+    <canvas id="field" width="1400" height="620" aria-label="Animation: hundreds of possible building volumes are generated on a site, evaluated, and reduced to the few that survive."></canvas>
+    <figcaption>Generate exhaustively. Evaluate physically. Return the few that survive.</figcaption>
+  </figure>
+
+  <hr>
+
+  <h2>What it does</h2>
+  <ol>
+    <li><b>Reads the documents.</b> The brief, the zoning code, the preservation constraints, the noise and cost limits. Not a parameter form. The constraints already exist, written down.</li>
+    <li><b>Generates every volume that satisfies them.</b> Exhaustively, because that is the only way to know nothing viable was missed.</li>
+    <li><b>Simulates each one properly.</b> Energy, daylight, cost, on real watertight geometry through a real solver. Not a proxy score.</li>
+    <li><b>Throws almost all of it away.</b> What arrives is a handful, and the evidence of what it survived. Every discarded scheme is inspectable, with the reason it was cut.</li>
+  </ol>
+
+  <hr>
+
+  <h2>Position</h2>
+  <p>
+    We do not design the building. We find the few worth looking at, so the architect starts there
+    on day one instead of month three.
+  </p>
+  <p class="dim">
+    An architect does not want a bigger search space. They want a smaller one. Generation is the
+    mechanism. Reduction is the product.
+  </p>
+
+  <hr>
+
+  <h2>The name</h2>
+  <p class="serif-note">
+    Zeuxis was commissioned by the city of Croton to paint Helen, the most beautiful woman in the
+    world. He could not find a single model who had all of it, so he chose five and composed one
+    image from the best of each. Note what the story actually says: <b>Helen already existed,
+    distributed across the women of Croton.</b> The work was the looking.
+  </p>
+
+  <footer>
+    <span>Zeuxis</span>
+    <span><a href="mailto:seshadri@arch.ethz.ch">seshadri@arch.ethz.ch</a></span>
+    <span>ETH Zürich</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var cv = document.getElementById('field');
+  var ctx = cv.getContext('2d');
+  var W = cv.width, H = cv.height;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // deterministic PRNG so the composition is designed, not accidental
+  var seed = 20260924;
+  function rnd(){ seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }
+
+  var INK = '#ece7df', DIM = '#3a3a3e', ACC = '#d08a4e';
+  var PAD = 70;
+  var blocks = [];
+  var N = 260;
+
+  for (var i = 0; i < N; i++){
+    var w = 40 + rnd()*110;
+    var h = 26 + rnd()*80;
+    blocks.push({
+      x: PAD + rnd()*(W - PAD*2 - w),
+      y: PAD + rnd()*(H - PAD*2 - h),
+      w: w, h: h,
+      depth: 6 + rnd()*16,
+      born: rnd(),
+      keep: false
+    });
+  }
+  // the survivors: five, spaced across the site, chosen by hand
+  var picks = [];
+  var sorted = blocks.slice().sort(function(a,b){ return a.x - b.x; });
+  for (var k = 0; k < 5; k++){
+    var idx = Math.floor((k + 0.5) / 5 * sorted.length);
+    sorted[idx].keep = true;
+    picks.push(sorted[idx]);
+  }
+
+  function drawBlock(b, alpha, stroke, fill){
+    ctx.globalAlpha = alpha;
+    var d = b.depth;
+    if (fill){ ctx.fillStyle = fill; ctx.fillRect(b.x, b.y, b.w, b.h); }
+    // extruded top face, a hint of volume rather than a full isometric
+    ctx.strokeStyle = stroke;
+    ctx.lineWidth = 1;
+    ctx.strokeRect(b.x, b.y, b.w, b.h);
+    ctx.beginPath();
+    ctx.moveTo(b.x, b.y);            ctx.lineTo(b.x + d, b.y - d);
+    ctx.lineTo(b.x + b.w + d, b.y - d); ctx.lineTo(b.x + b.w, b.y);
+    ctx.moveTo(b.x + b.w + d, b.y - d); ctx.lineTo(b.x + b.w + d, b.y + b.h - d);
+    ctx.lineTo(b.x + b.w, b.y + b.h);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
+  var CYCLE = 9000, t0 = null;
+
+  function frame(ts){
+    if (t0 === null) t0 = ts;
+    var t = ((ts - t0) % CYCLE) / CYCLE;   // 0..1
+
+    ctx.clearRect(0,0,W,H);
+    // site outline
+    ctx.strokeStyle = '#232326';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(PAD - 26, PAD - 26, W - (PAD-26)*2, H - (PAD-26)*2);
+
+    // phases: 0.00-0.35 generate | 0.35-0.55 evaluate | 0.55-0.75 reduce | 0.75-1.0 hold
+    var gen = Math.min(1, t / 0.35);
+    var evalP = (t - 0.35) / 0.20;
+    var red = (t - 0.55) / 0.20;
+
+    for (var i = 0; i < blocks.length; i++){
+      var b = blocks[i];
+      if (b.born > gen) continue;
+      var a = 0.5;
+      var stroke = DIM;
+      if (t > 0.55){
+        var r = Math.min(1, Math.max(0, red));
+        if (b.keep){ a = 0.5 + 0.5*r; stroke = ACC; }
+        else { a = 0.5 * (1 - r); }
+      }
+      if (a <= 0.01) continue;
+      drawBlock(b, a, b.keep && t > 0.55 ? ACC : stroke, null);
+    }
+
+    // evaluation sweep
+    if (evalP > 0 && evalP < 1){
+      var sx = PAD - 26 + evalP * (W - (PAD-26)*2);
+      var g = ctx.createLinearGradient(sx - 90, 0, sx + 10, 0);
+      g.addColorStop(0, 'rgba(208,138,78,0)');
+      g.addColorStop(1, 'rgba(208,138,78,0.5)');
+      ctx.fillStyle = g;
+      ctx.fillRect(sx - 90, PAD - 26, 100, H - (PAD-26)*2);
+      ctx.strokeStyle = 'rgba(208,138,78,0.85)';
+      ctx.beginPath(); ctx.moveTo(sx, PAD - 26); ctx.lineTo(sx, H - PAD + 26); ctx.stroke();
+    }
+
+    // counter
+    var shown = 0;
+    for (var j = 0; j < blocks.length; j++) if (blocks[j].born <= gen) shown++;
+    var label = t > 0.62 ? '5 remaining' : shown + ' generated';
+    ctx.globalAlpha = 0.75;
+    ctx.fillStyle = t > 0.62 ? ACC : '#6d6a63';
+    ctx.font = '500 15px system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif';
+    ctx.fillText(label, PAD - 26, H - 22);
+    ctx.globalAlpha = 1;
+
+    requestAnimationFrame(frame);
+  }
+
+  if (reduce){
+    // static end state
+    ctx.strokeStyle = '#232326';
+    ctx.strokeRect(PAD - 26, PAD - 26, W - (PAD-26)*2, H - (PAD-26)*2);
+    blocks.forEach(function(b){ drawBlock(b, b.keep ? 1 : 0.16, b.keep ? ACC : DIM, null); });
+  } else {
+    requestAnimationFrame(frame);
+  }
+})();
+</script>
+</body>
+</html>
