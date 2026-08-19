@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zeuxis — the brief already contains the building</title>
-<meta name="description" content="Zeuxis reads the brief, the zoning code and the site, generates every volume that satisfies them, simulates each one, and returns the few worth looking at.">
+<meta name="description" content="Zeuxis reads the brief, the zoning code and the site, generates every volume that satisfies them, simulates the top one percent, and returns the few worth looking at.">
 <meta property="og:title" content="Zeuxis">
 <meta property="og:description" content="The brief already contains the building.">
 <meta property="og:type" content="website">
@@ -15,209 +15,447 @@
     --ink-dim:#9a948b;
     --ink-faint:#5c5850;
     --bg:#0e0e0f;
+    --bg-raised:#131315;
     --accent:#d08a4e;
+    --accent-dim:rgba(208,138,78,.28);
+    --cool:#6f8794;
+    --line:#232326;
     --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua','Times New Roman',serif;
     --sans:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+    --mono:'SF Mono','Berkeley Mono',ui-monospace,'Courier New',monospace;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:var(--sans);
-    font-size:17px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
-  }
-  .wrap{
-    max-width:760px;
-    margin:0 auto;
-    padding:clamp(2.5rem,7vw,6rem) clamp(1.5rem,5vw,2rem) 4rem;
-  }
-  .wide{max-width:1040px}
-
-  header{
-    display:flex;
-    align-items:baseline;
-    justify-content:space-between;
-    gap:1rem;
-    padding-bottom:clamp(3rem,9vw,6rem);
-  }
-  .mark{
-    font-weight:600;
-    font-size:.95rem;
-    letter-spacing:.34em;
-    text-transform:uppercase;
-    margin:0;
-  }
-  .meta{
-    font-size:.78rem;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--ink-faint);
-    margin:0;
+    background:var(--bg); color:var(--ink);
+    font-family:var(--sans); font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    overflow-x:hidden;
   }
 
+  #scrollbar{
+    position:fixed; top:0; left:0; height:2px; width:0%;
+    background:var(--accent); z-index:80; box-shadow:0 0 10px var(--accent-dim);
+    transition:width .05s linear;
+  }
+
+  .swap{ display:inline-block; position:relative; overflow:hidden; vertical-align:bottom; line-height:1.25; }
+  .swap span{ display:block; transition:transform .38s cubic-bezier(.2,.75,.2,1); }
+  .swap span.dup{ position:absolute; top:100%; left:0; color:var(--accent); }
+  .swap:hover span{ transform:translateY(-100%); }
+
+  nav{
+    position:sticky; top:0; z-index:60;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:.85rem clamp(1.2rem,5vw,2rem);
+    background:rgba(14,14,15,.8); backdrop-filter:blur(12px) saturate(1.1);
+    border-bottom:1px solid transparent; transition:border-color .3s ease;
+  }
+  nav.scrolled{ border-bottom-color:var(--line); }
+  .nav-mark{ font-weight:600; font-size:.8rem; letter-spacing:.32em; text-transform:uppercase; }
+  .nav-links{ display:flex; gap:1.5rem; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; }
+  .nav-links a{ color:var(--ink-faint); }
+  @media (max-width:560px){ .nav-links{ gap:.95rem; } .nav-links .hide-sm{ display:none; } }
+
+  .reg{ position:fixed; width:15px; height:15px; z-index:45; pointer-events:none; opacity:.45; }
+  .reg::before,.reg::after{content:'';position:absolute;background:var(--ink-faint)}
+  .reg::before{width:100%;height:1px;top:50%;left:0}
+  .reg::after{width:1px;height:100%;left:50%;top:0}
+  .reg.tl{top:70px;left:14px} .reg.tr{top:70px;right:14px}
+  .reg.bl{bottom:14px;left:14px} .reg.br{bottom:14px;right:14px}
+  @media (max-width:900px){ .reg{display:none} }
+
+  .wrap{ max-width:780px; margin:0 auto; padding:0 clamp(1.2rem,5vw,2rem); position:relative; }
+  .wide{ max-width:1180px; margin:0 auto; padding:0 clamp(1.2rem,5vw,2rem); }
+
+  .eyebrow{
+    font-size:.7rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--ink-faint); margin:0 0 1.2rem; display:block;
+  }
+  .eyebrow::after{ content:'/'; color:var(--accent); margin-left:.35em; }
+
+  .mask{ display:block; overflow:hidden; }
+  .mask > i{ display:block; font-style:inherit; transform:translateY(105%); transition:transform .9s cubic-bezier(.16,.84,.24,1); }
+  .mask.in > i{ transform:translateY(0); }
+
+  .hero{ padding:clamp(3rem,9vw,6rem) 0 clamp(2rem,5vw,3rem); }
   h1{
-    font-family:var(--serif);
-    font-weight:400;
-    font-size:clamp(2.1rem,6.4vw,3.9rem);
-    line-height:1.08;
-    letter-spacing:-.015em;
-    margin:0 0 1.6rem;
-    max-width:15ch;
+    font-family:var(--serif); font-weight:400;
+    font-size:clamp(2.2rem,6.6vw,4.1rem); line-height:1.06; letter-spacing:-.018em;
+    margin:0 0 1.7rem; max-width:16ch;
   }
-  h1 em{font-style:italic;color:var(--accent)}
+  h1 em{ font-style:italic; color:var(--accent); }
+  .lede{ font-size:clamp(1.02rem,2.3vw,1.2rem); line-height:1.55; max-width:52ch; margin:0 0 2.2rem; }
 
-  .lede{
-    font-size:clamp(1.05rem,2.4vw,1.22rem);
-    line-height:1.55;
-    max-width:52ch;
-    margin:0 0 2.8rem;
+  .scroll-cue{
+    display:flex; align-items:center; gap:.6rem;
+    font-size:.68rem; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--ink-faint); margin-bottom:2.4rem; opacity:0; animation:fadeIn .8s 1s forwards;
+  }
+  .scroll-cue .bar{ width:34px; height:1px; background:var(--ink-faint); position:relative; overflow:hidden; }
+  .scroll-cue .bar::after{ content:''; position:absolute; inset:0; background:var(--accent); animation:sweep 2.2s cubic-bezier(.5,0,.5,1) infinite; }
+  @keyframes sweep{ 0%{transform:translateX(-100%)} 60%,100%{transform:translateX(100%)} }
+  @keyframes fadeIn{ to{opacity:1} }
+
+  .stat-row{
+    display:flex; flex-wrap:wrap; gap:1.6rem 2.6rem;
+    padding-top:1.3rem; border-top:1px solid var(--line);
+    opacity:0; transform:translateY(12px);
+    animation:riseIn .8s .7s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  @keyframes riseIn{ to{opacity:1;transform:translateY(0)} }
+  .stat{ min-width:7rem; }
+  .stat-num{ font-family:var(--serif); font-style:italic; color:var(--accent); font-size:1.65rem; line-height:1; font-variant-numeric:tabular-nums; }
+  .stat-lbl{ font-size:.66rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint); margin-top:.35rem; max-width:16ch; }
+
+  .marquee{
+    margin-top:clamp(2.6rem,7vw,4rem);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:.75rem 0; overflow:hidden; position:relative;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  }
+  .marquee-track{ display:flex; width:max-content; animation:slide 44s linear infinite; }
+  .marquee-track span{
+    font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-faint);
+    padding:0 1.5rem; white-space:nowrap; display:flex; align-items:center; gap:1.5rem;
+  }
+  .marquee-track span::after{ content:''; width:3px; height:3px; background:var(--accent); opacity:.6; }
+  @keyframes slide{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  .scroll-stage{ position:relative; height:700vh; margin:clamp(2rem,6vw,3rem) 0 0; }
+  @media (max-width:640px){ .scroll-stage{ height:520vh; } }
+  .stage-sticky{
+    position:sticky; top:54px; height:calc(100vh - 54px); min-height:500px;
+    display:flex; flex-direction:column; justify-content:center; gap:.85rem; padding:1rem 0;
+  }
+  .canvas-box{
+    position:relative; width:100%; aspect-ratio:1500/700;
+    border:1px solid var(--line);
+    background:radial-gradient(120% 140% at 15% 0%, #161617 0%, #101011 60%, #0c0c0d 100%);
+    overflow:hidden;
+  }
+  canvas{ display:block; width:100%; height:100%; }
+
+  .kpi-layer{ position:absolute; inset:0; pointer-events:none; }
+  .kpi{
+    position:absolute; width:112px; padding:.3rem .4rem .32rem;
+    background:rgba(14,14,15,.92); border:1px solid rgba(208,138,78,.75);
+    transform:translate(-50%,4px); opacity:0; pointer-events:none;
+    transition:opacity .22s ease, transform .22s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .kpi.show{ transform:translate(-50%,0); pointer-events:auto; }
+  .kpi.hover{ border-color:var(--accent); box-shadow:0 0 14px var(--accent-dim); }
+  .kpi-id{ font-size:.5rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:.2rem; }
+  .kpi-row{ display:flex; justify-content:space-between; gap:.3rem; font-size:.5rem; color:var(--ink-faint); line-height:1.5; }
+  .kpi-row b{ font-family:var(--mono); font-weight:500; color:var(--ink-dim); font-size:.54rem; }
+
+  .dossier{
+    position:absolute; top:5%; right:2.2%; width:min(250px,31%);
+    background:rgba(11,11,12,.93); border:1px solid rgba(208,138,78,.55);
+    padding:.85rem .9rem .9rem; opacity:0; transform:translateX(18px); pointer-events:none;
+    transition:opacity .5s ease, transform .5s cubic-bezier(.2,.75,.2,1);
+    backdrop-filter:blur(3px);
+  }
+  .dossier.show{ opacity:1; transform:translateX(0); }
+  .dossier-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding-bottom:.5rem; margin-bottom:.5rem; border-bottom:1px solid rgba(208,138,78,.35);
+  }
+  .dossier-head .d-id{ font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:600; }
+  .dossier-head .d-fit{ font-family:var(--serif); font-style:italic; color:var(--accent); font-size:1rem; }
+  .d-row{
+    display:flex; justify-content:space-between; align-items:baseline; gap:.6rem;
+    font-size:.6rem; letter-spacing:.05em; color:var(--ink-faint); padding:.2rem 0; text-transform:uppercase;
+  }
+  .d-row b{ font-family:var(--mono); font-weight:500; color:var(--ink); font-size:.66rem; text-transform:none; letter-spacing:0; }
+  .d-sub{ font-size:.55rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); margin:.7rem 0 .45rem; padding-top:.5rem; border-top:1px solid rgba(255,255,255,.07); }
+  .mix-bar{ display:flex; height:6px; gap:2px; margin-bottom:.45rem; }
+  .mix-bar i{ display:block; height:100%; }
+  .mix-legend{ display:flex; flex-direction:column; gap:.2rem; }
+  .mix-legend div{ display:flex; align-items:center; gap:.4rem; font-size:.58rem; color:var(--ink-dim); }
+  .mix-legend em{ width:7px; height:7px; display:inline-block; font-style:normal; flex:0 0 auto; }
+  .mix-legend b{ margin-left:auto; font-family:var(--mono); font-size:.6rem; color:var(--ink); font-weight:500; }
+  @media (max-width:560px){
+    .dossier{ width:46%; padding:.55rem; top:3%; }
+    .d-row, .mix-legend div{ font-size:.52rem; } .d-row b{ font-size:.56rem; }
   }
 
-  figure{margin:0 0 .9rem}
-  canvas{
-    display:block;
-    width:100%;
-    height:auto;
-    border:1px solid #232326;
-    background:#101011;
-  }
-  figcaption{
-    font-size:.76rem;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--ink-faint);
-    margin-top:.75rem;
-    display:flex;
-    flex-wrap:wrap;
-    gap:.3rem 1.4rem;
-  }
-  figcaption b{color:var(--accent);font-weight:500}
+  .score-bar{ display:flex; align-items:center; justify-content:space-between; gap:1.5rem; min-height:1.6rem; }
+  .phase{ display:flex; align-items:center; gap:.5rem; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-dim); transition:color .3s ease; }
+  .phase .dot{ width:5px; height:5px; border-radius:50%; background:var(--ink-faint); transition:background .3s ease, box-shadow .3s ease; }
+  .phase.active{ color:var(--accent); }
+  .phase.active .dot{ background:var(--accent); box-shadow:0 0 8px var(--accent); }
+  .score-final{ display:flex; align-items:baseline; gap:.5rem; opacity:0; transform:translateY(6px); transition:opacity .4s ease, transform .4s ease; }
+  .score-final.show{ opacity:1; transform:translateY(0); }
+  .score-final .num{ font-family:var(--serif); font-style:italic; color:var(--accent); font-size:1.4rem; line-height:1; }
+  .score-final .lbl{ font-size:.72rem; color:var(--ink-faint); max-width:34ch; }
+  figcaption{ font-size:.7rem; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-faint); display:flex; flex-wrap:wrap; gap:.3rem 1.4rem; }
+  figcaption b{ color:var(--accent); font-weight:500; }
 
-  hr{
-    border:0;
-    border-top:1px solid #232326;
-    margin:clamp(3rem,8vw,4.5rem) 0 clamp(1.6rem,4vw,2.2rem);
-  }
-  h2{
-    font-size:.76rem;
-    font-weight:600;
-    letter-spacing:.2em;
-    text-transform:uppercase;
-    color:var(--ink-faint);
-    margin:0 0 1.1rem;
-  }
-  p{max-width:62ch;margin:0 0 1.15rem}
-  p.dim{color:var(--ink-dim)}
-  .serif-note{
-    font-family:var(--serif);
-    font-size:1.05rem;
-    line-height:1.62;
-    color:var(--ink-dim);
-    max-width:58ch;
-  }
-  .serif-note b{color:var(--ink);font-weight:400;font-style:italic}
+  section{ padding:clamp(3.5rem,9vw,6rem) 0; }
+  .cap{ display:flex; gap:1.5rem; align-items:flex-start; padding:1.4rem 0; border-top:1px solid var(--line); transition:background .35s ease; }
+  .cap:last-child{ border-bottom:1px solid var(--line); }
+  .cap:hover{ background:rgba(208,138,78,.035); }
+  .cap-n{ font-size:.68rem; letter-spacing:.1em; color:var(--accent); font-variant-numeric:tabular-nums; padding-top:.45rem; min-width:2.2rem; }
+  .cap-body h3{ font-family:var(--serif); font-weight:400; font-size:clamp(1.15rem,2.8vw,1.5rem); margin:0 0 .45rem; }
+  .cap-body p{ margin:0; color:var(--ink-dim); font-size:.95rem; max-width:56ch; }
 
-  ol{counter-reset:step;list-style:none;padding:0;margin:0;max-width:62ch}
-  ol li{
-    counter-increment:step;
-    position:relative;
-    padding-left:2.6rem;
-    margin-bottom:1.15rem;
+  .statement{
+    font-family:var(--serif); font-weight:400;
+    font-size:clamp(1.7rem,5.2vw,3.1rem); line-height:1.14; letter-spacing:-.012em;
+    max-width:20ch; margin:0 0 1.6rem;
   }
-  ol li::before{
-    content:counter(step,decimal-leading-zero);
-    position:absolute;left:0;top:.15rem;
-    font-size:.76rem;letter-spacing:.08em;
-    color:var(--accent);
-    font-variant-numeric:tabular-nums;
-  }
-  li b{font-weight:600}
+  .statement em{ font-style:italic; color:var(--accent); }
+  .word{ display:inline-block; overflow:hidden; vertical-align:bottom; }
+  .word > i{ display:inline-block; font-style:inherit; transform:translateY(105%); transition:transform .7s cubic-bezier(.16,.84,.24,1); }
+  .statement.in .word > i{ transform:translateY(0); }
 
-  footer{
-    margin-top:clamp(3.5rem,9vw,5.5rem);
-    padding-top:1.6rem;
-    border-top:1px solid #232326;
-    display:flex;flex-wrap:wrap;
-    gap:.6rem 2.2rem;align-items:baseline;
-    font-size:.85rem;color:var(--ink-faint);
+  p{ max-width:60ch; margin:0 0 1.1rem; }
+  p.dim{ color:var(--ink-dim); }
+  .serif-note{ font-family:var(--serif); font-size:1.05rem; line-height:1.62; color:var(--ink-dim); max-width:58ch; }
+  .serif-note b{ color:var(--ink); font-weight:400; font-style:italic; }
+
+  .compare{
+    display:flex; gap:clamp(1.5rem,5vw,3rem); flex-wrap:wrap;
+    margin-top:2rem; padding:1.5rem clamp(1.1rem,4vw,1.8rem);
+    border:1px solid var(--line); background:var(--bg-raised);
   }
-  a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink-faint);padding-bottom:1px}
-  a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+  .compare-col{ flex:1 1 210px; }
+  .cc-label{ font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:.85rem; }
+  .cc-label::after{ content:'/'; color:var(--accent); margin-left:.35em; }
+  .field-grid{ display:grid; grid-template-columns:repeat(10,1fr); gap:3px; }
+  .field-grid span{ aspect-ratio:1; background:#2b2b2f; opacity:.45; transition:opacity .5s ease; }
+  .compare.in .field-grid span{ opacity:.8; }
+  .short-row{ display:flex; gap:8px; align-items:flex-end; height:58px; }
+  .short-row span{ flex:1; background:var(--accent); opacity:.12; height:18%; transition:opacity .6s ease, height .7s cubic-bezier(.2,.75,.2,1); }
+  .compare.in .short-row span{ opacity:1; box-shadow:0 0 12px var(--accent-dim); }
+  .compare.in .short-row span:nth-child(1){ height:55%; transition-delay:.06s }
+  .compare.in .short-row span:nth-child(2){ height:86%; transition-delay:.16s }
+  .compare.in .short-row span:nth-child(3){ height:64%; transition-delay:.26s }
+  .compare.in .short-row span:nth-child(4){ height:100%; transition-delay:.36s }
+  .compare.in .short-row span:nth-child(5){ height:73%; transition-delay:.46s }
+  .cc-caption{ margin-top:.8rem; font-size:.82rem; color:var(--ink-dim); }
+  .cc-caption b{ color:var(--ink); font-weight:600; }
+
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  footer{ border-top:1px solid var(--line); padding-top:clamp(2.5rem,6vw,4rem); padding-bottom:2rem; }
+  .cta-line{ font-family:var(--serif); font-style:italic; font-weight:400; font-size:clamp(1.6rem,5vw,2.8rem); line-height:1.12; margin:0 0 2.6rem; max-width:18ch; }
+  .cta-line a{ color:var(--accent); border-bottom:1px solid var(--accent-dim); }
+  .cta-line a:hover{ border-bottom-color:var(--accent); }
+  .foot-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:2rem 1.5rem; padding-top:2rem; border-top:1px solid var(--line); }
+  .foot-col h4{ font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 .9rem; font-weight:500; }
+  .foot-col h4::after{ content:'/'; color:var(--accent); margin-left:.35em; }
+  .foot-col p, .foot-col a{ font-size:.86rem; color:var(--ink-dim); margin:0 0 .35rem; display:block; max-width:none; }
+  .foot-col a{ color:var(--ink); }
+  .foot-base{
+    margin-top:2.6rem; padding-top:1.2rem; border-top:1px solid var(--line);
+    display:flex; flex-wrap:wrap; gap:.5rem 1.6rem; justify-content:space-between;
+    font-size:.74rem; letter-spacing:.06em; color:var(--ink-faint);
+  }
+
+  a{ color:var(--ink); text-decoration:none; }
+  a:hover{ color:var(--accent); }
+
+  @media (prefers-reduced-motion:reduce){
+    .mask > i, .word > i{ transform:none !important; transition:none !important; }
+    .reveal, .stat-row, .scroll-cue{ animation:none !important; transition:none !important; opacity:1 !important; transform:none !important; }
+    .marquee-track{ animation:none; }
+    .scroll-cue .bar::after{ animation:none; }
+  }
 </style>
 </head>
 <body>
-<div class="wrap wide">
 
-  <header>
-    <p class="mark">Zeuxis</p>
-    <p class="meta">Zürich</p>
-  </header>
+<div id="scrollbar"></div>
+<div class="reg tl"></div><div class="reg tr"></div>
+<div class="reg bl"></div><div class="reg br"></div>
 
-  <div style="max-width:760px">
-    <h1>The brief already <em>contains</em> the building.</h1>
+<nav id="siteNav">
+  <span class="nav-mark">Zeuxis</span>
+  <div class="nav-links">
+    <a class="swap" href="#process"><span>Process</span><span class="dup">Process</span></a>
+    <a class="swap" href="#position"><span>Position</span><span class="dup">Position</span></a>
+    <a class="swap hide-sm" href="#name"><span>The name</span><span class="dup">The name</span></a>
+    <a class="swap" href="#contact"><span>Contact</span><span class="dup">Contact</span></a>
+  </div>
+</nav>
 
+<div class="wide">
+
+  <div class="hero" id="hero">
+    <span class="eyebrow">Zürich — generative massing, evaluated</span>
+    <h1>
+      <span class="mask"><i>The brief already</i></span>
+      <span class="mask"><i><em>contains</em> the building.</i></span>
+    </h1>
     <p class="lede">
-      A developer wants a return. The city regulates the geometry. The environment sets the targets.
-      Six hundred pages of brief, zoning and landscape law, and thousands of hours spent composing one
-      volume out of everything it has to be.
+      <span class="mask"><i>A developer wants a return. The city regulates the geometry.</i></span>
+      <span class="mask"><i>The environment sets the targets. Six hundred pages of brief,</i></span>
+      <span class="mask"><i>zoning and landscape law, and thousands of hours spent composing</i></span>
+      <span class="mask"><i>one volume out of everything it has to be.</i></span>
     </p>
+    <div class="scroll-cue"><span class="bar"></span>Scroll to run the search</div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num" id="statC">0</div><div class="stat-lbl">constraints read from the documents</div></div>
+      <div class="stat"><div class="stat-num" id="statP">0</div><div class="stat-lbl">geometries enumerated</div></div>
+      <div class="stat"><div class="stat-num">1%</div><div class="stat-lbl">carried into full simulation</div></div>
+      <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">schemes reach the architect</div></div>
+    </div>
   </div>
 
-  <figure>
-    <canvas id="field" width="1500" height="700" aria-label="Animation: typed building volumes are generated across two development fields, evaluated, then eliminated one by one against the zoning rules until five schemes remain."></canvas>
-    <figcaption>
-      <span>Generate exhaustively</span>
-      <span>Evaluate physically</span>
-      <span><b>Keep the few that survive</b></span>
-    </figcaption>
-  </figure>
+  <div class="marquee"><div class="marquee-track" id="marqueeTrack"></div></div>
 
-  <div style="max-width:760px">
-    <hr>
-
-    <h2>What it does</h2>
-    <ol>
-      <li><b>Reads the documents.</b> The brief, the zoning code, the preservation constraints, the noise and cost limits. Not a parameter form. The constraints already exist, written down.</li>
-      <li><b>Generates every volume that satisfies them.</b> Real typologies with real roofs, at the dimensions the rules and the plan actually permit. Exhaustively, because that is the only way to know nothing viable was missed.</li>
-      <li><b>Simulates each one properly.</b> Energy, daylight, cost, on watertight geometry through a real solver. Not a proxy score.</li>
-      <li><b>Throws almost all of it away.</b> What arrives is a handful, and the evidence of what it survived. Every discarded scheme is inspectable, with the reason it was cut.</li>
-    </ol>
-
-    <hr>
-
-    <h2>Position</h2>
-    <p>
-      We do not design the building. We find the few worth looking at, so the architect starts there
-      on day one instead of month three.
-    </p>
-    <p class="dim">
-      An architect does not want a bigger search space. They want a smaller one. Generation is the
-      mechanism. Reduction is the product.
-    </p>
-
-    <hr>
-
-    <h2>The name</h2>
-    <p class="serif-note">
-      Zeuxis was commissioned by the city of Croton to paint Helen, the most beautiful woman in the
-      world. He could not find a single model who had all of it, so he chose five and composed one
-      image from the best of each. Note what the story actually says: <b>Helen already existed,
-      distributed across the women of Croton.</b> The work was the looking.
-    </p>
-
-    <footer>
-      <span>Zeuxis</span>
-      <span><a href="mailto:seshadri@arch.ethz.ch">seshadri@arch.ethz.ch</a></span>
-    </footer>
+  <div class="scroll-stage" id="stage">
+    <div class="stage-sticky">
+      <div class="canvas-box">
+        <canvas id="field" width="1500" height="700" aria-label="Animation: typed building volumes are generated across two development fields, evaluated, eliminated one by one against the zoning rules until five schemes remain, and then one scheme is enlarged, rotated and x-rayed to show its circulation and unit mix."></canvas>
+        <div class="kpi-layer" id="kpiLayer"></div>
+        <div class="dossier" id="dossier">
+          <div class="dossier-head">
+            <span class="d-id" id="dId">Blockrand</span>
+            <span class="d-fit" id="dFit">—</span>
+          </div>
+          <div class="d-row"><span>Storeys</span><b id="dFloors">—</b></div>
+          <div class="d-row"><span>GFA</span><b id="dGfa">—</b></div>
+          <div class="d-row"><span>Units</span><b id="dUnits">—</b></div>
+          <div class="d-row"><span>Cores</span><b id="dCore">—</b></div>
+          <div class="d-row"><span>Energy</span><b id="dEne">—</b></div>
+          <div class="d-row"><span>Daylight</span><b id="dDay">—</b></div>
+          <div class="d-row"><span>Cost Δ</span><b id="dCost">—</b></div>
+          <div class="d-sub">Unit mix</div>
+          <div class="mix-bar" id="mixBar"></div>
+          <div class="mix-legend" id="mixLegend"></div>
+        </div>
+      </div>
+      <div class="score-bar">
+        <span class="phase" id="phaseLabel"><span class="dot"></span>Generating</span>
+        <div class="score-final" id="scoreFinal">
+          <span class="num" id="scoreNum">—</span>
+          <span class="lbl">composite site-fit across the survivors</span>
+        </div>
+      </div>
+      <figcaption>
+        <span>Generate exhaustively</span>
+        <span>Evaluate physically</span>
+        <span><b>Keep the few that survive</b></span>
+      </figcaption>
+    </div>
   </div>
 
 </div>
 
+<div class="wrap">
+
+  <section id="process">
+    <span class="eyebrow reveal">What it does</span>
+    <div class="cap reveal">
+      <div class="cap-n">01</div>
+      <div class="cap-body">
+        <h3>Reads the documents</h3>
+        <p>The brief, the zoning code, the preservation constraints, the noise and cost limits — several hundred hard rules, extracted as constraints rather than typed into a parameter form.</p>
+      </div>
+    </div>
+    <div class="cap reveal">
+      <div class="cap-n">02</div>
+      <div class="cap-body">
+        <h3>Generates every volume that satisfies them</h3>
+        <p>Real typologies with real roofs — Zeile, Blockrand, Punktbau, Kamm, Grossform — at the dimensions the rules and the plan actually permit. Exhaustively, because that is the only way to know nothing viable was missed.</p>
+      </div>
+    </div>
+    <div class="cap reveal">
+      <div class="cap-n">03</div>
+      <div class="cap-body">
+        <h3>Simulates the top one percent properly</h3>
+        <p>Cheap filters cut the field to the promising percent. Those go through real solvers — energy, daylight, cost — on watertight geometry. Not a proxy score.</p>
+      </div>
+    </div>
+    <div class="cap reveal">
+      <div class="cap-n">04</div>
+      <div class="cap-body">
+        <h3>Throws almost all of it away</h3>
+        <p>What arrives is a handful, opened up: circulation, unit mix, and the evidence of what each one survived. Every discarded scheme is inspectable, with the reason it was cut.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="position">
+    <span class="eyebrow reveal">Position</span>
+    <h2 class="statement" id="statement">We do not design the building. We find the <em>few worth looking at.</em></h2>
+    <p class="reveal">So the architect starts there on day one instead of month three.</p>
+    <p class="dim reveal">
+      An architect does not want a bigger search space. They want a smaller one. Choice is the cost,
+      not the benefit — a hundred million compliant volumes, or even five hundred, just moves the
+      triage onto the person you were meant to help. Generation is the mechanism. Reduction is the product.
+    </p>
+
+    <div class="compare reveal" id="compareBlock">
+      <div class="compare-col">
+        <div class="cc-label">What a search space looks like</div>
+        <div class="field-grid" id="fieldGrid"></div>
+      </div>
+      <div class="compare-col">
+        <div class="cc-label">What a decision looks like</div>
+        <div class="short-row"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="cc-caption">Five schemes, each with a <b>reason it survived</b> — and one you can open up on the spot.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="name">
+    <span class="eyebrow reveal">The name</span>
+    <p class="serif-note reveal">
+      Zeuxis was commissioned by the city of Croton to paint Helen, the most beautiful woman in the
+      world. He could not find a single model who had all of it, so he chose five and composed one
+      image from the best of each. Note what the story actually says: <b>Helen already existed,
+      distributed across the women of Croton.</b> He did not paint five hundred faces — he went out,
+      looked at everyone, and came back with five. The search was the work. The five was the deliverable.
+      Our system does the looking.
+    </p>
+  </section>
+
+  <footer id="contact">
+    <p class="cta-line reveal">
+      Bring us the brief, the code, and the site —<br>
+      <a href="mailto:seshadri@arch.ethz.ch">seshadri@arch.ethz.ch</a>
+    </p>
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a class="swap" href="mailto:seshadri@arch.ethz.ch"><span>seshadri@arch.ethz.ch</span><span class="dup">seshadri@arch.ethz.ch</span></a>
+      </div>
+      <div class="foot-col"><h4>Based</h4><p>ETH Zürich</p><p>Zürich, Switzerland</p></div>
+      <div class="foot-col"><h4>Working on</h4><p>Constraint extraction</p><p>Typological enumeration</p><p>Physical simulation</p></div>
+      <div class="foot-col">
+        <h4>Index</h4>
+        <a class="swap" href="#process"><span>Process</span><span class="dup">Process</span></a>
+        <a class="swap" href="#position"><span>Position</span><span class="dup">Position</span></a>
+        <a class="swap" href="#name"><span>The name</span><span class="dup">The name</span></a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>Zeuxis — the brief already contains the building</span>
+      <span>© 2026</span>
+    </div>
+  </footer>
+
+</div>
+
 <script>
+/* ---------- constraint marquee ---------- */
+(function(){
+  var terms = ['Zoning envelope','Setback lines','GFA ratio','Ridge direction','Daylight factor','Noise exposure',
+               'Preservation zone','Fire egress','Cost ceiling','Shadow cast','Plot coverage','Dormer limits'];
+  var track = document.getElementById('marqueeTrack');
+  var html = terms.map(function(t){ return '<span>' + t + '</span>'; }).join('');
+  track.innerHTML = html + html;
+})();
+
+/* =========================================================================
+   The field: typological generation, elimination, then one scheme opened up
+   ========================================================================= */
 (function(){
 var cv  = document.getElementById('field');
 var ctx = cv.getContext('2d');
@@ -229,27 +467,50 @@ var seed = 20260924;
 function rnd(){ seed = (seed*1664525 + 1013904223) % 4294967296; return seed/4294967296; }
 function rr(a,b){ return a + rnd()*(b-a); }
 function pick(a){ return a[Math.floor(rnd()*a.length)|0]; }
+function clamp01(x){ return Math.min(1, Math.max(0, x)); }
+function ease(x){ return 1 - Math.pow(1-x, 3); }
+function easeIO(x){ return x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x+2, 3)/2; }
 
-/* ---------- axonometric projection, fitted to the canvas after the field is built ---------- */
-var FX = 0.866, FY = 0.34;                 // flattened dimetric, keeps the banner wide not tall
+/* ---------- the honest numbers ---------- */
+var CONSTRAINTS = 412, POSSIBILITIES = 128400000;
+var SIMULATED = Math.round(POSSIBILITIES * 0.01);
+
+/* ---------- axonometric projection, with an optional plan rotation ---------- */
+var FX = 0.866, FY = 0.34;
 var S = 1, OX = 0, OY = 0;
+var T = { rot:0, cx:0, cy:0, S:1, OX:0, OY:0 };
 function raw(x,y,z){ return [ (x-y)*FX, (x+y)*FY - z ]; }
-function P(x,y,z){ var r = raw(x,y,z); return [ OX + r[0]*S, OY + r[1]*S ]; }
+function P(x,y,z){
+  var px = x, py = y;
+  if (T.rot){
+    var dx = x - T.cx, dy = y - T.cy, c = Math.cos(T.rot), s = Math.sin(T.rot);
+    px = T.cx + dx*c - dy*s; py = T.cy + dx*s + dy*c;
+  }
+  var r = raw(px, py, z);
+  return [ T.OX + r[0]*T.S, T.OY + r[1]*T.S ];
+}
+function resetT(){ T.rot = 0; T.cx = 0; T.cy = 0; T.S = S; T.OX = OX; T.OY = OY; }
 
 /* ---------- site: two fields split by a street ---------- */
-var FIELD_A = {x:8,  y:6,   w:186, d:52};   // the long street-facing field
-var STREET  = {x:0,  y:60,  w:202, d:13};
-var FIELD_B = {x:8,  y:76,  w:186, d:50};
+var FIELD_A = {x:8, y:6,  w:186, d:52};
+var STREET  = {x:0, y:60, w:202, d:13};
+var FIELD_B = {x:8, y:76, w:186, d:50};
 
 /* ---------- palette ---------- */
 var C = {
-  cand:  { edge:'#6f6c66', wall:'#191a1c', wall2:'#141517', roof:'#212226' },
-  surv:  { edge:'#d08a4e', wall:'#241a11', wall2:'#1b130c', roof:'#33230f' },
-  ghost: '#2a2a2d'
+  cand: { edge:'#8b877f', wall:'#1d1e21', wall2:'#17181a', roof:'#26272b' },
+  born: { edge:'#f4efe6', wall:'#26272a', wall2:'#1e1f22', roof:'#303136' },
+  surv: { edge:'#d08a4e', wall:'#241a11', wall2:'#1b130c', roof:'#33230f' },
+  xray: { edge:'rgba(208,138,78,0.55)', wall:'rgba(208,138,78,0.03)', wall2:'rgba(208,138,78,0.02)', roof:'rgba(208,138,78,0.05)' }
 };
+var UNIT_TYPES = [
+  { name:'1.5 rm', hex:'#d08a4e', rgb:'208,138,78' },
+  { name:'3.5 rm', hex:'#ece7df', rgb:'236,231,223' },
+  { name:'4.5 rm', hex:'#6f8794', rgb:'111,135,148' }
+];
 
 /* ---------- geometry helpers ---------- */
-function poly(pts, fill, stroke, a){
+function poly(pts, fill, stroke, a, lw){
   if (a <= 0.004) return;
   ctx.globalAlpha = a;
   ctx.beginPath();
@@ -257,20 +518,16 @@ function poly(pts, fill, stroke, a){
   for (var i=1;i<pts.length;i++) ctx.lineTo(pts[i][0], pts[i][1]);
   ctx.closePath();
   if (fill){ ctx.fillStyle = fill; ctx.fill(); }
-  if (stroke){ ctx.strokeStyle = stroke; ctx.lineWidth = 1; ctx.stroke(); }
+  if (stroke){ ctx.strokeStyle = stroke; ctx.lineWidth = lw || 1; ctx.stroke(); }
   ctx.globalAlpha = 1;
 }
 
-/* one rectangular bar with a roof.
-   b = {x,y,w,d,h,roof,ridge,rh}  roof: flat|gable|hip|mono|attika */
+/* one rectangular bar with a roof: flat|gable|hip|mono|attika */
 function drawBar(b, col, a){
   var x=b.x, y=b.y, w=b.w, d=b.d, h=b.h, rh=b.rh||0;
   var xc = x+w/2, yc = y+d/2;
-
-  // two visible walls (+y face, +x face)
   poly([P(x,y+d,0),P(x+w,y+d,0),P(x+w,y+d,h),P(x,y+d,h)], col.wall,  col.edge, a);
   poly([P(x+w,y,0),P(x+w,y+d,0),P(x+w,y+d,h),P(x+w,y,h)], col.wall2, col.edge, a);
-
   if (b.roof === 'gable'){
     if (b.ridge === 'x'){
       poly([P(x,y+d,h),P(x+w,y+d,h),P(x+w,yc,h+rh),P(x,yc,h+rh)], col.roof, col.edge, a);
@@ -282,17 +539,17 @@ function drawBar(b, col, a){
       poly([P(x,y+d,h),P(x+w,y+d,h),P(xc,y+d,h+rh)],              col.wall,  col.edge, a);
     }
   } else if (b.roof === 'hip'){
-    var i = Math.min(w,d)/2;
-    poly([P(x,y+d,h),P(x+w,y+d,h),P(x+w-i,yc,h+rh),P(x+i,yc,h+rh)], col.roof, col.edge, a);
-    poly([P(x+w,y,h),P(x+w,y+d,h),P(x+w-i,yc,h+rh)],                col.wall, col.edge, a);
-    poly([P(x,y,h),P(x+w,y,h),P(x+w-i,yc,h+rh),P(x+i,yc,h+rh)],     col.wall2,col.edge, a*0.8);
+    var ins = Math.min(w,d)/2;
+    poly([P(x,y+d,h),P(x+w,y+d,h),P(x+w-ins,yc,h+rh),P(x+ins,yc,h+rh)], col.roof, col.edge, a);
+    poly([P(x+w,y,h),P(x+w,y+d,h),P(x+w-ins,yc,h+rh)],                  col.wall, col.edge, a);
+    poly([P(x,y,h),P(x+w,y,h),P(x+w-ins,yc,h+rh),P(x+ins,yc,h+rh)],     col.wall2,col.edge, a*0.8);
   } else if (b.roof === 'mono'){
     poly([P(x,y,h+rh),P(x+w,y,h+rh),P(x+w,y+d,h),P(x,y+d,h)], col.roof, col.edge, a);
     poly([P(x+w,y,h),P(x+w,y,h+rh),P(x+w,y+d,h)],             col.wall, col.edge, a);
   } else if (b.roof === 'attika'){
     poly([P(x,y,h),P(x+w,y,h),P(x+w,y+d,h),P(x,y+d,h)], col.roof, col.edge, a);
     var s = Math.min(2.6, Math.min(w,d)*0.16);
-    var at = {x:x+s, y:y+s, w:w-2*s, d:d-2*s, h:h+rh, roof:'flat'};
+    var at = {x:x+s, y:y+s, w:w-2*s, d:d-2*s, h:h+rh};
     poly([P(at.x,at.y+at.d,h),P(at.x+at.w,at.y+at.d,h),P(at.x+at.w,at.y+at.d,at.h),P(at.x,at.y+at.d,at.h)], col.wall, col.edge, a);
     poly([P(at.x+at.w,at.y,h),P(at.x+at.w,at.y+at.d,h),P(at.x+at.w,at.y+at.d,at.h),P(at.x+at.w,at.y,at.h)], col.wall2, col.edge, a);
     poly([P(at.x,at.y,at.h),P(at.x+at.w,at.y,at.h),P(at.x+at.w,at.y+at.d,at.h),P(at.x,at.y+at.d,at.h)], col.roof, col.edge, a);
@@ -302,9 +559,8 @@ function drawBar(b, col, a){
 }
 
 /* ---------- the type library ---------- */
-var ST = 3.1;  // storey height
-
-function tZeile(x,y,ang){                       // parallel slabs
+var ST = 3.1;
+function tZeile(x,y,ang){
   var n = 2 + (rnd()<0.5?0:1), d = rr(10,13), L = rr(34,52), g = rr(14,20);
   var st = 3 + (rnd()<0.4?1:0), bars = [];
   for (var i=0;i<n;i++){
@@ -313,7 +569,7 @@ function tZeile(x,y,ang){                       // parallel slabs
   }
   return {bars:bars, type:'Zeile'};
 }
-function tBlock(x,y){                            // perimeter block
+function tBlock(x,y){
   var W_=rr(46,62), D_=rr(38,46), t=rr(12,14), st=4+(rnd()<0.5?1:0), h=st*ST;
   return {type:'Blockrand', bars:[
     {x:x, y:y, w:W_, d:t, h:h, roof:'flat'},
@@ -322,19 +578,17 @@ function tBlock(x,y){                            // perimeter block
     {x:x+W_-t, y:y+t, w:t, d:D_-2*t, h:h, roof:'attika', rh:2.7}
   ]};
 }
-function tPunkt(x,y){                             // point block
+function tPunkt(x,y){
   var s = rr(18,23), st = 5 + Math.floor(rnd()*3);
   return {type:'Punktbau', bars:[{x:x,y:y,w:s,d:s,h:st*ST,roof:'attika',rh:2.8}]};
 }
-function tKamm(x,y){                              // comb, bar on the street + fingers
+function tKamm(x,y){
   var L=rr(56,76), t=rr(12,14), st=4, h=st*ST, bars=[{x:x,y:y,w:L,d:t,h:h,roof:'flat'}];
   var nf = 3, fl = rr(24,32);
-  for (var i=0;i<nf;i++){
-    bars.push({x:x + 4 + i*((L-12)/nf), y:y+t, w:t, d:fl, h:(st-1)*ST, roof:'gable', ridge:'y', rh:2.4});
-  }
+  for (var i=0;i<nf;i++) bars.push({x:x + 4 + i*((L-12)/nf), y:y+t, w:t, d:fl, h:(st-1)*ST, roof:'gable', ridge:'y', rh:2.4});
   return {type:'Kamm', bars:bars};
 }
-function tGross(x,y){                             // contemporary large figure
+function tGross(x,y){
   var W_=rr(44,60), D_=rr(34,44), t=rr(15,18), st=5+Math.floor(rnd()*3), h=st*ST;
   return {type:'Grossform', bars:[
     {x:x, y:y, w:W_, d:t, h:h, roof:'attika', rh:2.8},
@@ -342,18 +596,17 @@ function tGross(x,y){                             // contemporary large figure
     {x:x+W_-t, y:y+t, w:t, d:(D_-t)*0.7, h:h*0.9, roof:'attika', rh:2.6}
   ]};
 }
-function tReihe(x,y){                             // row houses
+function tReihe(x,y){
   var n=4+Math.floor(rnd()*3), u=rr(6.5,8), d=rr(9,11), bars=[];
   for (var i=0;i<n;i++) bars.push({x:x+i*u, y:y, w:u, d:d, h:2*ST, roof:'gable', ridge:'x', rh:2.3});
   return {type:'Reihenhaus', bars:bars};
 }
-function tHof(x,y){                               // low courtyard cluster
+function tHof(x,y){
   var s=rr(15,19), bars=[];
   for (var i=0;i<2;i++) for (var j=0;j<2;j++)
     bars.push({x:x+i*(s+3), y:y+j*(s+3), w:s, d:s*0.55, h:2*ST, roof:'mono', rh:1.8});
   return {type:'Hofcluster', bars:bars};
 }
-
 var MAKERS = [tZeile,tBlock,tPunkt,tKamm,tGross,tReihe,tHof];
 
 /* ---------- reasons a scheme dies ---------- */
@@ -362,20 +615,18 @@ var REASONS = ['too long','shadow','no quiet facade','over height','court too ti
 
 /* ---------- build the candidate field ---------- */
 var schemes = [];
+function centroid(s){
+  var cx=0, cy=0;
+  for (var k=0;k<s.bars.length;k++){ cx += s.bars[k].x + s.bars[k].w/2; cy += s.bars[k].y + s.bars[k].d/2; }
+  s.cx = cx/s.bars.length; s.cy = cy/s.bars.length;
+}
 function spawn(field, n){
   for (var i=0;i<n;i++){
     var mk = pick(MAKERS);
-    var sx = field.x + rnd()*(field.w-78);
-    var sy = field.y + rnd()*(field.d-40);
-    var s = mk(sx, sy, rnd()<0.45);
-    s.born   = rnd()*0.92;
-    s.killAt = 0.06 + rnd()*0.88;
-    s.reason = pick(REASONS);
-    s.keep   = false;
-    var cx=0, cy=0;
-    for (var k=0;k<s.bars.length;k++){ cx += s.bars[k].x + s.bars[k].w/2; cy += s.bars[k].y + s.bars[k].d/2; }
-    s.cx = cx/s.bars.length; s.cy = cy/s.bars.length;
-    schemes.push(s);
+    var s = mk(field.x + rnd()*(field.w-78), field.y + rnd()*(field.d-40), rnd()<0.45);
+    s.born = rnd()*0.92; s.killAt = 0.06 + rnd()*0.88;
+    s.reason = pick(REASONS); s.keep = false;
+    centroid(s); schemes.push(s);
   }
 }
 spawn(FIELD_A, 22);
@@ -384,22 +635,55 @@ spawn(FIELD_B, 21);
 /* ---------- the survivors: one coherent arrangement ---------- */
 var survivors = [];
 (function(){
-  var k1 = tKamm(28, 12);            k1.label='Kamm';        // shields the street
-  var z1 = tZeile(112, 10, false);   z1.label='Zeile';
-  var g1 = tGross(24, 84);           g1.label='Grossform';
-  var b1 = tBlock(104, 80);          b1.label='Blockrand';
-  var p1 = tPunkt(172, 96);          p1.label='Punktbau';
+  var k1 = tKamm(28, 12);           k1.label='Kamm';
+  var z1 = tZeile(112, 10, false);  z1.label='Zeile';
+  var g1 = tGross(24, 84);          g1.label='Grossform';
+  var b1 = tBlock(104, 80);         b1.label='Blockrand';
+  var p1 = tPunkt(172, 96);         p1.label='Punktbau';
   survivors = [k1,z1,g1,b1,p1];
   survivors.forEach(function(s){
     s.keep = true; s.born = rnd()*0.5; s.killAt = 2;
-    var cx=0, cy=0;
-    for (var k=0;k<s.bars.length;k++){ cx += s.bars[k].x + s.bars[k].w/2; cy += s.bars[k].y + s.bars[k].d/2; }
-    s.cx = cx/s.bars.length; s.cy = cy/s.bars.length;
-    schemes.push(s);
+    s.metrics = {
+      energy: Math.round(58 - rnd()*22),
+      daylight: Math.round(64 + rnd()*30),
+      cost: Math.round((rnd()*8 - 4)*10)/10,
+      fit: Math.round(80 + rnd()*18)
+    };
+    centroid(s); schemes.push(s);
   });
 })();
+var overallScore = Math.round(survivors.reduce(function(a,s){ return a + s.metrics.fit; }, 0) / survivors.length);
 
-/* ---------- fit the whole composition into the canvas ---------- */
+/* ---------- the one taken forward ---------- */
+var HERO = survivors[3];               // Blockrand: perimeter block, two cores, a real mix
+var HERO_STOREYS = Math.round(HERO.bars[0].h / ST);
+
+/* build its floor plan: units around the perimeter, cores in the two long wings */
+var mixCount = [0,0,0], TOTAL_UNITS = 0, CORES = 0, GFA = 0;
+HERO.bars.forEach(function(b, bi){
+  var along = b.w >= b.d ? 'x' : 'y';
+  var L = along === 'x' ? b.w : b.d;
+  var k = Math.max(2, Math.round(L / 9));
+  var coreCell = (bi < 2) ? Math.floor(k/2) : -1;    // the two long wings carry the cores
+  b.cells = [];
+  for (var i=0;i<k;i++){
+    var cell = { core: i === coreCell };
+    if (along === 'x'){ cell.x = b.x + i*(b.w/k); cell.w = b.w/k; cell.y = b.y; cell.d = b.d; }
+    else              { cell.y = b.y + i*(b.d/k); cell.d = b.d/k; cell.x = b.x; cell.w = b.w; }
+    if (!cell.core){ cell.type = Math.floor(rnd()*3); }
+    b.cells.push(cell);
+  }
+  b.storeys = Math.max(1, Math.round(b.h / ST));
+  if (coreCell >= 0) CORES++;
+  b.cells.forEach(function(c){
+    if (c.core) return;
+    mixCount[c.type] += b.storeys; TOTAL_UNITS += b.storeys;
+  });
+  GFA += b.w * b.d * b.storeys;
+});
+GFA = Math.round(GFA * 1.0 / 10) * 10;
+
+/* ---------- fit the composition into the canvas ---------- */
 (function(){
   var minX=1e9, maxX=-1e9, minY=1e9, maxY=-1e9;
   function note(x,y,z){ var r = raw(x,y,z);
@@ -419,14 +703,25 @@ var survivors = [];
   S  = Math.min((W-mL-mR)/(maxX-minX), (H-mT-mB)/(maxY-minY));
   OX = mL - minX*S + (W-mL-mR - (maxX-minX)*S)/2;
   OY = mT - minY*S;
+  resetT();
 })();
 
-/* label only a readable subset of the deaths */
+/* the enlarged view: how far the hero can grow before it leaves the frame */
+var HERO_R = 0, HERO_TOP = 0;
+HERO.bars.forEach(function(b){
+  [[b.x,b.y],[b.x+b.w,b.y],[b.x,b.y+b.d],[b.x+b.w,b.y+b.d]].forEach(function(c){
+    HERO_R = Math.max(HERO_R, Math.hypot(c[0]-HERO.cx, c[1]-HERO.cy));
+  });
+  HERO_TOP = Math.max(HERO_TOP, b.h + (b.rh||0));
+});
+var S_BIG = Math.min((W*0.78) / (2*HERO_R*FX), (H*0.80) / (2*HERO_R*FY + HERO_TOP));
+
+/* label a readable subset of the deaths */
 var labelled = schemes.filter(function(s){ return !s.keep; })
                       .sort(function(a,b){ return a.killAt - b.killAt; })
                       .filter(function(_,i){ return i % 5 === 0; });
 
-/* depth sort: far (small x+y) first */
+/* depth sort: far first */
 schemes.sort(function(a,b){ return (a.cx+a.cy) - (b.cx+b.cy); });
 
 /* ---------- ground ---------- */
@@ -434,100 +729,386 @@ function ground(f, a){
   poly([P(f.x,f.y,0),P(f.x+f.w,f.y,0),P(f.x+f.w,f.y+f.d,0),P(f.x,f.y+f.d,0)],
        'rgba(255,255,255,0.014)', '#26262a', a);
 }
-function street(){
+function street(a){
   poly([P(STREET.x,STREET.y,0),P(STREET.x+STREET.w,STREET.y,0),
         P(STREET.x+STREET.w,STREET.y+STREET.d,0),P(STREET.x,STREET.y+STREET.d,0)],
-       'rgba(208,138,78,0.045)', '#33261c', 1);
+       'rgba(208,138,78,0.045)', '#33261c', a);
 }
 
-/* ---------- animation ---------- */
-var CYCLE = 13000, t0 = null;
+/* ---------- x-ray of the hero: plates, units, cores ---------- */
+function drawXray(a){
+  HERO.bars.forEach(function(b){
+    for (var f=0; f<b.storeys; f++){
+      var z = f*ST;
+      poly([P(b.x,b.y,z),P(b.x+b.w,b.y,z),P(b.x+b.w,b.y+b.d,z),P(b.x,b.y+b.d,z)],
+           null, 'rgba(236,231,223,0.10)', a*0.9, 0.6);
+      b.cells.forEach(function(c){
+        if (c.core) return;
+        var u = UNIT_TYPES[c.type];
+        poly([P(c.x,c.y,z),P(c.x+c.w,c.y,z),P(c.x+c.w,c.y+c.d,z),P(c.x,c.y+c.d,z)],
+             'rgba(' + u.rgb + ',' + (0.17*a).toFixed(3) + ')',
+             'rgba(' + u.rgb + ',' + (0.45*a).toFixed(3) + ')', 1, 0.6);
+      });
+    }
+    // circulation cores, full height, with stair runs
+    b.cells.forEach(function(c){
+      if (!c.core) return;
+      poly([P(c.x,c.y+c.d,0),P(c.x+c.w,c.y+c.d,0),P(c.x+c.w,c.y+c.d,b.h),P(c.x,c.y+c.d,b.h)],
+           'rgba(208,138,78,0.10)', 'rgba(208,138,78,0.8)', a);
+      poly([P(c.x+c.w,c.y,0),P(c.x+c.w,c.y+c.d,0),P(c.x+c.w,c.y+c.d,b.h),P(c.x+c.w,c.y,b.h)],
+           'rgba(208,138,78,0.07)', 'rgba(208,138,78,0.8)', a);
+      ctx.globalAlpha = a*0.75; ctx.strokeStyle = '#d08a4e'; ctx.lineWidth = 0.8;
+      for (var f2=0; f2<b.storeys; f2++){
+        var p1 = P(c.x+0.8, c.y+0.8, f2*ST), p2 = P(c.x+c.w-0.8, c.y+c.d-0.8, (f2+1)*ST);
+        ctx.beginPath(); ctx.moveTo(p1[0],p1[1]); ctx.lineTo(p2[0],p2[1]); ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    });
+  });
+}
+
+/* ---------- HTML overlays ---------- */
+var phaseLabel = document.getElementById('phaseLabel');
+var scoreFinal = document.getElementById('scoreFinal');
+var scoreNum   = document.getElementById('scoreNum');
+var dossier    = document.getElementById('dossier');
+var kpiLayer   = document.getElementById('kpiLayer');
+var hoveredIdx = -1;
+
+var kpiEls = survivors.map(function(s, idx){
+  var pt = P(s.cx, s.cy, 0);
+  var el = document.createElement('div');
+  el.className = 'kpi';
+  el.style.left = Math.min(86, Math.max(8, pt[0]/W*100)) + '%';
+  el.style.top  = Math.min(78, pt[1]/H*100 + 2) + '%';
+  el.innerHTML =
+    '<div class="kpi-id">' + s.label + ' · ' + s.metrics.fit + '</div>' +
+    '<div class="kpi-row"><span>ENE</span><b>' + s.metrics.energy + '</b></div>' +
+    '<div class="kpi-row"><span>DAY</span><b>' + s.metrics.daylight + '%</b></div>' +
+    '<div class="kpi-row"><span>CST</span><b>' + (s.metrics.cost>0?'+':'') + s.metrics.cost + '%</b></div>';
+  el.addEventListener('mouseenter', function(){ hoveredIdx = idx; el.classList.add('hover'); render(currentT); });
+  el.addEventListener('mouseleave', function(){ hoveredIdx = -1; el.classList.remove('hover'); render(currentT); });
+  kpiLayer.appendChild(el);
+  return el;
+});
+
+document.getElementById('dId').textContent    = HERO.label;
+document.getElementById('dFit').textContent   = HERO.metrics.fit;
+document.getElementById('dFloors').textContent= HERO_STOREYS;
+document.getElementById('dGfa').textContent   = GFA.toLocaleString() + ' m²';
+document.getElementById('dUnits').textContent = TOTAL_UNITS;
+document.getElementById('dCore').textContent  = CORES + ' · perimeter';
+document.getElementById('dEne').textContent   = HERO.metrics.energy + ' kWh/m²a';
+document.getElementById('dDay').textContent   = HERO.metrics.daylight + '%';
+document.getElementById('dCost').textContent  = (HERO.metrics.cost>0?'+':'') + HERO.metrics.cost + '%';
+(function(){
+  var mixBar = document.getElementById('mixBar'), mixLegend = document.getElementById('mixLegend');
+  UNIT_TYPES.forEach(function(u, i){
+    var seg = document.createElement('i');
+    seg.style.background = u.hex; seg.style.flex = mixCount[i]; seg.style.opacity = '.85';
+    mixBar.appendChild(seg);
+    var row = document.createElement('div');
+    row.innerHTML = '<em style="background:' + u.hex + '"></em>' + u.name +
+                    '<b>' + Math.round(mixCount[i]/TOTAL_UNITS*100) + '%</b>';
+    mixLegend.appendChild(row);
+  });
+  var fg = document.getElementById('fieldGrid');
+  for (var i=0;i<50;i++) fg.appendChild(document.createElement('span'));
+})();
+
+/* ---------- phases ----------
+   0.00–0.20 generate | 0.20–0.32 evaluate | 0.32–0.54 eliminate | 0.54–0.60 five remain
+   0.60–0.66 take one forward | 0.66–0.74 enlarge | 0.74–1.00 rotate, x-ray past the half turn */
+var GEN=0.20, EV0=0.20, EV1=0.32, RD0=0.32, RD1=0.54;
+var lastPhase = '';
+function setPhase(t){
+  var label;
+  if (t < GEN)       label = 'Enumerating ' + (POSSIBILITIES/1e6).toFixed(1) + ' M geometries';
+  else if (t < RD0)  label = 'Simulating the top 1 percent';
+  else if (t < RD1)  label = 'Eliminating against the rules';
+  else if (t < 0.60) label = 'Five schemes remain';
+  else if (t < 0.66) label = 'Taking the ' + HERO.label + ' forward';
+  else if (t < 0.87) label = 'Opening the ' + HERO.label;
+  else               label = 'X-ray: circulation and unit mix';
+  if (label !== lastPhase){ phaseLabel.innerHTML = '<span class="dot"></span>' + label; lastPhase = label; }
+  phaseLabel.classList.toggle('active', t >= GEN);
+}
+
+var currentT = 0;
 
 function scene(t){
+  currentT = t;
   ctx.clearRect(0,0,W,H);
-  ground(FIELD_A,1); street(); ground(FIELD_B,1);
 
-  var GEN=0.30, EV0=0.30, EV1=0.48, RD0=0.48, RD1=0.76;
-  var gen = Math.min(1, t/GEN);
-  var red = (t-RD0)/(RD1-RD0);
+  var selectE = easeIO(clamp01((t - 0.60) / 0.06));     // the other four bow out
+  var zoom    = clamp01((t - 0.66) / 0.08);
+  var zoomE   = easeIO(zoom);
+  var fieldA  = 1 - zoomE;                              // ground, street, everything else
+  var handA   = 1 - clamp01(zoom / 0.25);               // flat-site hero hands over
+  var heroA   = clamp01(zoom / 0.25);
+  var rot     = clamp01((t - 0.74) / 0.26);
+  var xrayA   = clamp01((rot - 0.5) / 0.10);
 
-  var alive = 0, born = 0;
-  for (var i=0;i<schemes.length;i++){
-    var s = schemes[i], a = 0, k = 0;
-    if (s.born <= gen){
-      born++;
-      a = 0.9;
-      if (t > RD0 && !s.keep){
-        k = Math.max(0, Math.min(1, (red - s.killAt) / 0.16));
-        a = 0.9*(1-k) + 0.055*k;                     // never quite zero: the discarded field stays as a ghost
+  /* ---------------- ACT ONE : the field ---------------- */
+  if (fieldA > 0.01){
+    resetT();
+    ground(FIELD_A, fieldA); street(fieldA); ground(FIELD_B, fieldA);
+
+    var gen = Math.min(1, t/GEN);
+    var red = (t-RD0)/(RD1-RD0);
+    var alive = 0, born = 0;
+
+    for (var i=0;i<schemes.length;i++){
+      var s = schemes[i], a = 0, k = 0;
+      if (s.born <= gen){
+        born++;
+        var fresh = clamp01((gen - s.born) / 0.05);      // the birth flash
+        a = 0.9;
+        if (t > RD0 && !s.keep){
+          k = clamp01((red - s.killAt) / 0.16);
+          a = 0.9*(1-k) + 0.055*k;                       // the discarded field stays as a ghost
+        }
+        if (s.keep || k < 0.5) alive++;
+
+        var col = C.cand, al = a;
+        if (fresh < 1 && !s.keep){ col = C.born; al = Math.min(1, a + 0.1); }
+        if (s.keep && t > RD0 + 0.04){ col = C.surv; al = Math.min(1, 0.9 + red*0.4); }
+        if (s === HERO){ al *= handA; if (selectE > 0.2) col = C.surv; }
+        else if (s.keep){ al *= (1 - selectE*0.92); }
+        else { al *= (1 - selectE*0.75); }
+        al *= fieldA;
+
+        if (hoveredIdx >= 0 && survivors[hoveredIdx] === s){ col = C.surv; al = Math.min(1, al + 0.25); }
+        if (al <= 0.01) continue;
+        for (var j=0;j<s.bars.length;j++) drawBar(s.bars[j], col, al);
       }
-      if (s.keep || k < 0.5) alive++;
     }
-    if (a <= 0.01) continue;
-    var col = (s.keep && t > RD0+0.06) ? C.surv : C.cand;
-    var al  = (s.keep && t > RD0+0.06) ? Math.min(1, 0.9 + red*0.4) : a;
-    for (var j=0;j<s.bars.length;j++) drawBar(s.bars[j], col, al);
-  }
 
-  /* evaluation sweep */
-  if (t > EV0 && t < EV1){
-    var p = (t-EV0)/(EV1-EV0);
-    var sx = p * W;
-    var g = ctx.createLinearGradient(sx-150, 0, sx+8, 0);
-    g.addColorStop(0,'rgba(208,138,78,0)');
-    g.addColorStop(1,'rgba(208,138,78,0.16)');
-    ctx.fillStyle = g; ctx.fillRect(sx-150, 0, 158, H);
-    ctx.strokeStyle = 'rgba(208,138,78,0.7)'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(sx,0); ctx.lineTo(sx,H); ctx.stroke();
-  }
-
-  /* kill reasons */
-  if (t > RD0 && t < RD1 + 0.05){
-    ctx.font = '500 13px system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
-    for (var m=0;m<labelled.length;m++){
-      var s2 = labelled[m];
-      var d = red - s2.killAt;
-      if (d < -0.02 || d > 0.14) continue;
-      var fade = d < 0 ? (d+0.02)/0.02 : 1 - d/0.14;
-      var pt = P(s2.cx, s2.cy, 16);
-      ctx.globalAlpha = Math.max(0, Math.min(1, fade)) * 0.85;
-      ctx.fillStyle = '#b8564a';
-      ctx.fillText(s2.reason, pt[0]-14, pt[1]);
+    /* evaluation sweep */
+    if (t > EV0 && t < EV1){
+      var p = (t-EV0)/(EV1-EV0), sx = p * W;
+      var g = ctx.createLinearGradient(sx-190, 0, sx+10, 0);
+      g.addColorStop(0,'rgba(208,138,78,0)');
+      g.addColorStop(0.72,'rgba(208,138,78,0.16)');
+      g.addColorStop(1,'rgba(208,138,78,0.42)');
+      ctx.fillStyle = g; ctx.fillRect(sx-190, 0, 200, H);
+      ctx.save();
+      ctx.shadowColor = '#d08a4e'; ctx.shadowBlur = 22;
+      ctx.strokeStyle = 'rgba(208,138,78,0.9)'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(sx,0); ctx.lineTo(sx,H); ctx.stroke();
+      ctx.restore();
+      ctx.globalAlpha = 0.85; ctx.fillStyle = '#d08a4e';
+      ctx.font = '600 12px system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
+      var st = 'SIMULATING · ' + Math.round(SIMULATED*p).toLocaleString() + ' / ' + SIMULATED.toLocaleString();
+      var stw = ctx.measureText(st).width;
+      ctx.fillText(st, Math.min(W-26-stw, Math.max(26, sx-stw/2)), 26);
       ctx.globalAlpha = 1;
     }
-  }
 
-  /* survivor labels */
-  if (t > 0.78){
-    var lf = Math.min(1, (t-0.78)/0.06);
-    ctx.font = '500 13px system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
-    for (var q=0;q<survivors.length;q++){
-      var sv = survivors[q], ptn = P(sv.cx, sv.cy, 26);
-      ctx.globalAlpha = lf*0.9; ctx.fillStyle = C.surv.edge;
-      ctx.fillText(sv.label, ptn[0]-16, ptn[1]);
-      ctx.globalAlpha = 1;
+    /* kill reasons */
+    if (t > RD0 && t < RD1 + 0.05){
+      ctx.font = '500 13px system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
+      for (var m=0;m<labelled.length;m++){
+        var s2 = labelled[m], dd = red - s2.killAt;
+        if (dd < -0.02 || dd > 0.14) continue;
+        var fade = dd < 0 ? (dd+0.02)/0.02 : 1 - dd/0.14;
+        var pt = P(s2.cx, s2.cy, 16);
+        ctx.globalAlpha = clamp01(fade) * 0.85 * fieldA;
+        ctx.fillStyle = '#b8564a';
+        ctx.fillText(s2.reason, pt[0]-14, pt[1]);
+        ctx.globalAlpha = 1;
+      }
     }
+
+    /* survivor labels */
+    if (t > RD1 + 0.02){
+      var lf = Math.min(1, (t-RD1-0.02)/0.04);
+      ctx.font = '500 13px system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
+      for (var q=0;q<survivors.length;q++){
+        var sv = survivors[q], ptn = P(sv.cx, sv.cy, 26);
+        var la = sv === HERO ? handA : (1 - selectE);
+        ctx.globalAlpha = lf*0.9*la*fieldA;
+        ctx.fillStyle = '#d08a4e';
+        ctx.fillText(sv.label, ptn[0]-16, ptn[1]);
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    /* the bracket that marks the one taken forward */
+    if (selectE > 0.02 && handA > 0.02){
+      var c0 = P(HERO.cx, HERO.cy, 0);
+      var rpx = HERO_R * S * 1.25, arm = 18;
+      var bx = c0[0]-rpx, by = c0[1]-rpx*0.62-24, bw2 = rpx*2, bh2 = rpx*1.24+34;
+      ctx.save();
+      ctx.globalAlpha = selectE*handA*fieldA; ctx.strokeStyle = '#d08a4e'; ctx.lineWidth = 1.2;
+      [[bx,by,1,1],[bx+bw2,by,-1,1],[bx+bw2,by+bh2,-1,-1],[bx,by+bh2,1,-1]].forEach(function(c){
+        ctx.beginPath();
+        ctx.moveTo(c[0]+c[2]*arm, c[1]); ctx.lineTo(c[0], c[1]); ctx.lineTo(c[0], c[1]+c[3]*arm);
+        ctx.stroke();
+      });
+      ctx.fillStyle = '#d08a4e'; ctx.font = '600 11px system-ui,sans-serif';
+      ctx.fillText('TAKEN FORWARD', bx, by - 9);
+      ctx.restore();
+    }
+
+    /* counter */
+    var txt;
+    if (t < GEN)      txt = Math.round(POSSIBILITIES*(t/GEN)).toLocaleString() + ' enumerated';
+    else if (t < RD0) txt = SIMULATED.toLocaleString() + ' simulated · top 1%';
+    else if (t < RD1) txt = alive + ' remaining';
+    else              txt = '5 schemes remain';
+    ctx.globalAlpha = 0.8 * fieldA;
+    ctx.fillStyle = t > RD0 + 0.02 ? '#d08a4e' : '#b8b2a8';
+    ctx.font = '500 15px system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
+    ctx.fillText(txt, 26, H-24);
+    ctx.globalAlpha = 1;
   }
 
-  /* counter: counts up while generating, then counts down as the rules eliminate */
-  var txt;
-  if (t <= RD0)      txt = born + ' schemes generated';
-  else if (t < 0.74) txt = alive + ' remaining';
-  else               txt = alive + ' schemes remain';
-  ctx.globalAlpha = 0.8;
-  ctx.fillStyle = t > RD0 + 0.02 ? C.surv.edge : '#726f68';
-  ctx.font = '500 15px system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
-  ctx.fillText(txt, 26, H-24);
-  ctx.globalAlpha = 1;
+  /* ---------------- ACT TWO : the scheme, opened ---------------- */
+  if (heroA > 0.001){
+    var r0 = raw(HERO.cx, HERO.cy, 0);
+    var fromX = OX + r0[0]*S, fromY = OY + r0[1]*S;
+    var toX = W*0.5, toY = H*0.72;
+    T.rot = rot * Math.PI * 2;                 // one full turn once it has arrived
+    T.cx = HERO.cx; T.cy = HERO.cy;
+    T.S  = S + (S_BIG - S) * zoomE;
+    var tx = fromX + (toX - fromX) * zoomE, ty = fromY + (toY - fromY) * zoomE;
+    T.OX = tx - r0[0]*T.S; T.OY = ty - r0[1]*T.S;
+
+    // plot outline, rotating with the scheme
+    var pad = 6;
+    var bb = { x0:1e9, y0:1e9, x1:-1e9, y1:-1e9 };
+    HERO.bars.forEach(function(b){
+      bb.x0 = Math.min(bb.x0, b.x); bb.y0 = Math.min(bb.y0, b.y);
+      bb.x1 = Math.max(bb.x1, b.x+b.w); bb.y1 = Math.max(bb.y1, b.y+b.d);
+    });
+    poly([P(bb.x0-pad,bb.y0-pad,0),P(bb.x1+pad,bb.y0-pad,0),P(bb.x1+pad,bb.y1+pad,0),P(bb.x0-pad,bb.y1+pad,0)],
+         'rgba(255,255,255,0.015)', '#2e2e33', heroA);
+
+    var env = xrayA > 0.01 ? {
+      edge:'rgba(208,138,78,' + (0.85 - 0.35*xrayA).toFixed(2) + ')',
+      wall:'rgba(36,26,17,' + (1-xrayA*0.92).toFixed(2) + ')',
+      wall2:'rgba(27,19,12,' + (1-xrayA*0.92).toFixed(2) + ')',
+      roof:'rgba(51,35,15,' + (1-xrayA*0.9).toFixed(2) + ')'
+    } : C.surv;
+    HERO.bars.forEach(function(b){ drawBar(b, env, heroA); });
+    if (xrayA > 0.01) drawXray(xrayA * heroA);
+
+    resetT();
+    ctx.globalAlpha = heroA*0.9;
+    ctx.fillStyle = '#d08a4e'; ctx.font = '600 13px system-ui,sans-serif';
+    ctx.fillText(HERO.label.toUpperCase() + ' · ' + HERO_STOREYS + ' STOREYS · ' + TOTAL_UNITS + ' UNITS · ' + CORES + ' CORES', 30, 34);
+    ctx.fillStyle = '#7d7a73'; ctx.font = '500 11px system-ui,sans-serif';
+    ctx.fillText(xrayA > 0.2 ? 'X-RAY — CIRCULATION + UNIT MIX'
+                             : 'ORBIT ' + Math.round((rot*360) % 360) + '°', 30, 52);
+    ctx.globalAlpha = 1;
+  }
+
+  /* ---------------- overlays ---------------- */
+  var tagsBase = clamp01((t - RD1 - 0.02) / 0.02);
+  kpiEls.forEach(function(el, idx){
+    var vis = survivors[idx] === HERO ? tagsBase * handA : tagsBase * (1 - selectE);
+    el.classList.toggle('show', vis > 0.02);
+    el.style.opacity = vis.toFixed(3);
+  });
+  var scoreOn = t > RD1 && t < 0.685;
+  scoreFinal.classList.toggle('show', scoreOn);
+  scoreNum.textContent = scoreOn ? overallScore + ' / 100' : '—';
+  dossier.classList.toggle('show', xrayA > 0.25);
+
+  setPhase(t);
 }
 
-function frame(ts){
-  if (t0 === null) t0 = ts;
-  scene(((ts-t0) % CYCLE)/CYCLE);
-  requestAnimationFrame(frame);
+/* ---------- scroll wiring ---------- */
+var stage = document.getElementById('stage');
+var ticking = false;
+function progress(){
+  var rect = stage.getBoundingClientRect();
+  var total = rect.height - window.innerHeight;
+  if (total <= 0) return 1;
+  return clamp01(-rect.top / total);
+}
+function onScroll(){
+  if (!ticking){
+    requestAnimationFrame(function(){ scene(progress()); ticking = false; });
+    ticking = true;
+  }
+}
+if (reduce){ scene(0.95); }
+else {
+  scene(0);
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', onScroll);
 }
 
-if (reduce) scene(0.95); else requestAnimationFrame(frame);
+/* ---------- hero counters ---------- */
+function countTo(el, target, fmt, dur){
+  var t0 = null;
+  function step(ts){
+    if (t0 === null) t0 = ts;
+    var p = Math.min(1, (ts-t0)/dur);
+    el.textContent = fmt(ease(p) * target);
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+setTimeout(function(){
+  countTo(document.getElementById('statC'), CONSTRAINTS, function(v){ return Math.round(v); }, 1300);
+  countTo(document.getElementById('statP'), POSSIBILITIES, function(v){ return (v/1e6).toFixed(1) + ' M'; }, 1700);
+}, 900);
+})();
+
+/* ---------- hero line reveal ---------- */
+window.addEventListener('load', function(){
+  requestAnimationFrame(function(){
+    document.querySelectorAll('.hero .mask').forEach(function(m, i){
+      m.querySelector('i').style.transitionDelay = (0.08 + i*0.07) + 's';
+      m.classList.add('in');
+    });
+  });
+});
+
+/* ---------- statement word reveal ---------- */
+(function(){
+  var el = document.getElementById('statement');
+  if (!el) return;
+  var frag = document.createDocumentFragment();
+  Array.prototype.slice.call(el.childNodes).forEach(function(node){
+    var isText = node.nodeType === 3;
+    var tag = isText ? null : node.tagName.toLowerCase();
+    node.textContent.split(/(\s+)/).forEach(function(tok){
+      if (!tok.trim()){ frag.appendChild(document.createTextNode(' ')); return; }
+      var s = document.createElement('span'); s.className = 'word';
+      var inner = document.createElement('i');
+      if (tag){ var em = document.createElement(tag); em.textContent = tok; inner.appendChild(em); }
+      else { inner.textContent = tok; }
+      s.appendChild(inner); frag.appendChild(s);
+    });
+  });
+  el.innerHTML = ''; el.appendChild(frag);
+  el.querySelectorAll('.word > i').forEach(function(i, n){ i.style.transitionDelay = (n*0.035) + 's'; });
+})();
+
+/* ---------- progress bar + nav ---------- */
+(function(){
+  var bar = document.getElementById('scrollbar'), nav = document.getElementById('siteNav');
+  function update(){
+    var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop/max)*100 : 0) + '%';
+    nav.classList.toggle('scrolled', h.scrollTop > 8);
+  }
+  window.addEventListener('scroll', update, { passive:true });
+  update();
+})();
+
+/* ---------- reveal on scroll ---------- */
+(function(){
+  var els = document.querySelectorAll('.reveal, #statement');
+  if (!('IntersectionObserver' in window)){ els.forEach(function(el){ el.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.15, rootMargin:'0px 0px -8% 0px' });
+  els.forEach(function(el){ io.observe(el); });
 })();
 </script>
 </body>
