@@ -35,8 +35,8 @@
     margin:0 auto;
     padding:clamp(2.5rem,7vw,6rem) clamp(1.5rem,5vw,2rem) 4rem;
   }
+  .wide{max-width:1040px}
 
-  /* masthead */
   header{
     display:flex;
     align-items:baseline;
@@ -45,7 +45,6 @@
     padding-bottom:clamp(3rem,9vw,6rem);
   }
   .mark{
-    font-family:var(--sans);
     font-weight:600;
     font-size:.95rem;
     letter-spacing:.34em;
@@ -60,7 +59,6 @@
     margin:0;
   }
 
-  /* thesis */
   h1{
     font-family:var(--serif);
     font-weight:400;
@@ -75,36 +73,36 @@
   .lede{
     font-size:clamp(1.05rem,2.4vw,1.22rem);
     line-height:1.55;
-    color:var(--ink);
     max-width:52ch;
-    margin:0 0 2.6rem;
+    margin:0 0 2.8rem;
   }
 
-  /* canvas */
   figure{margin:0 0 .9rem}
   canvas{
     display:block;
     width:100%;
     height:auto;
     border:1px solid #232326;
-    background:#111112;
+    background:#101011;
   }
   figcaption{
     font-size:.76rem;
     letter-spacing:.1em;
     text-transform:uppercase;
     color:var(--ink-faint);
-    margin-top:.7rem;
+    margin-top:.75rem;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.3rem 1.4rem;
   }
+  figcaption b{color:var(--accent);font-weight:500}
 
-  /* rules + sections */
   hr{
     border:0;
     border-top:1px solid #232326;
     margin:clamp(3rem,8vw,4.5rem) 0 clamp(1.6rem,4vw,2.2rem);
   }
   h2{
-    font-family:var(--sans);
     font-size:.76rem;
     font-weight:600;
     letter-spacing:.2em;
@@ -112,7 +110,7 @@
     color:var(--ink-faint);
     margin:0 0 1.1rem;
   }
-  p{max-width:62ch;margin:0 0 1.15rem;color:var(--ink)}
+  p{max-width:62ch;margin:0 0 1.15rem}
   p.dim{color:var(--ink-dim)}
   .serif-note{
     font-family:var(--serif);
@@ -123,13 +121,7 @@
   }
   .serif-note b{color:var(--ink);font-weight:400;font-style:italic}
 
-  ol{
-    counter-reset:step;
-    list-style:none;
-    padding:0;
-    margin:0;
-    max-width:62ch;
-  }
+  ol{counter-reset:step;list-style:none;padding:0;margin:0;max-width:62ch}
   ol li{
     counter-increment:step;
     position:relative;
@@ -138,11 +130,8 @@
   }
   ol li::before{
     content:counter(step,decimal-leading-zero);
-    position:absolute;
-    left:0;
-    top:.15rem;
-    font-size:.76rem;
-    letter-spacing:.08em;
+    position:absolute;left:0;top:.15rem;
+    font-size:.76rem;letter-spacing:.08em;
     color:var(--accent);
     font-variant-numeric:tabular-nums;
   }
@@ -152,200 +141,393 @@
     margin-top:clamp(3.5rem,9vw,5.5rem);
     padding-top:1.6rem;
     border-top:1px solid #232326;
-    display:flex;
-    flex-wrap:wrap;
-    gap:.6rem 2.2rem;
-    align-items:baseline;
-    font-size:.85rem;
-    color:var(--ink-faint);
+    display:flex;flex-wrap:wrap;
+    gap:.6rem 2.2rem;align-items:baseline;
+    font-size:.85rem;color:var(--ink-faint);
   }
   a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink-faint);padding-bottom:1px}
   a:hover{color:var(--accent);border-bottom-color:var(--accent)}
-
-  @media (prefers-reduced-motion:reduce){
-    canvas{opacity:.9}
-  }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap wide">
 
   <header>
     <p class="mark">Zeuxis</p>
     <p class="meta">Zürich</p>
   </header>
 
-  <h1>The brief already <em>contains</em> the building.</h1>
+  <div style="max-width:760px">
+    <h1>The brief already <em>contains</em> the building.</h1>
 
-  <p class="lede">
-    A developer wants a return. The city regulates the geometry. The environment sets the targets.
-    Six hundred pages of brief, zoning and landscape law, and thousands of hours spent composing one
-    volume out of everything it has to be.
-  </p>
+    <p class="lede">
+      A developer wants a return. The city regulates the geometry. The environment sets the targets.
+      Six hundred pages of brief, zoning and landscape law, and thousands of hours spent composing one
+      volume out of everything it has to be.
+    </p>
+  </div>
 
   <figure>
-    <canvas id="field" width="1400" height="620" aria-label="Animation: hundreds of possible building volumes are generated on a site, evaluated, and reduced to the few that survive."></canvas>
-    <figcaption>Generate exhaustively. Evaluate physically. Return the few that survive.</figcaption>
+    <canvas id="field" width="1500" height="700" aria-label="Animation: typed building volumes are generated across two development fields, evaluated, then eliminated one by one against the zoning rules until five schemes remain."></canvas>
+    <figcaption>
+      <span>Generate exhaustively</span>
+      <span>Evaluate physically</span>
+      <span><b>Keep the few that survive</b></span>
+    </figcaption>
   </figure>
 
-  <hr>
+  <div style="max-width:760px">
+    <hr>
 
-  <h2>What it does</h2>
-  <ol>
-    <li><b>Reads the documents.</b> The brief, the zoning code, the preservation constraints, the noise and cost limits. Not a parameter form. The constraints already exist, written down.</li>
-    <li><b>Generates every volume that satisfies them.</b> Exhaustively, because that is the only way to know nothing viable was missed.</li>
-    <li><b>Simulates each one properly.</b> Energy, daylight, cost, on real watertight geometry through a real solver. Not a proxy score.</li>
-    <li><b>Throws almost all of it away.</b> What arrives is a handful, and the evidence of what it survived. Every discarded scheme is inspectable, with the reason it was cut.</li>
-  </ol>
+    <h2>What it does</h2>
+    <ol>
+      <li><b>Reads the documents.</b> The brief, the zoning code, the preservation constraints, the noise and cost limits. Not a parameter form. The constraints already exist, written down.</li>
+      <li><b>Generates every volume that satisfies them.</b> Real typologies with real roofs, at the dimensions the rules and the plan actually permit. Exhaustively, because that is the only way to know nothing viable was missed.</li>
+      <li><b>Simulates each one properly.</b> Energy, daylight, cost, on watertight geometry through a real solver. Not a proxy score.</li>
+      <li><b>Throws almost all of it away.</b> What arrives is a handful, and the evidence of what it survived. Every discarded scheme is inspectable, with the reason it was cut.</li>
+    </ol>
 
-  <hr>
+    <hr>
 
-  <h2>Position</h2>
-  <p>
-    We do not design the building. We find the few worth looking at, so the architect starts there
-    on day one instead of month three.
-  </p>
-  <p class="dim">
-    An architect does not want a bigger search space. They want a smaller one. Generation is the
-    mechanism. Reduction is the product.
-  </p>
+    <h2>Position</h2>
+    <p>
+      We do not design the building. We find the few worth looking at, so the architect starts there
+      on day one instead of month three.
+    </p>
+    <p class="dim">
+      An architect does not want a bigger search space. They want a smaller one. Generation is the
+      mechanism. Reduction is the product.
+    </p>
 
-  <hr>
+    <hr>
 
-  <h2>The name</h2>
-  <p class="serif-note">
-    Zeuxis was commissioned by the city of Croton to paint Helen, the most beautiful woman in the
-    world. He could not find a single model who had all of it, so he chose five and composed one
-    image from the best of each. Note what the story actually says: <b>Helen already existed,
-    distributed across the women of Croton.</b> The work was the looking.
-  </p>
+    <h2>The name</h2>
+    <p class="serif-note">
+      Zeuxis was commissioned by the city of Croton to paint Helen, the most beautiful woman in the
+      world. He could not find a single model who had all of it, so he chose five and composed one
+      image from the best of each. Note what the story actually says: <b>Helen already existed,
+      distributed across the women of Croton.</b> The work was the looking.
+    </p>
 
-  <footer>
-    <span>Zeuxis</span>
-    <span><a href="mailto:seshadri@arch.ethz.ch">seshadri@arch.ethz.ch</a></span>
-    <span>ETH Zürich</span>
-  </footer>
+    <footer>
+      <span>Zeuxis</span>
+      <span><a href="mailto:seshadri@arch.ethz.ch">seshadri@arch.ethz.ch</a></span>
+    </footer>
+  </div>
 
 </div>
 
 <script>
 (function(){
-  var cv = document.getElementById('field');
-  var ctx = cv.getContext('2d');
-  var W = cv.width, H = cv.height;
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var cv  = document.getElementById('field');
+var ctx = cv.getContext('2d');
+var W = cv.width, H = cv.height;
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // deterministic PRNG so the composition is designed, not accidental
-  var seed = 20260924;
-  function rnd(){ seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }
+/* ---------- deterministic randomness ---------- */
+var seed = 20260924;
+function rnd(){ seed = (seed*1664525 + 1013904223) % 4294967296; return seed/4294967296; }
+function rr(a,b){ return a + rnd()*(b-a); }
+function pick(a){ return a[Math.floor(rnd()*a.length)|0]; }
 
-  var INK = '#ece7df', DIM = '#3a3a3e', ACC = '#d08a4e';
-  var PAD = 70;
-  var blocks = [];
-  var N = 260;
+/* ---------- axonometric projection, fitted to the canvas after the field is built ---------- */
+var FX = 0.866, FY = 0.34;                 // flattened dimetric, keeps the banner wide not tall
+var S = 1, OX = 0, OY = 0;
+function raw(x,y,z){ return [ (x-y)*FX, (x+y)*FY - z ]; }
+function P(x,y,z){ var r = raw(x,y,z); return [ OX + r[0]*S, OY + r[1]*S ]; }
 
-  for (var i = 0; i < N; i++){
-    var w = 40 + rnd()*110;
-    var h = 26 + rnd()*80;
-    blocks.push({
-      x: PAD + rnd()*(W - PAD*2 - w),
-      y: PAD + rnd()*(H - PAD*2 - h),
-      w: w, h: h,
-      depth: 6 + rnd()*16,
-      born: rnd(),
-      keep: false
-    });
-  }
-  // the survivors: five, spaced across the site, chosen by hand
-  var picks = [];
-  var sorted = blocks.slice().sort(function(a,b){ return a.x - b.x; });
-  for (var k = 0; k < 5; k++){
-    var idx = Math.floor((k + 0.5) / 5 * sorted.length);
-    sorted[idx].keep = true;
-    picks.push(sorted[idx]);
-  }
+/* ---------- site: two fields split by a street ---------- */
+var FIELD_A = {x:8,  y:6,   w:186, d:52};   // the long street-facing field
+var STREET  = {x:0,  y:60,  w:202, d:13};
+var FIELD_B = {x:8,  y:76,  w:186, d:50};
 
-  function drawBlock(b, alpha, stroke, fill){
-    ctx.globalAlpha = alpha;
-    var d = b.depth;
-    if (fill){ ctx.fillStyle = fill; ctx.fillRect(b.x, b.y, b.w, b.h); }
-    // extruded top face, a hint of volume rather than a full isometric
-    ctx.strokeStyle = stroke;
-    ctx.lineWidth = 1;
-    ctx.strokeRect(b.x, b.y, b.w, b.h);
-    ctx.beginPath();
-    ctx.moveTo(b.x, b.y);            ctx.lineTo(b.x + d, b.y - d);
-    ctx.lineTo(b.x + b.w + d, b.y - d); ctx.lineTo(b.x + b.w, b.y);
-    ctx.moveTo(b.x + b.w + d, b.y - d); ctx.lineTo(b.x + b.w + d, b.y + b.h - d);
-    ctx.lineTo(b.x + b.w, b.y + b.h);
-    ctx.stroke();
-    ctx.globalAlpha = 1;
-  }
+/* ---------- palette ---------- */
+var C = {
+  cand:  { edge:'#6f6c66', wall:'#191a1c', wall2:'#141517', roof:'#212226' },
+  surv:  { edge:'#d08a4e', wall:'#241a11', wall2:'#1b130c', roof:'#33230f' },
+  ghost: '#2a2a2d'
+};
 
-  var CYCLE = 9000, t0 = null;
+/* ---------- geometry helpers ---------- */
+function poly(pts, fill, stroke, a){
+  if (a <= 0.004) return;
+  ctx.globalAlpha = a;
+  ctx.beginPath();
+  ctx.moveTo(pts[0][0], pts[0][1]);
+  for (var i=1;i<pts.length;i++) ctx.lineTo(pts[i][0], pts[i][1]);
+  ctx.closePath();
+  if (fill){ ctx.fillStyle = fill; ctx.fill(); }
+  if (stroke){ ctx.strokeStyle = stroke; ctx.lineWidth = 1; ctx.stroke(); }
+  ctx.globalAlpha = 1;
+}
 
-  function frame(ts){
-    if (t0 === null) t0 = ts;
-    var t = ((ts - t0) % CYCLE) / CYCLE;   // 0..1
+/* one rectangular bar with a roof.
+   b = {x,y,w,d,h,roof,ridge,rh}  roof: flat|gable|hip|mono|attika */
+function drawBar(b, col, a){
+  var x=b.x, y=b.y, w=b.w, d=b.d, h=b.h, rh=b.rh||0;
+  var xc = x+w/2, yc = y+d/2;
 
-    ctx.clearRect(0,0,W,H);
-    // site outline
-    ctx.strokeStyle = '#232326';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(PAD - 26, PAD - 26, W - (PAD-26)*2, H - (PAD-26)*2);
+  // two visible walls (+y face, +x face)
+  poly([P(x,y+d,0),P(x+w,y+d,0),P(x+w,y+d,h),P(x,y+d,h)], col.wall,  col.edge, a);
+  poly([P(x+w,y,0),P(x+w,y+d,0),P(x+w,y+d,h),P(x+w,y,h)], col.wall2, col.edge, a);
 
-    // phases: 0.00-0.35 generate | 0.35-0.55 evaluate | 0.55-0.75 reduce | 0.75-1.0 hold
-    var gen = Math.min(1, t / 0.35);
-    var evalP = (t - 0.35) / 0.20;
-    var red = (t - 0.55) / 0.20;
-
-    for (var i = 0; i < blocks.length; i++){
-      var b = blocks[i];
-      if (b.born > gen) continue;
-      var a = 0.5;
-      var stroke = DIM;
-      if (t > 0.55){
-        var r = Math.min(1, Math.max(0, red));
-        if (b.keep){ a = 0.5 + 0.5*r; stroke = ACC; }
-        else { a = 0.5 * (1 - r); }
-      }
-      if (a <= 0.01) continue;
-      drawBlock(b, a, b.keep && t > 0.55 ? ACC : stroke, null);
+  if (b.roof === 'gable'){
+    if (b.ridge === 'x'){
+      poly([P(x,y+d,h),P(x+w,y+d,h),P(x+w,yc,h+rh),P(x,yc,h+rh)], col.roof, col.edge, a);
+      poly([P(x,y,h),P(x+w,y,h),P(x+w,yc,h+rh),P(x,yc,h+rh)],     col.wall2, col.edge, a*0.85);
+      poly([P(x+w,y,h),P(x+w,y+d,h),P(x+w,yc,h+rh)],              col.wall,  col.edge, a);
+    } else {
+      poly([P(x+w,y,h),P(x+w,y+d,h),P(xc,y+d,h+rh),P(xc,y,h+rh)], col.roof, col.edge, a);
+      poly([P(x,y,h),P(x,y+d,h),P(xc,y+d,h+rh),P(xc,y,h+rh)],     col.wall2, col.edge, a*0.85);
+      poly([P(x,y+d,h),P(x+w,y+d,h),P(xc,y+d,h+rh)],              col.wall,  col.edge, a);
     }
-
-    // evaluation sweep
-    if (evalP > 0 && evalP < 1){
-      var sx = PAD - 26 + evalP * (W - (PAD-26)*2);
-      var g = ctx.createLinearGradient(sx - 90, 0, sx + 10, 0);
-      g.addColorStop(0, 'rgba(208,138,78,0)');
-      g.addColorStop(1, 'rgba(208,138,78,0.5)');
-      ctx.fillStyle = g;
-      ctx.fillRect(sx - 90, PAD - 26, 100, H - (PAD-26)*2);
-      ctx.strokeStyle = 'rgba(208,138,78,0.85)';
-      ctx.beginPath(); ctx.moveTo(sx, PAD - 26); ctx.lineTo(sx, H - PAD + 26); ctx.stroke();
-    }
-
-    // counter
-    var shown = 0;
-    for (var j = 0; j < blocks.length; j++) if (blocks[j].born <= gen) shown++;
-    var label = t > 0.62 ? '5 remaining' : shown + ' generated';
-    ctx.globalAlpha = 0.75;
-    ctx.fillStyle = t > 0.62 ? ACC : '#6d6a63';
-    ctx.font = '500 15px system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif';
-    ctx.fillText(label, PAD - 26, H - 22);
-    ctx.globalAlpha = 1;
-
-    requestAnimationFrame(frame);
-  }
-
-  if (reduce){
-    // static end state
-    ctx.strokeStyle = '#232326';
-    ctx.strokeRect(PAD - 26, PAD - 26, W - (PAD-26)*2, H - (PAD-26)*2);
-    blocks.forEach(function(b){ drawBlock(b, b.keep ? 1 : 0.16, b.keep ? ACC : DIM, null); });
+  } else if (b.roof === 'hip'){
+    var i = Math.min(w,d)/2;
+    poly([P(x,y+d,h),P(x+w,y+d,h),P(x+w-i,yc,h+rh),P(x+i,yc,h+rh)], col.roof, col.edge, a);
+    poly([P(x+w,y,h),P(x+w,y+d,h),P(x+w-i,yc,h+rh)],                col.wall, col.edge, a);
+    poly([P(x,y,h),P(x+w,y,h),P(x+w-i,yc,h+rh),P(x+i,yc,h+rh)],     col.wall2,col.edge, a*0.8);
+  } else if (b.roof === 'mono'){
+    poly([P(x,y,h+rh),P(x+w,y,h+rh),P(x+w,y+d,h),P(x,y+d,h)], col.roof, col.edge, a);
+    poly([P(x+w,y,h),P(x+w,y,h+rh),P(x+w,y+d,h)],             col.wall, col.edge, a);
+  } else if (b.roof === 'attika'){
+    poly([P(x,y,h),P(x+w,y,h),P(x+w,y+d,h),P(x,y+d,h)], col.roof, col.edge, a);
+    var s = Math.min(2.6, Math.min(w,d)*0.16);
+    var at = {x:x+s, y:y+s, w:w-2*s, d:d-2*s, h:h+rh, roof:'flat'};
+    poly([P(at.x,at.y+at.d,h),P(at.x+at.w,at.y+at.d,h),P(at.x+at.w,at.y+at.d,at.h),P(at.x,at.y+at.d,at.h)], col.wall, col.edge, a);
+    poly([P(at.x+at.w,at.y,h),P(at.x+at.w,at.y+at.d,h),P(at.x+at.w,at.y+at.d,at.h),P(at.x+at.w,at.y,at.h)], col.wall2, col.edge, a);
+    poly([P(at.x,at.y,at.h),P(at.x+at.w,at.y,at.h),P(at.x+at.w,at.y+at.d,at.h),P(at.x,at.y+at.d,at.h)], col.roof, col.edge, a);
   } else {
-    requestAnimationFrame(frame);
+    poly([P(x,y,h),P(x+w,y,h),P(x+w,y+d,h),P(x,y+d,h)], col.roof, col.edge, a);
   }
+}
+
+/* ---------- the type library ---------- */
+var ST = 3.1;  // storey height
+
+function tZeile(x,y,ang){                       // parallel slabs
+  var n = 2 + (rnd()<0.5?0:1), d = rr(10,13), L = rr(34,52), g = rr(14,20);
+  var st = 3 + (rnd()<0.4?1:0), bars = [];
+  for (var i=0;i<n;i++){
+    if (ang) bars.push({x:x+i*(d+g), y:y, w:d, d:L, h:st*ST, roof:'gable', ridge:'y', rh:2.6});
+    else     bars.push({x:x, y:y+i*(d+g), w:L, d:d, h:st*ST, roof:'gable', ridge:'x', rh:2.6});
+  }
+  return {bars:bars, type:'Zeile'};
+}
+function tBlock(x,y){                            // perimeter block
+  var W_=rr(46,62), D_=rr(38,46), t=rr(12,14), st=4+(rnd()<0.5?1:0), h=st*ST;
+  return {type:'Blockrand', bars:[
+    {x:x, y:y, w:W_, d:t, h:h, roof:'flat'},
+    {x:x, y:y+D_-t, w:W_, d:t, h:h, roof:'flat'},
+    {x:x, y:y+t, w:t, d:D_-2*t, h:h, roof:'flat'},
+    {x:x+W_-t, y:y+t, w:t, d:D_-2*t, h:h, roof:'attika', rh:2.7}
+  ]};
+}
+function tPunkt(x,y){                             // point block
+  var s = rr(18,23), st = 5 + Math.floor(rnd()*3);
+  return {type:'Punktbau', bars:[{x:x,y:y,w:s,d:s,h:st*ST,roof:'attika',rh:2.8}]};
+}
+function tKamm(x,y){                              // comb, bar on the street + fingers
+  var L=rr(56,76), t=rr(12,14), st=4, h=st*ST, bars=[{x:x,y:y,w:L,d:t,h:h,roof:'flat'}];
+  var nf = 3, fl = rr(24,32);
+  for (var i=0;i<nf;i++){
+    bars.push({x:x + 4 + i*((L-12)/nf), y:y+t, w:t, d:fl, h:(st-1)*ST, roof:'gable', ridge:'y', rh:2.4});
+  }
+  return {type:'Kamm', bars:bars};
+}
+function tGross(x,y){                             // contemporary large figure
+  var W_=rr(44,60), D_=rr(34,44), t=rr(15,18), st=5+Math.floor(rnd()*3), h=st*ST;
+  return {type:'Grossform', bars:[
+    {x:x, y:y, w:W_, d:t, h:h, roof:'attika', rh:2.8},
+    {x:x, y:y+t, w:t, d:D_-t, h:h*0.82, roof:'flat'},
+    {x:x+W_-t, y:y+t, w:t, d:(D_-t)*0.7, h:h*0.9, roof:'attika', rh:2.6}
+  ]};
+}
+function tReihe(x,y){                             // row houses
+  var n=4+Math.floor(rnd()*3), u=rr(6.5,8), d=rr(9,11), bars=[];
+  for (var i=0;i<n;i++) bars.push({x:x+i*u, y:y, w:u, d:d, h:2*ST, roof:'gable', ridge:'x', rh:2.3});
+  return {type:'Reihenhaus', bars:bars};
+}
+function tHof(x,y){                               // low courtyard cluster
+  var s=rr(15,19), bars=[];
+  for (var i=0;i<2;i++) for (var j=0;j<2;j++)
+    bars.push({x:x+i*(s+3), y:y+j*(s+3), w:s, d:s*0.55, h:2*ST, roof:'mono', rh:1.8});
+  return {type:'Hofcluster', bars:bars};
+}
+
+var MAKERS = [tZeile,tBlock,tPunkt,tKamm,tGross,tReihe,tHof];
+
+/* ---------- reasons a scheme dies ---------- */
+var REASONS = ['too long','shadow','no quiet facade','over height','court too tight',
+               'ridge direction','setback','dormers over limit','roof yield','cost'];
+
+/* ---------- build the candidate field ---------- */
+var schemes = [];
+function spawn(field, n){
+  for (var i=0;i<n;i++){
+    var mk = pick(MAKERS);
+    var sx = field.x + rnd()*(field.w-78);
+    var sy = field.y + rnd()*(field.d-40);
+    var s = mk(sx, sy, rnd()<0.45);
+    s.born   = rnd()*0.92;
+    s.killAt = 0.06 + rnd()*0.88;
+    s.reason = pick(REASONS);
+    s.keep   = false;
+    var cx=0, cy=0;
+    for (var k=0;k<s.bars.length;k++){ cx += s.bars[k].x + s.bars[k].w/2; cy += s.bars[k].y + s.bars[k].d/2; }
+    s.cx = cx/s.bars.length; s.cy = cy/s.bars.length;
+    schemes.push(s);
+  }
+}
+spawn(FIELD_A, 22);
+spawn(FIELD_B, 21);
+
+/* ---------- the survivors: one coherent arrangement ---------- */
+var survivors = [];
+(function(){
+  var k1 = tKamm(28, 12);            k1.label='Kamm';        // shields the street
+  var z1 = tZeile(112, 10, false);   z1.label='Zeile';
+  var g1 = tGross(24, 84);           g1.label='Grossform';
+  var b1 = tBlock(104, 80);          b1.label='Blockrand';
+  var p1 = tPunkt(172, 96);          p1.label='Punktbau';
+  survivors = [k1,z1,g1,b1,p1];
+  survivors.forEach(function(s){
+    s.keep = true; s.born = rnd()*0.5; s.killAt = 2;
+    var cx=0, cy=0;
+    for (var k=0;k<s.bars.length;k++){ cx += s.bars[k].x + s.bars[k].w/2; cy += s.bars[k].y + s.bars[k].d/2; }
+    s.cx = cx/s.bars.length; s.cy = cy/s.bars.length;
+    schemes.push(s);
+  });
+})();
+
+/* ---------- fit the whole composition into the canvas ---------- */
+(function(){
+  var minX=1e9, maxX=-1e9, minY=1e9, maxY=-1e9;
+  function note(x,y,z){ var r = raw(x,y,z);
+    if(r[0]<minX)minX=r[0]; if(r[0]>maxX)maxX=r[0];
+    if(r[1]<minY)minY=r[1]; if(r[1]>maxY)maxY=r[1]; }
+  [FIELD_A, FIELD_B, STREET].forEach(function(f){
+    note(f.x,f.y,0); note(f.x+f.w,f.y,0); note(f.x,f.y+f.d,0); note(f.x+f.w,f.y+f.d,0);
+  });
+  schemes.forEach(function(s){
+    s.bars.forEach(function(b){
+      var top = b.h + (b.rh||0);
+      note(b.x,b.y,0); note(b.x+b.w,b.y,0); note(b.x,b.y+b.d,0); note(b.x+b.w,b.y+b.d,0);
+      note(b.x,b.y,top); note(b.x+b.w,b.y,top); note(b.x,b.y+b.d,top); note(b.x+b.w,b.y+b.d,top);
+    });
+  });
+  var mL=46, mR=46, mT=34, mB=64;
+  S  = Math.min((W-mL-mR)/(maxX-minX), (H-mT-mB)/(maxY-minY));
+  OX = mL - minX*S + (W-mL-mR - (maxX-minX)*S)/2;
+  OY = mT - minY*S;
+})();
+
+/* label only a readable subset of the deaths */
+var labelled = schemes.filter(function(s){ return !s.keep; })
+                      .sort(function(a,b){ return a.killAt - b.killAt; })
+                      .filter(function(_,i){ return i % 5 === 0; });
+
+/* depth sort: far (small x+y) first */
+schemes.sort(function(a,b){ return (a.cx+a.cy) - (b.cx+b.cy); });
+
+/* ---------- ground ---------- */
+function ground(f, a){
+  poly([P(f.x,f.y,0),P(f.x+f.w,f.y,0),P(f.x+f.w,f.y+f.d,0),P(f.x,f.y+f.d,0)],
+       'rgba(255,255,255,0.014)', '#26262a', a);
+}
+function street(){
+  poly([P(STREET.x,STREET.y,0),P(STREET.x+STREET.w,STREET.y,0),
+        P(STREET.x+STREET.w,STREET.y+STREET.d,0),P(STREET.x,STREET.y+STREET.d,0)],
+       'rgba(208,138,78,0.045)', '#33261c', 1);
+}
+
+/* ---------- animation ---------- */
+var CYCLE = 13000, t0 = null;
+
+function scene(t){
+  ctx.clearRect(0,0,W,H);
+  ground(FIELD_A,1); street(); ground(FIELD_B,1);
+
+  var GEN=0.30, EV0=0.30, EV1=0.48, RD0=0.48, RD1=0.76;
+  var gen = Math.min(1, t/GEN);
+  var red = (t-RD0)/(RD1-RD0);
+
+  var alive = 0, born = 0;
+  for (var i=0;i<schemes.length;i++){
+    var s = schemes[i], a = 0, k = 0;
+    if (s.born <= gen){
+      born++;
+      a = 0.9;
+      if (t > RD0 && !s.keep){
+        k = Math.max(0, Math.min(1, (red - s.killAt) / 0.16));
+        a = 0.9*(1-k) + 0.055*k;                     // never quite zero: the discarded field stays as a ghost
+      }
+      if (s.keep || k < 0.5) alive++;
+    }
+    if (a <= 0.01) continue;
+    var col = (s.keep && t > RD0+0.06) ? C.surv : C.cand;
+    var al  = (s.keep && t > RD0+0.06) ? Math.min(1, 0.9 + red*0.4) : a;
+    for (var j=0;j<s.bars.length;j++) drawBar(s.bars[j], col, al);
+  }
+
+  /* evaluation sweep */
+  if (t > EV0 && t < EV1){
+    var p = (t-EV0)/(EV1-EV0);
+    var sx = p * W;
+    var g = ctx.createLinearGradient(sx-150, 0, sx+8, 0);
+    g.addColorStop(0,'rgba(208,138,78,0)');
+    g.addColorStop(1,'rgba(208,138,78,0.16)');
+    ctx.fillStyle = g; ctx.fillRect(sx-150, 0, 158, H);
+    ctx.strokeStyle = 'rgba(208,138,78,0.7)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(sx,0); ctx.lineTo(sx,H); ctx.stroke();
+  }
+
+  /* kill reasons */
+  if (t > RD0 && t < RD1 + 0.05){
+    ctx.font = '500 13px system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
+    for (var m=0;m<labelled.length;m++){
+      var s2 = labelled[m];
+      var d = red - s2.killAt;
+      if (d < -0.02 || d > 0.14) continue;
+      var fade = d < 0 ? (d+0.02)/0.02 : 1 - d/0.14;
+      var pt = P(s2.cx, s2.cy, 16);
+      ctx.globalAlpha = Math.max(0, Math.min(1, fade)) * 0.85;
+      ctx.fillStyle = '#b8564a';
+      ctx.fillText(s2.reason, pt[0]-14, pt[1]);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  /* survivor labels */
+  if (t > 0.78){
+    var lf = Math.min(1, (t-0.78)/0.06);
+    ctx.font = '500 13px system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
+    for (var q=0;q<survivors.length;q++){
+      var sv = survivors[q], ptn = P(sv.cx, sv.cy, 26);
+      ctx.globalAlpha = lf*0.9; ctx.fillStyle = C.surv.edge;
+      ctx.fillText(sv.label, ptn[0]-16, ptn[1]);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  /* counter: counts up while generating, then counts down as the rules eliminate */
+  var txt;
+  if (t <= RD0)      txt = born + ' schemes generated';
+  else if (t < 0.74) txt = alive + ' remaining';
+  else               txt = alive + ' schemes remain';
+  ctx.globalAlpha = 0.8;
+  ctx.fillStyle = t > RD0 + 0.02 ? C.surv.edge : '#726f68';
+  ctx.font = '500 15px system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
+  ctx.fillText(txt, 26, H-24);
+  ctx.globalAlpha = 1;
+}
+
+function frame(ts){
+  if (t0 === null) t0 = ts;
+  scene(((ts-t0) % CYCLE)/CYCLE);
+  requestAnimationFrame(frame);
+}
+
+if (reduce) scene(0.95); else requestAnimationFrame(frame);
 })();
 </script>
 </body>
