@@ -3,1315 +3,974 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zeuxis — the brief already contains the building</title>
-<meta name="description" content="Zeuxis reads the brief, the zoning code and the site, generates every volume that satisfies them, simulates the top one percent, and returns the few worth looking at.">
-<meta property="og:title" content="Zeuxis">
-<meta property="og:description" content="The brief already contains the building.">
-<meta property="og:type" content="website">
-<link rel="icon" href="data:image/png;base64,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"><rect width='32' height='32' fill='%230e0e0f'/><rect x='9' y='7' width='5' height='18' fill='%23d08a4e'/><rect x='17' y='12' width='5' height='13' fill='%23ece7df'/></svg>">
+<title>Zeuxis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#ece7df;
-    --ink-dim:#9a948b;
-    --ink-faint:#5c5850;
-    --bg:#0e0e0f;
-    --bg-raised:#131315;
-    --accent:#d08a4e;
-    --accent-dim:rgba(208,138,78,.28);
-    --cool:#6f8794;
-    --line:#232326;
-    --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua','Times New Roman',serif;
-    --sans:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
-    --mono:'SF Mono','Berkeley Mono',ui-monospace,'Courier New',monospace;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
-  body{
-    background:var(--bg); color:var(--ink);
-    font-family:var(--sans); font-size:17px; line-height:1.6;
-    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-    overflow-x:hidden;
-  }
+/* Swiss-poster layout: one dark opener, then white sheets on a 12-col grid; blue = Zeuxis, yellow = sun, green = open ground */
+:root{
+  --ink:#0A0A0A;
+  --paper:#FFFFFF;
+  --mist:#F1F2F6;
+  --blue:#1F3BFF;
+  --blue-soft:#8FA0FF;
+  --tint:#DDE2FF;
+  --sun:#FFC61A;
+  --green:#3DBE6B;
+  --mut:#6B6E78;
+  --line:#0A0A0A;
+  --display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body:"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+@media (max-width:600px){.wrap{padding:0 18px}body{font-size:17px}}
+h1,h2,h3{font-family:var(--display);text-wrap:balance}
+h2{font-size:clamp(38px,5.4vw,72px);font-weight:850;font-stretch:112%;line-height:1.0;letter-spacing:-.02em}
+h3{font-size:24px;font-weight:750;font-stretch:105%;line-height:1.15}
+.eyebrow{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.lede{font-size:clamp(20px,2vw,24px);line-height:1.45;max-width:62ch}
+.mut{color:var(--mut)}
+.mono{font-family:var(--mono)}
+section{padding:112px 0}
+@media (max-width:700px){section{padding:72px 0}}
+.sec-head{display:grid;grid-template-columns:200px 1fr;gap:32px;margin-bottom:48px}
+.sec-head .num{font-family:var(--mono);font-size:13px;color:var(--mut);padding-top:10px;border-top:3px solid var(--ink)}
+.sec-head .txt{display:flex;flex-direction:column;gap:20px;border-top:3px solid var(--ink);padding-top:22px}
+@media (max-width:800px){.sec-head{grid-template-columns:1fr;gap:0}.sec-head .num{border-top:none;padding:0 0 6px}}
 
-  #scrollbar{
-    position:fixed; top:0; left:0; height:2px; width:0%;
-    background:var(--accent); z-index:80; box-shadow:0 0 10px var(--accent-dim);
-    transition:width .05s linear;
-  }
+/* nav */
+nav.top{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.92);backdrop-filter:blur(8px);color:#fff}
+nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:20px}
+nav.top .brand{font-family:var(--display);font-weight:900;font-stretch:118%;font-size:20px;letter-spacing:-.01em;text-decoration:none}
+nav.top ul{display:flex;gap:22px;list-style:none;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+nav.top ul a{text-decoration:none;color:#C9CCD6}
+nav.top ul a:hover{color:#fff}
+@media (max-width:820px){nav.top ul{display:none}}
 
-  .swap{ display:inline-block; position:relative; overflow:hidden; vertical-align:bottom; line-height:1.25; }
-  .swap span{ display:block; transition:transform .38s cubic-bezier(.2,.75,.2,1); }
-  .swap span.dup{ position:absolute; top:100%; left:0; color:var(--accent); }
-  .swap:hover span{ transform:translateY(-100%); }
+/* hero */
+.hero{background:#0A0A0A;color:#fff;padding:72px 0 88px;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.08fr;gap:40px;align-items:center}
+.hero .eyebrow{color:var(--blue-soft)}
+.hero h1{font-size:clamp(64px,10vw,152px);font-weight:900;font-stretch:118%;line-height:.86;letter-spacing:-.035em;margin:22px 0 26px}
+.hero .claim{font-family:var(--display);font-size:clamp(24px,2.6vw,34px);font-weight:750;font-stretch:108%;line-height:1.15;max-width:18ch}
+.hero p.sub{color:#C9CCD6;font-size:19px;max-width:46ch;margin-top:22px}
+.hero img{width:100%;height:auto;display:block}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:14px 20px;border:2px solid currentColor;text-decoration:none;background:transparent;color:inherit;cursor:pointer}
+.btn.fill{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn:hover{transform:translateY(-1px)}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}}
 
-  nav{
-    position:sticky; top:0; z-index:60;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:.85rem clamp(1.2rem,5vw,2rem);
-    background:rgba(14,14,15,.8); backdrop-filter:blur(12px) saturate(1.1);
-    border-bottom:1px solid transparent; transition:border-color .3s ease;
-  }
-  nav.scrolled{ border-bottom-color:var(--line); }
-  .nav-mark{ display:flex; align-items:center; gap:.55rem; }
-  .nav-mark img{ height:19px; width:auto; display:block; opacity:.95; transition:opacity .25s ease; }
-  nav:hover .nav-mark img{ opacity:1; }
+/* problem */
+.quote{font-family:var(--display);font-size:clamp(30px,4vw,54px);font-weight:800;font-stretch:108%;line-height:1.08;letter-spacing:-.015em;max-width:22ch}
+.quote em{font-style:normal;background:var(--sun);padding:0 .12em}
+.chain{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:56px;border:3px solid var(--ink)}
+.chain div{padding:28px;border-right:3px solid var(--ink);display:flex;flex-direction:column;gap:10px}
+.chain div:last-child{border-right:none;background:var(--ink);color:#fff}
+.chain .k{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.chain div:last-child .k{color:var(--sun)}
+.chain p.big{font-family:var(--display);font-size:28px;font-weight:800;font-stretch:108%;line-height:1.1}
+@media (max-width:800px){.chain{grid-template-columns:1fr}.chain div{border-right:none;border-bottom:3px solid var(--ink)}.chain div:last-child{border-bottom:none}}
 
-  /* ---- brand lockup ---- */
-  .lockup{ margin:0 0 clamp(2rem,5vw,2.8rem); }
-  .lockup img.mark{
-    width:clamp(180px,26vw,280px); height:auto; display:block;
-    opacity:0; transform:translateY(10px);
-    animation:riseIn .9s .05s cubic-bezier(.2,.7,.2,1) forwards;
-  }
-  .lockup .rule{
-    display:flex; align-items:center; gap:.9rem; margin-top:.95rem;
-    opacity:0; animation:fadeIn .8s .5s forwards;
-  }
-  .lockup .rule::before{ content:''; height:1px; width:34px; background:var(--accent); flex:0 0 auto; }
-  .lockup img.tagline{ width:clamp(190px,30vw,320px); height:auto; display:block; opacity:.72; }
+.curve-card{margin-top:56px;border:3px solid var(--ink);padding:28px 28px 20px;background:var(--paper)}
+.curve-card svg{width:100%;height:auto;display:block}
+.curve-legend{display:flex;gap:26px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;margin-top:8px}
+.sw{display:inline-block;width:22px;height:4px;vertical-align:middle;margin-right:8px}
 
-  .meta-line{
-    font-size:.7rem; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--ink-faint); margin:0 0 1.4rem;
-  }
-  .nav-links{ display:flex; gap:1.5rem; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; }
-  .nav-links a{ color:var(--ink-faint); }
-  @media (max-width:560px){ .nav-links{ gap:.95rem; } .nav-links .hide-sm{ display:none; } }
+/* massing decides: sun section */
+.lab{display:grid;grid-template-columns:1fr 340px;gap:0;border:3px solid var(--ink);margin-top:8px}
+.lab .stage{background:#FAFAFB;border-right:3px solid var(--ink);padding:16px;min-width:0}
+.lab .stage svg{width:100%;height:auto;display:block}
+.lab .panel{padding:26px;display:flex;flex-direction:column;gap:22px}
+@media (max-width:960px){.lab{grid-template-columns:1fr}.lab .stage{border-right:none;border-bottom:3px solid var(--ink)}}
+.ctl{display:flex;flex-direction:column;gap:8px}
+.ctl label{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between}
+.ctl output{font-weight:600;color:var(--blue)}
+input[type=range]{width:100%;accent-color:var(--blue);height:28px}
+.seg{display:flex;border:2px solid var(--ink)}
+.seg button{flex:1;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:10px 6px;border:none;background:var(--paper);cursor:pointer;color:var(--ink)}
+.seg button+button{border-left:2px solid var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.readouts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ro{border:2px solid var(--ink);padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.ro .v{font-family:var(--display);font-size:34px;font-weight:850;font-stretch:110%;line-height:1;font-variant-numeric:tabular-nums}
+.ro .l{font-size:13px;line-height:1.3;color:var(--mut)}
+.ro.sun{background:var(--sun);border-color:var(--ink)}
+.ro.sun .l{color:var(--ink)}
+.ro.green{background:#E3F6EA}
+.note{font-size:14px;color:var(--mut);line-height:1.45}
 
-  .reg{ position:fixed; width:15px; height:15px; z-index:45; pointer-events:none; opacity:.45; }
-  .reg::before,.reg::after{content:'';position:absolute;background:var(--ink-faint)}
-  .reg::before{width:100%;height:1px;top:50%;left:0}
-  .reg::after{width:1px;height:100%;left:50%;top:0}
-  .reg.tl{top:70px;left:14px} .reg.tr{top:70px;right:14px}
-  .reg.bl{bottom:14px;left:14px} .reg.br{bottom:14px;right:14px}
-  @media (max-width:900px){ .reg{display:none} }
+/* scores */
+.decides{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:64px}
+.decides div{border-top:3px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:6px}
+.decides b{font-family:var(--display);font-size:22px;font-weight:800;font-stretch:108%}
+@media (max-width:800px){.decides{grid-template-columns:1fr 1fr}}
 
-  .wrap{ max-width:780px; margin:0 auto; padding:0 clamp(1.2rem,5vw,2rem); position:relative; }
-  .wide{ max-width:1180px; margin:0 auto; padding:0 clamp(1.2rem,5vw,2rem); }
+.weights{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:22px;align-items:end;border:3px solid var(--ink);padding:22px 24px;background:var(--mist)}
+.weights .presets{display:flex;gap:8px;flex-wrap:wrap}
+.weights .presets .btn{padding:10px 14px;font-size:12px}
+.weights .presets .btn[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+@media (max-width:900px){.weights{grid-template-columns:1fr}}
+.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:18px}
+@media (max-width:1000px){.opts{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.opts{grid-template-columns:1fr}}
+.opt{border:3px solid var(--ink);padding:18px;display:flex;flex-direction:column;gap:14px;position:relative;background:var(--paper);transition:transform .25s ease, box-shadow .25s ease}
+.opt.win{box-shadow:8px 8px 0 var(--blue);transform:translate(-4px,-4px)}
+.opt .rank{position:absolute;top:-3px;right:-3px;font-family:var(--mono);font-size:12px;font-weight:600;padding:6px 10px;background:var(--ink);color:#fff}
+.opt.win .rank{background:var(--blue)}
+.opt svg{width:100%;height:auto;display:block;background:#F6F7F9;border:1px solid #D6D8DE}
+.opt .total{font-family:var(--display);font-size:46px;font-weight:900;font-stretch:112%;line-height:1;font-variant-numeric:tabular-nums}
+.bars{display:flex;flex-direction:column;gap:8px}
+.bar{display:grid;grid-template-columns:86px 1fr 34px;gap:8px;align-items:center;font-size:13px}
+.bar .t{height:12px;background:#E7E8EC;position:relative}
+.bar .f{position:absolute;inset:0 auto 0 0;transition:width .35s ease}
+.bar .n{font-family:var(--mono);font-size:12px;text-align:right;font-variant-numeric:tabular-nums}
+.facts{font-family:var(--mono);font-size:12px;color:var(--mut);line-height:1.5}
+details.how{margin-top:22px;border-top:2px solid var(--ink);padding-top:14px}
+details.how summary{cursor:pointer;font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.tbl{overflow-x:auto;margin-top:14px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:680px}
+th,td{padding:8px 10px;border-bottom:1px solid #C9CCD6;text-align:right;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+th{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-bottom:2px solid var(--ink)}
 
-  .eyebrow{
-    font-size:.7rem; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--ink-faint); margin:0 0 1.2rem; display:block;
-  }
-  .eyebrow::after{ content:'/'; color:var(--accent); margin-left:.35em; }
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(4,1fr);border:3px solid var(--ink)}
+.pipe .st{padding:26px;border-right:3px solid var(--ink);display:flex;flex-direction:column;gap:14px;min-height:300px}
+.pipe .st:last-child{border-right:none}
+.pipe .st .n{font-family:var(--mono);font-size:13px;color:var(--mut)}
+.pipe .st svg{width:100%;height:120px}
+.pipe .st.on{background:var(--tint)}
+@media (max-width:900px){.pipe{grid-template-columns:1fr 1fr}.pipe .st:nth-child(2){border-right:none}.pipe .st:nth-child(-n+2){border-bottom:3px solid var(--ink)}}
+@media (max-width:560px){.pipe{grid-template-columns:1fr}.pipe .st{border-right:none;border-bottom:3px solid var(--ink);min-height:0}.pipe .st:last-child{border-bottom:none}}
+.context{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.context div{padding:18px;border:2px solid var(--ink);display:flex;flex-direction:column;gap:6px}
+.context .chip{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;align-self:flex-start;border:2px solid var(--ink)}
+@media (max-width:800px){.context{grid-template-columns:1fr 1fr}}
 
-  .mask{ display:block; overflow:hidden; }
-  .mask > i{ display:block; font-style:inherit; transform:translateY(105%); transition:transform .9s cubic-bezier(.16,.84,.24,1); }
-  .mask.in > i{ transform:translateY(0); }
+/* results */
+.results{background:var(--ink);color:#fff}
+.results .sec-head .num,.results .sec-head .txt{border-color:#fff}
+.results .sec-head .num{color:#9EA3B0}
+.results .eyebrow{color:var(--blue-soft)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:#2A2B30;border:2px solid #2A2B30}
+.tile{background:var(--ink);padding:24px;display:flex;flex-direction:column;gap:8px;min-height:180px}
+.tile .v{font-family:var(--display);font-size:clamp(40px,4.4vw,60px);font-weight:900;font-stretch:112%;line-height:1;font-variant-numeric:tabular-nums}
+.tile .l{color:#C9CCD6;font-size:15px;line-height:1.35}
+.tile .c{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-top:auto}
+.c.w{color:var(--sun)}.c.e{color:var(--green)}.c.r{color:var(--blue-soft)}
+@media (max-width:900px){.tiles{grid-template-columns:1fr 1fr}}
+.next{margin-top:28px;border:2px dashed #6B6E78;padding:18px 22px;display:flex;gap:18px;flex-wrap:wrap;align-items:baseline}
+.next b{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:#9EA3B0}
+.bench{margin-top:16px;color:#C9CCD6;font-size:15px}
 
-  .hero{ padding:clamp(3rem,9vw,6rem) 0 clamp(2rem,5vw,3rem); }
-  h1{
-    font-family:var(--serif); font-weight:400;
-    font-size:clamp(2.2rem,6.6vw,4.1rem); line-height:1.06; letter-spacing:-.018em;
-    margin:0 0 1.7rem; max-width:16ch;
-  }
-  h1 em{ font-style:italic; color:var(--accent); }
-  .lede{ font-size:clamp(1.02rem,2.3vw,1.2rem); line-height:1.55; max-width:52ch; margin:0 0 2.2rem; }
+/* who & team */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.card{border:3px solid var(--ink);padding:28px;display:flex;flex-direction:column;gap:12px}
+.card.blue{background:var(--blue);color:#fff;border-color:var(--blue)}
+.card ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.card li{padding-left:22px;position:relative}
+.card li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:3px;background:currentColor}
+.team{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.team div{border-top:3px solid var(--ink);padding-top:12px}
+.team b{font-family:var(--display);font-size:26px;font-weight:850;font-stretch:110%;display:block}
+footer{background:var(--ink);color:#C9CCD6;padding:56px 0}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-end}
+footer .big{font-family:var(--display);font-size:clamp(34px,4vw,56px);font-weight:900;font-stretch:115%;color:#fff;line-height:1}
 
-  .scroll-cue{
-    display:flex; align-items:center; gap:.6rem;
-    font-size:.68rem; letter-spacing:.18em; text-transform:uppercase;
-    color:var(--ink-faint); margin-bottom:2.4rem; opacity:0; animation:fadeIn .8s 1s forwards;
-  }
-  .scroll-cue .bar{ width:34px; height:1px; background:var(--ink-faint); position:relative; overflow:hidden; }
-  .scroll-cue .bar::after{ content:''; position:absolute; inset:0; background:var(--accent); animation:sweep 2.2s cubic-bezier(.5,0,.5,1) infinite; }
-  @keyframes sweep{ 0%{transform:translateX(-100%)} 60%,100%{transform:translateX(100%)} }
-  @keyframes fadeIn{ to{opacity:1} }
+/* tabs */
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C9CCD6;text-decoration:none;padding:18px 12px 15px;border-bottom:3px solid transparent;white-space:nowrap}
+.tabs a:hover{color:#fff}
+.tabs a[aria-selected="true"]{color:#fff;border-bottom-color:var(--sun)}
+nav.top .wrap{height:auto;min-height:56px}
+@media (max-width:820px){nav.top .wrap{flex-direction:column;align-items:flex-start;gap:0;padding-top:10px}.tabs{width:100%}.tabs a{padding:12px 10px 11px}}
+.panel-tab[hidden]{display:none}
+.ov{padding:88px 0 112px}
+.ovgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+@media (max-width:900px){.ovgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.ovgrid{grid-template-columns:1fr}}
+.ovc{border:3px solid var(--ink);padding:22px;display:flex;flex-direction:column;gap:10px;text-decoration:none;min-height:220px;transition:transform .2s ease, box-shadow .2s ease;background:var(--paper)}
+.ovc:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--blue)}
+.ovc .k{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.ovc b{font-family:var(--display);font-size:26px;font-weight:850;font-stretch:110%;line-height:1.08;text-wrap:balance}
+.ovc .go{margin-top:auto;font-family:var(--mono);font-size:13px;font-weight:600}
+.ovc.dark{background:var(--ink);color:#fff}
+.ovc.dark .k{color:var(--sun)}
+.pager{padding:0 0 88px}
+.pager .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:3px solid var(--ink);padding-top:24px}
+.results + .pager, [data-panel="results"] .pager{background:var(--ink)}
+[data-panel="results"] .pager .wrap{border-color:#fff;color:#fff}
+[data-panel="sun-lab"] .pager,[data-panel="how"] .pager{background:var(--mist)}
 
-  .stat-row{
-    display:flex; flex-wrap:wrap; gap:1.6rem 2.6rem;
-    padding-top:1.3rem; border-top:1px solid var(--line);
-    opacity:0; transform:translateY(12px);
-    animation:riseIn .8s .7s cubic-bezier(.2,.7,.2,1) forwards;
-  }
-  @keyframes riseIn{ to{opacity:1;transform:translateY(0)} }
-  .stat{ min-width:7rem; }
-  .stat-num{ font-family:var(--serif); font-style:italic; color:var(--accent); font-size:1.65rem; line-height:1; font-variant-numeric:tabular-nums; }
-  .stat-lbl{ font-size:.66rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint); margin-top:.35rem; max-width:16ch; }
+.cmp-step{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:36px 0;border-top:3px solid var(--ink)}
+.stepn{font-family:var(--display);font-size:44px;font-weight:900;font-stretch:115%;line-height:1;color:var(--blue)}
+.cmp-q{display:flex;flex-direction:column;gap:18px;min-width:0}
+.cmp-q h3{font-size:30px}
+@media (max-width:600px){.cmp-step{grid-template-columns:1fr;gap:8px}}
+.choice{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:760px){.choice{grid-template-columns:1fr}}
+.choice button{text-align:left;border:3px solid var(--ink);background:var(--paper);color:var(--ink);padding:16px 18px;cursor:pointer;display:flex;flex-direction:column;gap:4px;font-family:var(--body)}
+.choice button b{font-family:var(--display);font-size:22px;font-weight:850;font-stretch:108%}
+.choice button span{font-size:14px;color:var(--mut)}
+.choice button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.choice button[aria-pressed="true"] span{color:#C9CCD6}
+.fine summary{cursor:pointer;font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.fine .weights{margin-top:14px;grid-template-columns:repeat(3,1fr)}
+@media (max-width:760px){.fine .weights{grid-template-columns:1fr}}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;vertical-align:-1px;border:1.5px solid var(--ink)}
+.winner{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:center;border:3px solid var(--ink);padding:22px;box-shadow:8px 8px 0 var(--blue);background:var(--paper)}
+@media (max-width:700px){.winner{grid-template-columns:1fr}}
+.winner svg{width:100%;height:auto;display:block;background:#F6F7F9;border:1px solid #D6D8DE}
+.winner .name{font-family:var(--display);font-size:clamp(34px,4vw,52px);font-weight:900;font-stretch:112%;line-height:1}
+.winner .why{font-size:19px;line-height:1.45;max-width:58ch}
+.winner .trade{font-size:16px;color:var(--mut)}
+.winner .tag{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.rank-list{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.rk{display:grid;grid-template-columns:28px 120px 1fr 56px;gap:12px;align-items:center;font-size:15px}
+.rk .rkn{font-family:var(--mono);font-weight:600}
+.rk .rkb{height:18px;background:#E7E8EC;display:flex}
+.rk .rkb i{display:block;height:100%;transition:width .4s ease}
+.rk .rkv{font-family:var(--mono);font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.rk.first .rkn,.rk.first .rkv{color:var(--blue)}
+.grid-wrap{overflow-x:auto}
+table.glance{min-width:720px;border-collapse:separate;border-spacing:6px;margin:-6px}
+table.glance th,table.glance td{border:none;padding:0;text-align:center;vertical-align:middle}
+table.glance thead th{border-bottom:none;padding:6px 4px 10px;font-family:var(--display);font-size:18px;font-weight:850;font-stretch:108%;letter-spacing:0;text-transform:none}
+table.glance thead th svg{width:100%;max-width:150px;height:auto;display:block;margin:0 auto 8px;background:#F6F7F9;border:1px solid #D6D8DE}
+table.glance thead th.win{color:var(--blue)}
+table.glance tbody th{text-align:left;font-family:var(--body);font-size:16px;font-weight:600;letter-spacing:0;text-transform:none;padding-right:10px;white-space:nowrap;color:var(--ink)}
+table.glance tbody th small{letter-spacing:0;text-transform:none}
+table.glance tbody th small{display:block;font-weight:400;color:var(--mut);font-size:12px}
+table.glance td .cell{padding:10px 8px;font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;border:2px solid var(--ink)}
+.cell.g{background:#BFEACF}.cell.m{background:#FFF1C2}.cell.p{background:#F4C5BE}
+table.glance tr.grp th{padding-top:14px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:600}
+td.win .cell{box-shadow:inset 0 0 0 2px var(--blue)}
+.legend-row{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;align-items:center}
+.pill{display:inline-block;width:18px;height:12px;border:2px solid var(--ink);margin-right:6px;vertical-align:-1px}
+.pill.g{background:#BFEACF}.pill.m{background:#FFF1C2}.pill.p{background:#F4C5BE}
 
-  .marquee{
-    margin-top:clamp(2.6rem,7vw,4rem);
-    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    padding:.75rem 0; overflow:hidden; position:relative;
-    -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-    mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-  }
-  .marquee-track{ display:flex; width:max-content; animation:slide 44s linear infinite; }
-  .marquee-track span{
-    font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-faint);
-    padding:0 1.5rem; white-space:nowrap; display:flex; align-items:center; gap:1.5rem;
-  }
-  .marquee-track span::after{ content:''; width:3px; height:3px; background:var(--accent); opacity:.6; }
-  @keyframes slide{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-  .scroll-stage{ position:relative; margin:clamp(2rem,6vw,3rem) 0 0; }
-  .stage-sticky{
-    display:flex; flex-direction:column; gap:.85rem; padding:1rem 0;
-  }
-  .canvas-box{
-    position:relative; width:100%; aspect-ratio:1500/700;
-    border:1px solid var(--line);
-    background:radial-gradient(120% 140% at 15% 0%, #161617 0%, #101011 60%, #0c0c0d 100%);
-    overflow:hidden;
-  }
-  canvas{ display:block; width:100%; height:100%; }
-
-  .kpi-layer{ position:absolute; inset:0; pointer-events:none; }
-  .kpi{
-    position:absolute; width:112px; padding:.3rem .4rem .32rem;
-    background:rgba(14,14,15,.92); border:1px solid rgba(208,138,78,.75);
-    transform:translate(-50%,4px); opacity:0; pointer-events:none;
-    transition:opacity .22s ease, transform .22s ease, box-shadow .2s ease, border-color .2s ease;
-  }
-  .kpi.show{ transform:translate(-50%,0); pointer-events:auto; }
-  .kpi.hover{ border-color:var(--accent); box-shadow:0 0 14px var(--accent-dim); }
-  .kpi-id{ font-size:.5rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:.2rem; }
-  .kpi-row{ display:flex; justify-content:space-between; gap:.3rem; font-size:.5rem; color:var(--ink-faint); line-height:1.5; }
-  .kpi-row b{ font-family:var(--mono); font-weight:500; color:var(--ink-dim); font-size:.54rem; }
-
-  .dossier{
-    position:absolute; top:5%; right:2.2%; width:min(250px,31%);
-    background:rgba(11,11,12,.93); border:1px solid rgba(208,138,78,.55);
-    padding:.85rem .9rem .9rem; opacity:0; transform:translateX(18px); pointer-events:none;
-    transition:opacity .5s ease, transform .5s cubic-bezier(.2,.75,.2,1);
-    backdrop-filter:blur(3px);
-  }
-  .dossier.show{ opacity:1; transform:translateX(0); }
-  .dossier-head{
-    display:flex; justify-content:space-between; align-items:baseline;
-    padding-bottom:.5rem; margin-bottom:.5rem; border-bottom:1px solid rgba(208,138,78,.35);
-  }
-  .dossier-head .d-id{ font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:600; }
-  .dossier-head .d-fit{ font-family:var(--serif); font-style:italic; color:var(--accent); font-size:1rem; }
-  .d-row{
-    display:flex; justify-content:space-between; align-items:baseline; gap:.6rem;
-    font-size:.6rem; letter-spacing:.05em; color:var(--ink-faint); padding:.2rem 0; text-transform:uppercase;
-  }
-  .d-row b{ font-family:var(--mono); font-weight:500; color:var(--ink); font-size:.66rem; text-transform:none; letter-spacing:0; }
-  .d-sub{ font-size:.55rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); margin:.7rem 0 .45rem; padding-top:.5rem; border-top:1px solid rgba(255,255,255,.07); }
-  .mix-bar{ display:flex; height:6px; gap:2px; margin-bottom:.45rem; }
-  .mix-bar i{ display:block; height:100%; }
-  .mix-legend{ display:flex; flex-direction:column; gap:.2rem; }
-  .mix-legend div{ display:flex; align-items:center; gap:.4rem; font-size:.58rem; color:var(--ink-dim); }
-  .mix-legend em{ width:7px; height:7px; display:inline-block; font-style:normal; flex:0 0 auto; }
-  .mix-legend b{ margin-left:auto; font-family:var(--mono); font-size:.6rem; color:var(--ink); font-weight:500; }
-  @media (max-width:560px){
-    .dossier{ width:46%; padding:.55rem; top:3%; }
-    .d-row, .mix-legend div{ font-size:.52rem; } .d-row b{ font-size:.56rem; }
-  }
-
-  .score-bar{ display:flex; align-items:center; justify-content:space-between; gap:1.5rem; min-height:1.6rem; }
-  .phase{ display:flex; align-items:center; gap:.5rem; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-dim); transition:color .3s ease; }
-  .phase .dot{ width:5px; height:5px; border-radius:50%; background:var(--ink-faint); transition:background .3s ease, box-shadow .3s ease; }
-  .phase.active{ color:var(--accent); }
-  .phase.active .dot{ background:var(--accent); box-shadow:0 0 8px var(--accent); }
-  .score-final{ display:flex; align-items:baseline; gap:.5rem; opacity:0; transform:translateY(6px); transition:opacity .4s ease, transform .4s ease; }
-  .score-final.show{ opacity:1; transform:translateY(0); }
-  .score-final .num{ font-family:var(--serif); font-style:italic; color:var(--accent); font-size:1.4rem; line-height:1; }
-  .score-final .lbl{ font-size:.72rem; color:var(--ink-faint); max-width:34ch; }
-  figcaption{ font-size:.7rem; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-faint); display:flex; flex-wrap:wrap; gap:.3rem 1.4rem; }
-  figcaption b{ color:var(--accent); font-weight:500; }
-
-  section{ padding:clamp(3.5rem,9vw,6rem) 0; }
-  .cap{ display:flex; gap:1.5rem; align-items:flex-start; padding:1.4rem 0; border-top:1px solid var(--line); transition:background .35s ease; }
-  .cap:last-child{ border-bottom:1px solid var(--line); }
-  .cap:hover{ background:rgba(208,138,78,.035); }
-  .cap-n{ font-size:.68rem; letter-spacing:.1em; color:var(--accent); font-variant-numeric:tabular-nums; padding-top:.45rem; min-width:2.2rem; }
-  .cap-body h3{ font-family:var(--serif); font-weight:400; font-size:clamp(1.15rem,2.8vw,1.5rem); margin:0 0 .45rem; }
-  .cap-body p{ margin:0; color:var(--ink-dim); font-size:.95rem; max-width:56ch; }
-
-  .statement{
-    font-family:var(--serif); font-weight:400;
-    font-size:clamp(1.7rem,5.2vw,3.1rem); line-height:1.14; letter-spacing:-.012em;
-    max-width:20ch; margin:0 0 1.6rem;
-  }
-  .statement em{ font-style:italic; color:var(--accent); }
-  .word{ display:inline-block; overflow:hidden; vertical-align:bottom; }
-  .word > i{ display:inline-block; font-style:inherit; transform:translateY(105%); transition:transform .7s cubic-bezier(.16,.84,.24,1); }
-  .statement.in .word > i{ transform:translateY(0); }
-
-  p{ max-width:60ch; margin:0 0 1.1rem; }
-  p.dim{ color:var(--ink-dim); }
-  .serif-note{ font-family:var(--serif); font-size:1.05rem; line-height:1.62; color:var(--ink-dim); max-width:58ch; }
-  .serif-note b{ color:var(--ink); font-weight:400; font-style:italic; }
-
-  .compare{
-    display:flex; gap:clamp(1.5rem,5vw,3rem); flex-wrap:wrap;
-    margin-top:2rem; padding:1.5rem clamp(1.1rem,4vw,1.8rem);
-    border:1px solid var(--line); background:var(--bg-raised);
-  }
-  .compare-col{ flex:1 1 210px; }
-  .cc-label{ font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:.85rem; }
-  .cc-label::after{ content:'/'; color:var(--accent); margin-left:.35em; }
-  .field-grid{ display:grid; grid-template-columns:repeat(10,1fr); gap:3px; }
-  .field-grid span{ aspect-ratio:1; background:#2b2b2f; opacity:.45; transition:opacity .5s ease; }
-  .compare.in .field-grid span{ opacity:.8; }
-  .short-row{ display:flex; gap:8px; align-items:flex-end; height:58px; }
-  .short-row span{ flex:1; background:var(--accent); opacity:.12; height:18%; transition:opacity .6s ease, height .7s cubic-bezier(.2,.75,.2,1); }
-  .compare.in .short-row span{ opacity:1; box-shadow:0 0 12px var(--accent-dim); }
-  .compare.in .short-row span:nth-child(1){ height:55%; transition-delay:.06s }
-  .compare.in .short-row span:nth-child(2){ height:86%; transition-delay:.16s }
-  .compare.in .short-row span:nth-child(3){ height:64%; transition-delay:.26s }
-  .compare.in .short-row span:nth-child(4){ height:100%; transition-delay:.36s }
-  .compare.in .short-row span:nth-child(5){ height:73%; transition-delay:.46s }
-  .cc-caption{ margin-top:.8rem; font-size:.82rem; color:var(--ink-dim); }
-  .cc-caption b{ color:var(--ink); font-weight:600; }
-
-  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
-  .reveal.in{ opacity:1; transform:translateY(0); }
-
-  footer{ border-top:1px solid var(--line); padding-top:clamp(2.5rem,6vw,4rem); padding-bottom:2rem; }
-  .cta-line{ font-family:var(--serif); font-style:italic; font-weight:400; font-size:clamp(1.6rem,5vw,2.8rem); line-height:1.12; margin:0 0 .9rem; max-width:20ch; }
-  .cta-emails{ display:flex; flex-wrap:wrap; align-items:baseline; gap:.6rem .7rem; margin:0 0 2.6rem; }
-  .cta-emails a{
-    font-family:var(--serif); font-style:italic; font-weight:400;
-    font-size:clamp(1.6rem,5vw,2.8rem); line-height:1.12;
-    color:var(--accent); border-bottom:1px solid var(--accent-dim);
-  }
-  .cta-emails a:hover{ border-bottom-color:var(--accent); }
-  .cta-or{ font-family:var(--sans); font-style:normal; font-size:.9rem; letter-spacing:.04em; color:var(--ink-faint); }
-  .foot-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:2rem 1.5rem; padding-top:2rem; border-top:1px solid var(--line); }
-  .foot-col h4{ font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 .9rem; font-weight:500; }
-  .foot-col h4::after{ content:'/'; color:var(--accent); margin-left:.35em; }
-  .foot-col p, .foot-col a{ font-size:.86rem; color:var(--ink-dim); margin:0 0 .35rem; display:block; max-width:none; }
-  .foot-col a{ color:var(--ink); margin-bottom:.35rem; }
-  .foot-base{
-    margin-top:2.6rem; padding-top:1.2rem; border-top:1px solid var(--line);
-    display:flex; flex-wrap:wrap; gap:.5rem 1.6rem; justify-content:space-between;
-    font-size:.74rem; letter-spacing:.06em; color:var(--ink-faint);
-  }
-
-  a{ color:var(--ink); text-decoration:none; }
-  a:hover{ color:var(--accent); }
-
-  @media (prefers-reduced-motion:reduce){
-    .mask > i, .word > i{ transform:none !important; transition:none !important; }
-    .reveal, .stat-row, .scroll-cue{ animation:none !important; transition:none !important; opacity:1 !important; transform:none !important; }
-    .marquee-track{ animation:none; }
-    .scroll-cue .bar::after{ animation:none; }
-  }
+.scene{background:#0A0A0A;border:3px solid var(--ink);position:relative}
+.scene svg{width:100%;height:auto;display:block}
+.scene-cap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:12px 16px;border-top:1px solid #2A2B30;color:#C9CCD6;background:#0A0A0A}
+.scene-cap b{color:#FFC61A;font-weight:600}
+.split{display:grid;grid-template-columns:1.35fr 1fr;gap:32px;align-items:start}
+@media (max-width:960px){.split{grid-template-columns:1fr}}
+.stepper{display:grid;grid-template-columns:repeat(4,1fr);border:3px solid var(--ink);margin-bottom:24px}
+.stepper button{border:none;border-right:3px solid var(--ink);background:var(--paper);padding:14px 16px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:2px;font-family:var(--body);color:var(--ink)}
+.stepper button:last-child{border-right:none}
+.stepper button .n{font-family:var(--mono);font-size:12px;color:var(--mut)}
+.stepper button b{font-family:var(--display);font-size:20px;font-weight:850;font-stretch:108%}
+.stepper button[aria-selected="true"]{background:var(--ink);color:#fff}
+.stepper button[aria-selected="true"] .n{color:var(--sun)}
+@media (max-width:700px){.stepper{grid-template-columns:1fr 1fr}.stepper button:nth-child(2){border-right:none}.stepper button:nth-child(-n+2){border-bottom:3px solid var(--ink)}}
+.steptext{display:flex;flex-direction:column;gap:16px}
+.steptext h3{font-size:32px}
+.steptext .context{grid-template-columns:1fr 1fr;margin-top:6px}
+.counter{font-family:var(--mono);font-size:14px;border:2px solid var(--ink);padding:10px 12px;background:var(--paper)}
+.counter b{font-size:22px;color:var(--blue)}
+.winner{grid-template-columns:1.25fr 1fr!important}
+@media (max-width:860px){.winner{grid-template-columns:1fr!important}}
+.winner .scene{border-width:2px}
+.winner .scene svg{background:transparent;border:none}
 </style>
 </head>
 <body>
 
-<div id="scrollbar"></div>
-<div class="reg tl"></div><div class="reg tr"></div>
-<div class="reg bl"></div><div class="reg br"></div>
-
-<nav id="siteNav">
-  <span class="nav-mark"><img src="data:image/png;base64,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" alt="ZAMS"></span>
-  <div class="nav-links">
-    <a class="swap" href="#process"><span>Process</span><span class="dup">Process</span></a>
-    <a class="swap" href="#position"><span>Position</span><span class="dup">Position</span></a>
-    <a class="swap hide-sm" href="#name"><span>The name</span><span class="dup">The name</span></a>
-    <a class="swap" href="#contact"><span>Contact</span><span class="dup">Contact</span></a>
+<nav class="top" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="#overview">Zeuxis</a>
+    <div class="tabs" role="tablist" aria-label="Sections">
+      <a role="tab" href="#overview" data-tab="overview">Overview</a>
+      <a role="tab" href="#problem" data-tab="problem">Problem</a>
+      <a role="tab" href="#sun-lab" data-tab="sun-lab">Sun lab</a>
+      <a role="tab" href="#compare" data-tab="compare">Compare</a>
+      <a role="tab" href="#how" data-tab="how">How it works</a>
+      <a role="tab" href="#results" data-tab="results">Results</a>
+      <a role="tab" href="#about" data-tab="about">About</a>
+    </div>
   </div>
 </nav>
 
-<div class="wide">
-
-  <div class="hero" id="hero">
-    <span class="eyebrow">Zürich — generative massing, evaluated</span>
-    <h1>
-      <span class="mask"><i>Zeuxis.</i></span>
-      <span class="mask"><i>From every possibility,</i></span>
-      <span class="mask"><i>the <em>few</em> that matter.</i></span>
-    </h1>
-    <p class="lede">
-      <span class="mask"><i>A developer wants a return. The city regulates the geometry.</i></span>
-      <span class="mask"><i>The environment sets the targets. Six hundred pages of brief,</i></span>
-      <span class="mask"><i>zoning and landscape law, and thousands of hours spent composing</i></span>
-      <span class="mask"><i>one volume out of everything it has to be.</i></span>
-    </p>
-    <div class="scroll-cue"><span class="bar"></span>Playing automatically</div>
-    <div class="stat-row">
-      <div class="stat"><div class="stat-num" id="statC">0</div><div class="stat-lbl">constraints read from the documents</div></div>
-      <div class="stat"><div class="stat-num" id="statP">0</div><div class="stat-lbl">geometries enumerated</div></div>
-      <div class="stat"><div class="stat-num">1%</div><div class="stat-lbl">carried into full simulation</div></div>
-      <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">schemes reach the architect</div></div>
+<div class="panel-tab" id="tab-overview" data-panel="overview" role="tabpanel">
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Early-stage massing · wellbeing · ecology · return</p>
+      <h1>Zeuxis</h1>
+      <p class="claim">Buildings for people and planet.</p>
+      <p class="sub">A design tool for developers and architects. It reads the brief and the zoning, generates compliant massing options in minutes, and scores each one on wellbeing, ecology and return, side by side.</p>
+      <div class="cta">
+        <a class="btn fill" href="#sun-lab">Try the sun lab</a>
+        <a class="btn" href="#compare">Compare options</a>
+      </div>
+    </div>
+    <img src="cover-iso.webp" alt="Isometric city block: a light, terraced housing block with solar roofs, balconies and a green courtyard with trees and paths, between dark, heavy blocks and a parking lot" width="1464" height="1202">
+  </div>
+</header>
+<section class="ov">
+  <div class="wrap">
+    <p class="quote" style="max-width:26ch">We believe wellbeing and ecology should weigh as much as economic return.</p>
+    <div class="ovgrid">
+      <a class="ovc" href="#problem"><span class="k">01 · Problem</span><b>The first weeks decide.</b><span class="mut">The shape is set fast, and profit is the easiest thing to measure.</span><span class="go">Read →</span></a>
+      <a class="ovc" href="#sun-lab"><span class="k">02 · Sun lab</span><b>Every extra floor is someone else's sunlight.</b><span class="mut">Move a building and watch the midday sun.</span><span class="go">Try it →</span></a>
+      <a class="ovc" href="#compare"><span class="k">03 · Compare</span><b>Same plot. Four shapes.</b><span class="mut">Weigh wellbeing, ecology and return and see who wins.</span><span class="go">Play →</span></a>
+      <a class="ovc" href="#how"><span class="k">04 · How it works</span><b>Brief in. Options out.</b><span class="mut">Read, generate, score, compare. In minutes.</span><span class="go">See →</span></a>
+      <a class="ovc" href="#results"><span class="k">05 · Results</span><b>First numbers from a real parcel.</b><span class="mut">31 flats, 100% of space near a façade, −39% built area.</span><span class="go">View →</span></a>
+      <a class="ovc dark" href="#about"><span class="k">06 · About</span><b>Healthier to live in. Lighter on the planet. Still a sound investment.</b><span class="go">Who we are →</span></a>
     </div>
   </div>
+</section>
+</div>
 
-  <div class="marquee"><div class="marquee-track" id="marqueeTrack"></div></div>
+<main>
 
-  <div class="scroll-stage" id="stage">
-    <div class="stage-sticky">
-      <div class="canvas-box">
-        <canvas id="field" width="1500" height="700" aria-label="Animation: typed building volumes are generated across two development fields, evaluated, eliminated one by one against the zoning rules until five schemes remain, and then one scheme is enlarged, rotated and x-rayed to show its circulation and unit mix."></canvas>
-        <div class="kpi-layer" id="kpiLayer"></div>
-        <div class="dossier" id="dossier">
-          <div class="dossier-head">
-            <span class="d-id" id="dId">Blockrand</span>
-            <span class="d-fit" id="dFit">—</span>
+<div class="panel-tab" id="tab-problem" data-panel="problem" role="tabpanel" hidden>
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="num">01 · The problem</p>
+      <div class="txt">
+        <p class="eyebrow">The first weeks</p>
+        <h2>The most important decisions are made first, and fast.</h2>
+      </div>
+    </div>
+    <p class="quote">In the first weeks, a building gets its shape. Under time pressure, the easiest thing to measure is profit. <em>So profit wins.</em></p>
+
+    <div class="chain" role="list">
+      <div role="listitem"><span class="k">What is decided</span><p class="big">Height, depth, gaps, how much of the plot stays open.</p><p class="mut">The massing. Set in a few weeks, it stays for 60 to 100 years.</p></div>
+      <div role="listitem"><span class="k">What is measured</span><p class="big">Floor area, flats, yield.</p><p class="mut">Spreadsheets answer this in minutes. Daylight, noise or carbon take studies that arrive months later.</p></div>
+      <div role="listitem"><span class="k">What follows</span><p class="big">Dark flats, loud bedrooms, wasted material.</p><p>By the time the other numbers arrive, the shape is fixed and changing it is expensive.</p></div>
+    </div>
+
+    <div class="scene" id="scProblem" style="margin-top:56px"></div>
+    <div class="scene-cap"><span>Same site, today's way: <b>profit first</b></span><span>March, midday sun</span></div>
+    <div class="curve-card">
+      <svg viewBox="0 0 1000 340" role="img" aria-label="Conceptual chart over a project's life: the freedom to change the design falls steeply in the first weeks, while the cost of changing it rises.">
+        <defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#1F3BFF" stroke-width="2" opacity=".25"/></pattern></defs>
+        <rect x="70" y="20" width="170" height="260" fill="url(#hatch)"/>
+        <line x1="70" y1="280" x2="970" y2="280" stroke="#0A0A0A" stroke-width="2"/>
+        <line x1="70" y1="20" x2="70" y2="280" stroke="#0A0A0A" stroke-width="2"/>
+        <g font-family="IBM Plex Mono, monospace" font-size="13" fill="#6B6E78">
+          <text x="155" y="304" text-anchor="middle">Massing · weeks</text>
+          <text x="370" y="304" text-anchor="middle">Design</text>
+          <text x="560" y="304" text-anchor="middle">Permit</text>
+          <text x="740" y="304" text-anchor="middle">Construction</text>
+          <text x="900" y="304" text-anchor="middle">Use · decades</text>
+          <text x="60" y="30" text-anchor="end">high</text>
+          <text x="60" y="280" text-anchor="end">low</text>
+        </g>
+        <g stroke="#C9CCD6" stroke-width="1"><line x1="240" y1="20" x2="240" y2="280"/><line x1="480" y1="20" x2="480" y2="280"/><line x1="640" y1="20" x2="640" y2="280"/><line x1="840" y1="20" x2="840" y2="280"/></g>
+        <path d="M70,40 C150,60 200,170 300,215 S600,262 970,270" fill="none" stroke="#1F3BFF" stroke-width="5"/>
+        <path d="M70,268 C300,262 450,230 600,170 S850,60 970,40" fill="none" stroke="#0A0A0A" stroke-width="5" stroke-dasharray="12 8"/>
+        <g font-family="Archivo, Arial, sans-serif" font-weight="800" font-size="20">
+          <text x="252" y="58" fill="#1F3BFF">Zeuxis works here</text>
+        </g>
+        <circle cx="155" cy="95" r="9" fill="#FFC61A" stroke="#0A0A0A" stroke-width="3"/>
+      </svg>
+      <div class="curve-legend">
+        <span><i class="sw" style="background:#1F3BFF"></i>Freedom to change the design</span>
+        <span><i class="sw" style="background:repeating-linear-gradient(90deg,#0A0A0A 0 8px,transparent 8px 12px)"></i>Cost of changing it</span>
+        <span class="mut">Conceptual, not to scale.</span>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="pager"><div class="wrap"><a href="#overview" class="btn">← Overview</a><a href="#sun-lab" class="btn fill">Sun lab →</a></div></div>
+</div>
+
+<div class="panel-tab" id="tab-sun-lab" data-panel="sun-lab" role="tabpanel" hidden>
+<section style="background:var(--mist)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="num">02 · Sun lab</p>
+      <div class="txt">
+        <p class="eyebrow">What the massing decides</p>
+        <h2>Every extra floor is someone else's sunlight.</h2>
+        <p class="lede">Change the height of a new building and its distance to the neighbour. Watch who keeps the midday sun in Zürich, and what the extra floors earn.</p>
+      </div>
+    </div>
+
+    <div class="lab">
+      <div class="stage">
+        <svg id="sec" viewBox="0 0 900 470" role="img" aria-label="Section through a street, an existing neighbour, a courtyard and a new building, with the midday sun casting the new building's shadow onto the neighbour's facade."></svg>
+      </div>
+      <div class="panel">
+        <div class="ctl">
+          <label for="season">Season <output id="seasonOut">March · 43°</output></label>
+          <div class="seg" id="season" role="group" aria-label="Season">
+            <button type="button" data-alt="19.2" data-name="December" aria-pressed="false">Dec</button>
+            <button type="button" data-alt="42.6" data-name="March" aria-pressed="true">Mar</button>
+            <button type="button" data-alt="66" data-name="June" aria-pressed="false">Jun</button>
           </div>
-          <div class="d-row"><span>Storeys</span><b id="dFloors">—</b></div>
-          <div class="d-row"><span>GFA</span><b id="dGfa">—</b></div>
-          <div class="d-row"><span>Units</span><b id="dUnits">—</b></div>
-          <div class="d-row"><span>Cores</span><b id="dCore">—</b></div>
-          <div class="d-row"><span>Energy</span><b id="dEne">—</b></div>
-          <div class="d-row"><span>Daylight</span><b id="dDay">—</b></div>
-          <div class="d-row"><span>Cost Δ</span><b id="dCost">—</b></div>
-          <div class="d-sub">Unit mix</div>
-          <div class="mix-bar" id="mixBar"></div>
-          <div class="mix-legend" id="mixLegend"></div>
         </div>
-      </div>
-      <div class="score-bar">
-        <span class="phase" id="phaseLabel"><span class="dot"></span>Generating</span>
-        <div class="score-final" id="scoreFinal">
-          <span class="num" id="scoreNum">—</span>
-          <span class="lbl">composite site-fit across the survivors</span>
+        <div class="ctl">
+          <label for="floors">New building <output id="floorsOut">5 floors</output></label>
+          <input type="range" id="floors" min="2" max="9" step="1" value="5">
         </div>
+        <div class="ctl">
+          <label for="gap">Distance to neighbour <output id="gapOut">14 m</output></label>
+          <input type="range" id="gap" min="8" max="30" step="1" value="14">
+        </div>
+        <div class="readouts">
+          <div class="ro sun"><span class="v" id="rFloors">5/5</span><span class="l">neighbour floors with midday sun</span></div>
+          <div class="ro green"><span class="v" id="rYard">0%</span><span class="l">of the courtyard in the sun</span></div>
+          <div class="ro"><span class="v" id="rGfa">2,400</span><span class="l">m² floor area of the new building</span></div>
+          <div class="ro"><span class="v" id="rQuiet">yes</span><span class="l">quiet side for the new flats</span></div>
+        </div>
+        <p class="note">Midday sun in Zürich (47.4° N), sun from the south on the right. 3 m per floor, building 12 m deep and 40 m long. A simple section for explanation. Zeuxis runs full sun, daylight and noise studies in 3D.</p>
       </div>
-      <figcaption>
-        <span>Generate exhaustively</span>
-        <span>Evaluate physically</span>
-        <span><b>Keep the few that survive</b></span>
-      </figcaption>
     </div>
   </div>
-
+</section>
+<div class="pager"><div class="wrap"><a href="#problem" class="btn">← Problem</a><a href="#compare" class="btn fill">Compare →</a></div></div>
 </div>
 
-<div class="wrap">
+<div class="panel-tab" id="tab-compare" data-panel="compare" role="tabpanel" hidden>
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="num">03 · Three scores</p>
+      <div class="txt">
+        <p class="eyebrow">Wellbeing · Ecology · Return</p>
+        <h2>Same plot. Four shapes. Change what counts.</h2>
+        <p class="lede">Four ways to build on the same plot. Choose what should count, and see which shape comes out on top, and what it gives up.</p>
+      </div>
+    </div>
 
-  <section id="process">
-    <span class="eyebrow reveal">What it does</span>
-    <div class="cap reveal">
-      <div class="cap-n">01</div>
-      <div class="cap-body">
-        <h3>Reads the documents</h3>
-        <p>The brief, the zoning code, the preservation constraints, the noise and cost limits — several hundred hard rules, extracted as constraints rather than typed into a parameter form.</p>
+    <div class="cmp-step">
+      <span class="stepn">1</span>
+      <div class="cmp-q">
+        <h3>What should count?</h3>
+        <div class="choice" role="group" aria-label="What should count">
+          <button type="button" data-p="0,0,100" aria-pressed="false"><b>Only profit</b><span>How it's usually decided today</span></button>
+          <button type="button" data-p="1,1,1" aria-pressed="true"><b>All three equally</b><span>People, planet and return</span></button>
+          <button type="button" data-p="1,1,0" aria-pressed="false"><b>People and planet</b><span>Return left out</span></button>
+        </div>
+        <details class="fine">
+          <summary>Set your own weights</summary>
+          <div class="weights">
+            <div class="ctl"><label for="wW"><span><i class="dot" style="background:#FFC61A"></i>Wellbeing</span><output id="wWo">1</output></label><input type="range" id="wW" min="0" max="10" value="1"></div>
+            <div class="ctl"><label for="wE"><span><i class="dot" style="background:#3DBE6B"></i>Ecology</span><output id="wEo">1</output></label><input type="range" id="wE" min="0" max="10" value="1"></div>
+            <div class="ctl"><label for="wR"><span><i class="dot" style="background:#1F3BFF"></i>Return</span><output id="wRo">1</output></label><input type="range" id="wR" min="0" max="10" value="1"></div>
+          </div>
+        </details>
       </div>
     </div>
-    <div class="cap reveal">
-      <div class="cap-n">02</div>
-      <div class="cap-body">
-        <h3>Generates every volume that satisfies them</h3>
-        <p>Real typologies with real roofs — Zeile, Blockrand, Punktbau, Kamm, Grossform — at the dimensions the rules and the plan actually permit. Exhaustively, because that is the only way to know nothing viable was missed.</p>
-      </div>
-    </div>
-    <div class="cap reveal">
-      <div class="cap-n">03</div>
-      <div class="cap-body">
-        <h3>Simulates the top one percent properly</h3>
-        <p>Cheap filters cut the field to the promising percent. Those go through real solvers — energy, daylight, cost — on watertight geometry. Not a proxy score.</p>
-      </div>
-    </div>
-    <div class="cap reveal">
-      <div class="cap-n">04</div>
-      <div class="cap-body">
-        <h3>Throws almost all of it away</h3>
-        <p>What arrives is a handful, opened up: circulation, unit mix, and the evidence of what each one survived. Every discarded scheme is inspectable, with the reason it was cut.</p>
-      </div>
-    </div>
-  </section>
 
-  <section id="position">
-    <span class="eyebrow reveal">Position</span>
-    <h2 class="statement" id="statement">We do not design the building. We find the <em>few worth looking at.</em></h2>
-    <p class="reveal">So the architect starts there on day one instead of month three.</p>
-    <p class="dim reveal">
-      An architect does not want a bigger search space. They want a smaller one. Choice is the cost,
-      not the benefit — a hundred million compliant volumes, or even five hundred, just moves the
-      triage onto the person you were meant to help. Generation is the mechanism. Reduction is the product.
-    </p>
-
-    <div class="compare reveal" id="compareBlock">
-      <div class="compare-col">
-        <div class="cc-label">What a search space looks like</div>
-        <div class="field-grid" id="fieldGrid"></div>
-      </div>
-      <div class="compare-col">
-        <div class="cc-label">What a decision looks like</div>
-        <div class="short-row"><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="cc-caption">Five schemes, each with a <b>reason it survived</b> — and one you can open up on the spot.</div>
+    <div class="cmp-step">
+      <span class="stepn">2</span>
+      <div class="cmp-q">
+        <h3>The best fit</h3>
+        <div class="winner" id="winner"><div class="scene" id="scCompare"></div><div id="winText" aria-live="polite" style="display:flex;flex-direction:column;gap:12px"></div></div>
       </div>
     </div>
-  </section>
 
-  <section id="name">
-    <span class="eyebrow reveal">The name</span>
-    <p class="serif-note reveal">
-      Zeuxis was commissioned by the city of Croton to paint Helen, the most beautiful woman in the
-      world. He could not find a single model who had all of it, so he chose five and composed one
-      image from the best of each. Note what the story actually says: <b>Helen already existed,
-      distributed across the women of Croton.</b> He did not paint five hundred faces — he went out,
-      looked at everyone, and came back with five. The search was the work. The five was the deliverable.
-      Our system does the looking.
-    </p>
-  </section>
-
-  <footer id="contact">
-    <p class="cta-line reveal">
-      Bring us the brief, the code, and the site —
-    </p>
-    <p class="cta-emails reveal">
-      <a href="mailto:seshadri@arch.ethz.ch">seshadri@arch.ethz.ch</a>
-      <span class="cta-or">or</span>
-      <a href="mailto:stoll@arch.ethz.ch">stoll@arch.ethz.ch</a>
-    </p>
-    <div class="foot-grid">
-      <div class="foot-col">
-        <h4>Contact</h4>
-        <a class="swap" href="mailto:seshadri@arch.ethz.ch"><span>seshadri@arch.ethz.ch</span><span class="dup">seshadri@arch.ethz.ch</span></a>
-        <a class="swap" href="mailto:stoll@arch.ethz.ch"><span>stoll@arch.ethz.ch</span><span class="dup">stoll@arch.ethz.ch</span></a>
-      </div>
-      <div class="foot-col"><h4>Based</h4><p>ETH Zürich</p><p>Zürich, Switzerland</p></div>
-      <div class="foot-col"><h4>Working on</h4><p>Constraint extraction</p><p>Typological enumeration</p><p>Physical simulation</p></div>
-      <div class="foot-col">
-        <h4>Index</h4>
-        <a class="swap" href="#process"><span>Process</span><span class="dup">Process</span></a>
-        <a class="swap" href="#position"><span>Position</span><span class="dup">Position</span></a>
-        <a class="swap" href="#name"><span>The name</span><span class="dup">The name</span></a>
+    <div class="cmp-step">
+      <span class="stepn">3</span>
+      <div class="cmp-q">
+        <h3>All four, side by side</h3>
+        <div class="grid-wrap"><table class="glance" id="glance"></table></div>
+        <p class="legend-row"><span><i class="pill g"></i>good</span><span><i class="pill m"></i>okay</span><span><i class="pill p"></i>poor</span><span class="mut">Rated against the other three options.</span><span><i class="pill" style="background:#1F3BFF"></i>building</span><span><i class="pill" style="background:#4a4a52"></i>more than 7 m from a window</span></p>
       </div>
     </div>
-    <div class="foot-base">
-      <span>Zeuxis — the brief already contains the building</span>
-      <span>© 2026</span>
-    </div>
-  </footer>
 
+    <p class="note" style="margin-top:8px">A simplified teaching model: the same 62 × 46 m plot (2,852 m²), at most 5 storeys, four typical shapes. The real engine computes these values from full 3D geometry, zoning rules and floor plans.</p>
+  </div>
+</section>
+<div class="pager"><div class="wrap"><a href="#sun-lab" class="btn">← Sun lab</a><a href="#how" class="btn fill">How it works →</a></div></div>
 </div>
+
+<div class="panel-tab" id="tab-how" data-panel="how" role="tabpanel" hidden>
+<section style="background:var(--mist)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="num">04 · How it works</p>
+      <div class="txt">
+        <p class="eyebrow">From brief to decision</p>
+        <h2>Brief in. Options out. In minutes.</h2>
+      </div>
+    </div>
+    <div class="stepper" role="tablist" aria-label="Steps">
+      <button type="button" role="tab" data-step="read" aria-selected="true"><span class="n">Step 1</span><b>Read the site</b></button>
+      <button type="button" role="tab" data-step="gen" aria-selected="false"><span class="n">Step 2</span><b>Generate</b></button>
+      <button type="button" role="tab" data-step="score" aria-selected="false"><span class="n">Step 3</span><b>Score</b></button>
+      <button type="button" role="tab" data-step="cmp" aria-selected="false"><span class="n">Step 4</span><b>Compare</b></button>
+    </div>
+    <div class="split">
+      <div><div class="scene" id="scHow"></div><div class="scene-cap"><span id="howCap">Same site · <b>step 1 of 4</b></span><span>Click a step, or let it play</span></div></div>
+      <div class="steptext" id="stepText"></div>
+    </div>
+  </div>
+</section>
+<div class="pager"><div class="wrap"><a href="#compare" class="btn">← Compare</a><a href="#results" class="btn fill">Results →</a></div></div>
+</div>
+
+<div class="panel-tab" id="tab-results" data-panel="results" role="tabpanel" hidden>
+<section class="results">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="num">05 · First results</p>
+      <div class="txt">
+        <p class="eyebrow">Prototype · Zürich test parcel</p>
+        <h2>2,852 m², zone W4. The winning scheme.</h2>
+      </div>
+    </div>
+    <div class="scene" id="scResults" style="margin-bottom:2px"></div>
+    <div class="scene-cap" style="margin-bottom:28px"><span>Same site, <b>the winning scheme</b></span><span>March, midday sun</span></div>
+    <div class="tiles">
+      <div class="tile"><span class="v">100%</span><span class="l">of floor area within 7 m of a façade</span><span class="c w">Wellbeing</span></div>
+      <div class="tile"><span class="v">13.9 m</span><span class="l">between the buildings</span><span class="c w">Wellbeing</span></div>
+      <div class="tile"><span class="v">69%</span><span class="l">of the plot stays open</span><span class="c w">Wellbeing</span></div>
+      <div class="tile"><span class="v">−39%</span><span class="l">built area vs. the worst layout, for the same living space</span><span class="c e">Ecology</span></div>
+      <div class="tile"><span class="v">0.42</span><span class="l">compactness: less envelope, less heating</span><span class="c e">Ecology</span></div>
+      <div class="tile"><span class="v">99.8%</span><span class="l">of the allowed density used, no sprawl</span><span class="c e">Ecology</span></div>
+      <div class="tile"><span class="v">31</span><span class="l">flats</span><span class="c r">Return</span></div>
+      <div class="tile"><span class="v">85%</span><span class="l">living space (net to gross)</span><span class="c r">Return</span></div>
+    </div>
+    <div class="next"><b>IN DEVELOPMENT</b><span>Daylight hours · noise maps · energy simulation · embodied carbon · keep-or-replace scoring</span></div>
+    <p class="bench">Benchmark for the energy score: Zürich's first PlusEnergie renovation, an apartment block on Culmannstrasse, needs about 32 kWh/m² a year, down from 253, and produces more than it uses (<a href="https://21.solaragentur.ch/files/solarpreis-gewinner/g-16-09-21_jugendstil_peb_sanierung_culmannstrasse_zuerich_def_0.pdf">Swiss Solar Prize 2016</a>).</p>
+  </div>
+</section>
+<div class="pager"><div class="wrap"><a href="#how" class="btn">← How it works</a><a href="#about" class="btn fill">About →</a></div></div>
+</div>
+
+<div class="panel-tab" id="tab-about" data-panel="about" role="tabpanel" hidden>
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="num">06 · Who and why</p>
+      <div class="txt">
+        <p class="eyebrow">For developers and architects</p>
+        <h2>Healthier to live in. Lighter on the planet. Still a sound investment.</h2>
+      </div>
+    </div>
+    <div class="two">
+      <div class="card">
+        <h3>Already in use</h3>
+        <p>A pilot is running with an architecture firm, JOM Architects. We track time saved, options tested, and whether their chosen scheme is among our top options.</p>
+        <div class="team">
+          <div><b>Nik Stoll</b><span class="mut">Co-founder. Leads technology.</span></div>
+          <div><b>Bharath Seshadri</b><span class="mut">Co-founder. Leads business development.</span></div>
+        </div>
+      </div>
+      <div class="card blue">
+        <h3>What we work on next</h3>
+        <ul>
+          <li>make the wellbeing, ecology and return scores fast and credible,</li>
+          <li>show trade-offs so they change real decisions,</li>
+          <li>stress-test the tool and our business case with architects and developers,</li>
+          <li>connect it to more zoning codes and building laws.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="pager"><div class="wrap"><a href="#results" class="btn">← Results</a><a href="#overview" class="btn fill">Back to overview</a></div></div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="big">Zeuxis</p>
+    <p><a href="https://zeuxis-ai.github.io">zeuxis-ai.github.io</a></p>
+  </div>
+</footer>
 
 <script>
-/* ---------- constraint marquee ---------- */
 (function(){
-  var terms = ['Zoning envelope','Setback lines','GFA ratio','Ridge direction','Daylight factor','Noise exposure',
-               'Preservation zone','Fire egress','Cost ceiling','Shadow cast','Plot coverage','Dormer limits'];
-  var track = document.getElementById('marqueeTrack');
-  var html = terms.map(function(t){ return '<span>' + t + '</span>'; }).join('');
-  track.innerHTML = html + html;
+
+/* tabs routing */
+const TABS=['overview','problem','sun-lab','compare','how','results','about'];
+function show(){
+  let h=(location.hash||'').slice(1); if(!TABS.includes(h)) h='overview';
+  document.querySelectorAll('.panel-tab').forEach(p=>p.hidden=p.dataset.panel!==h);
+  document.querySelectorAll('.tabs a').forEach(a=>a.setAttribute('aria-selected',a.dataset.tab===h?'true':'false'));
+  const act=document.querySelector('.tabs a[aria-selected="true"]'); if(act&&act.scrollIntoView) act.scrollIntoView({block:'nearest',inline:'nearest'});
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',show); show();
+/* ---------- 3D site scene: one site that evolves through the story ---------- */
+const Scene=(function(){
+  const C=Math.cos(Math.PI/6), S=5.4, OX=20+86*C*5.4, OY=268;
+  const P=(x,y,z)=>[OX+(x-y)*C*S, OY+(x+y)*0.5*S-z*S];
+  const pts=a=>a.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
+  const poly=(a,fill,stroke,extra)=>`<polygon points="${pts(a)}" fill="${fill}" stroke="${stroke||'none'}" stroke-width="1.2" stroke-linejoin="round" ${extra||''}/>`;
+  const quad=(x0,y0,x1,y1,z,fill,stroke,extra)=>poly([P(x0,y0,z),P(x1,y0,z),P(x1,y1,z),P(x0,y1,z)],fill,stroke,extra);
+  const STY={
+    ctx:{t:'#2B2B2B',l:'#1D1D1D',r:'#151515',s:'#4A4A4A',w1:'#3A3A3A',w2:'#5A5240'},
+    good:{t:'#FFFFFF',l:'#E3E7FF',r:'#B9C3FF',s:'#0A0A0A',w1:'#FFC61A',w2:'#8FA0FF'},
+    profit:{t:'#C9CCD6',l:'#A3A8B8',r:'#7E8392',s:'#0A0A0A',w1:'#565B6B',w2:'#565B6B'},
+  };
+  // the existing neighbourhood (metres). Parcel: 0..62 x 0..46. Main street with tram: y 48..55.
+  const CTX=[
+    {id:'n1',x:-18,y:-18,w:30,d:12,h:15},{id:'n2',x:16,y:-18,w:40,d:12,h:18},{id:'n3',x:60,y:-18,w:22,d:14,h:12},
+    {id:'w1',x:-18,y:0,w:12,d:28,h:21},{id:'w2',x:-18,y:32,w:12,d:14,h:6},
+    {id:'e1',x:68,y:0,w:14,d:22,h:24},{id:'e2',x:68,y:26,w:14,d:20,h:9},
+    {id:'f1',x:-14,y:58,w:24,d:8,h:6},{id:'f2',x:46,y:58,w:34,d:8,h:6}
+  ];
+  const TREES_STREET=[[8,52],[20,52],[32,52],[44,52],[56,52],[66,50],[-4,52]];
+  function boxFaces(b,o){
+    const st=STY[b.kind]||STY.good, z0=b.z0||0, h=b.h, x0=b.x,y0=b.y,x1=b.x+b.w,y1=b.y+b.d;
+    if(h<=0.05)return;
+    if(b.ghost){
+      const ex=`stroke-dasharray="5 4" fill-opacity="${b.fo||.14}"`;
+      o.push(poly([P(x1,y0,z0),P(x1,y1,z0),P(x1,y1,z0+h),P(x1,y0,z0+h)],b.col||'#8FA0FF',b.col||'#8FA0FF',ex));
+      o.push(poly([P(x0,y1,z0),P(x1,y1,z0),P(x1,y1,z0+h),P(x0,y1,z0+h)],b.col||'#8FA0FF',b.col||'#8FA0FF',ex));
+      o.push(quad(x0,y0,x1,y1,z0+h,b.col||'#8FA0FF',b.col||'#8FA0FF',ex));
+      return;
+    }
+    o.push(poly([P(x1,y0,z0),P(x1,y1,z0),P(x1,y1,z0+h),P(x1,y0,z0+h)],st.r,st.s));
+    o.push(poly([P(x0,y1,z0),P(x1,y1,z0),P(x1,y1,z0+h),P(x0,y1,z0+h)],st.l,st.s));
+    o.push(quad(x0,y0,x1,y1,z0+h,st.t,st.s));
+    // windows
+    const W={};const add=(c,a)=>{(W[c]=W[c]||[]).push('M'+a.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L')+'Z')};
+    const nf=Math.floor(h/3+0.01);
+    ['x','y'].forEach(face=>{
+      const span=face==='x'?b.d:b.w; const cols=Math.max(1,Math.floor(span/(b.kind==='ctx'?2.6:3.2))); const step=span/cols;
+      for(let r=0;r<nf;r++){const za=z0+r*3+0.9, zb=za+1.4; if(zb>z0+h-0.2)break;
+        for(let c=0;c<cols;c++){const a=c*step+step*0.3, e=a+step*0.4;
+          const q=face==='x'?[P(x1,y0+a,za),P(x1,y0+e,za),P(x1,y0+e,zb),P(x1,y0+a,zb)]:[P(x0+a,y1,za),P(x0+e,y1,za),P(x0+e,y1,zb),P(x0+a,y1,zb)];
+          const lit=b.kind==='good'?((r*7+c*3+(b.seed||0))%4!==0):((r+c+(b.seed||0))%6===0);
+          add(lit?st.w1:st.w2,q);}}
+    });
+    for(const c in W)o.push(`<path d="${W[c].join('')}" fill="${c}"/>`);
+    if(b.balc){ // balconies on the visible long face (y = y1) and loggia rhythm
+      const cols=Math.max(1,Math.floor(b.w/4.2)),step=b.w/cols;const B=[],R=[];
+      for(let r=1;r<nf;r++){const z=z0+r*3;for(let c=0;c<cols;c++){if((c+r+(b.seed||0))%2)continue;const a=x0+c*step+step*.18,e=a+step*.64;
+        B.push('M'+[P(a,y1,z),P(e,y1,z),P(e,y1+1.6,z),P(a,y1+1.6,z)].map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L')+'Z');
+        R.push('M'+[P(a,y1+1.6,z),P(e,y1+1.6,z),P(e,y1+1.6,z+1.05),P(a,y1+1.6,z+1.05)].map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L')+'Z');}}
+      o.push(`<path d="${B.join('')}" fill="#FFFFFF" stroke="#0A0A0A" stroke-width=".8"/><path d="${R.join('')}" fill="#FFFFFF" fill-opacity=".72" stroke="#0A0A0A" stroke-width=".8"/>`);
+    }
+    if(b.pv){const Pn=[];for(let px=x0+1.2;px+2.6<=x1-1;px+=3.4)for(let py=y0+1.2;py+1.7<=y1-1;py+=2.4)Pn.push('M'+[P(px,py,z0+h),P(px+2.6,py,z0+h),P(px+2.6,py+1.7,z0+h),P(px,py+1.7,z0+h)].map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L')+'Z');
+      o.push(`<path d="${Pn.join('')}" fill="#8FA0FF" stroke="#0A0A0A" stroke-width=".6"/>`)}
+    if(b.kind==='ctx'){o.push(quad(x0+1,y0+1,x0+3,y0+2.5,z0+h,'#3A3A3A','#4A4A4A'))}
+  }
+  function tree(x,y,o){const p=P(x,y,0);o.push(`<line x1="${p[0].toFixed(1)}" y1="${p[1].toFixed(1)}" x2="${p[0].toFixed(1)}" y2="${(p[1]-9).toFixed(1)}" stroke="#6B4F2A" stroke-width="2"/><circle cx="${p[0].toFixed(1)}" cy="${(p[1]-13).toFixed(1)}" r="6.5" fill="#3DBE6B" stroke="#1E7A42" stroke-width="1"/>`)}
+  function person(x,y,col,o){const p=P(x,y,0);o.push(`<line x1="${p[0].toFixed(1)}" y1="${p[1].toFixed(1)}" x2="${p[0].toFixed(1)}" y2="${(p[1]-8).toFixed(1)}" stroke="${col}" stroke-width="2.4" stroke-linecap="round"/><circle cx="${p[0].toFixed(1)}" cy="${(p[1]-11).toFixed(1)}" r="2.4" fill="${col}"/>`)}
+  function before(a,b){
+    const ax1=a.x+a.w,ay1=a.y+a.d,bx1=b.x+b.w,by1=b.y+b.d;
+    const xo=a.x<bx1-1e-6&&b.x<ax1-1e-6, yo=a.y<by1-1e-6&&b.y<ay1-1e-6;
+    if(xo&&yo)return (a.z0||0)<(b.z0||0);
+    if(xo&&!yo)return ay1<=b.y+1e-6;
+    if(yo&&!xo)return ax1<=b.x+1e-6;
+    return (a.x+ax1+a.y+ay1)<(b.x+bx1+b.y+by1);
+  }
+  function order(items){const rest=items.slice(),out=[];while(rest.length){let k=rest.findIndex(a=>!rest.some(b=>b!==a&&before(b,a)));if(k<0)k=0;out.push(rest.splice(k,1)[0])}return out}
+  function tag(t,o){const p=P(t.x,t.y,t.z);const tx=p[0]+t.dx,ty=p[1]+t.dy;const w=t.text.length*7.6+18;
+    o.push(`<line x1="${p[0].toFixed(1)}" y1="${p[1].toFixed(1)}" x2="${tx.toFixed(1)}" y2="${ty.toFixed(1)}" stroke="${t.line||'#FFFFFF'}" stroke-width="1.4"/><circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3" fill="${t.line||'#FFFFFF'}"/>`+
+      `<rect x="${(tx-w/2).toFixed(1)}" y="${(ty-12).toFixed(1)}" width="${w.toFixed(1)}" height="24" fill="${t.bg}" stroke="#0A0A0A" stroke-width="1.5"/><text x="${tx.toFixed(1)}" y="${(ty+5).toFixed(1)}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" letter-spacing=".5" fill="${t.fg||'#0A0A0A'}">${t.text}</text>`)}
+  function draw(st,scheme){
+    const o=[];
+    o.push(quad(-22,-22,84,68,0,'#161616','#2E2E2E'));
+    [[-22,47.5,84,55],[62.5,-22,67.5,47.5],[-5.5,-22,-0.5,47.5],[-22,-5.5,84,-0.5]].forEach(r=>o.push(quad(r[0],r[1],r[2],r[3],0,'#232323')));
+    o.push(`<line x1="${P(-22,50.5,0)[0].toFixed(1)}" y1="${P(-22,50.5,0)[1].toFixed(1)}" x2="${P(84,50.5,0)[0].toFixed(1)}" y2="${P(84,50.5,0)[1].toFixed(1)}" stroke="#3A3A3A" stroke-width="1.2"/><line x1="${P(-22,52,0)[0].toFixed(1)}" y1="${P(-22,52,0)[1].toFixed(1)}" x2="${P(84,52,0)[0].toFixed(1)}" y2="${P(84,52,0)[1].toFixed(1)}" stroke="#3A3A3A" stroke-width="1.2"/>`);
+    // parcel ground
+    const green=st.green;
+    o.push(quad(0,0,62,46,0,green?'#173D25':'#1B1B1B'));
+    if(st.paths){o.push(quad(0,21.2,62,24.2,0.02,'#5E5845'))}
+    o.push(quad(0,0,62,46,0.03,'none','#FFC61A','stroke-dasharray="6 5" stroke-width="1.6"'));
+    // shadows of scheme
+    (st.shadow? scheme:[]).forEach(b=>{if(b.ghost||b.h<.1||b.z0)return;const L=b.h/Math.tan(st.shadow*Math.PI/180);o.push(quad(b.x-L,b.y,b.x,b.y+b.d,0.04,'#000','none','fill-opacity=".45"'))});
+    // objects
+    const items=[];
+    CTX.forEach(c=>items.push(Object.assign({kind:'ctx'},c,st.ctxMod&&st.ctxMod[c.id]||{})));
+    (st.extra||[]).forEach(e=>items.push(e));
+    scheme.forEach(b=>items.push(b));
+    const trees=[];
+    if(st.trees)st.trees.forEach(t=>{if(!scheme.some(b=>!b.ghost&&b.h>.1&&t[0]>b.x-1.2&&t[0]<b.x+b.w+1.2&&t[1]>b.y-1.2&&t[1]<b.y+b.d+1.2))trees.push({x:t[0]-.05,y:t[1]-.05,w:.1,d:.1,h:0,tree:1})});
+    TREES_STREET.forEach(t=>trees.push({x:t[0]-.05,y:t[1]-.05,w:.1,d:.1,h:0,tree:1}));
+    (st.people||[]).forEach(p=>trees.push({x:p[0]-.03,y:p[1]-.03,w:.06,d:.06,h:0,person:p[2]}));
+    // tram
+    trees.push({x:6,y:50.6,w:26,d:3,h:3,tram:1});
+    const all=order(items.concat(trees));
+    all.forEach(b=>{
+      if(b.tree)tree(b.x+.05,b.y+.05,o);
+      else if(b.person)person(b.x+.03,b.y+.03,b.person,o);
+      else if(b.tram){o.push(poly([P(32,50.6,.3),P(32,53.6,.3),P(32,53.6,3),P(32,50.6,3)],'#C8A400','#0A0A0A'));o.push(poly([P(6,53.6,.3),P(32,53.6,.3),P(32,53.6,3),P(6,53.6,3)],'#FFC61A','#0A0A0A'));o.push(quad(6,50.6,32,53.6,3,'#FFE08A','#0A0A0A'))}
+      else boxFaces(b,o);
+    });
+    (st.post||[]).forEach(b=>boxFaces(b,o));
+    (st.tags||[]).forEach(t=>tag(t,o));
+    // sun
+    o.push('<circle cx="842" cy="58" r="26" fill="#FFC61A"/>');
+    return o.join('');
+  }
+  function make(el,cfg){
+    const inst={el,state:cfg,scheme:(cfg.scheme||[]).map(b=>Object.assign({},b)),anim:null};
+    inst.render=()=>{el.innerHTML=`<svg viewBox="0 0 900 690" role="img" aria-label="${cfg.label||'Isometric view of the site'}">${draw(inst.state,inst.scheme)}</svg>`};
+    inst.set=(st,instant)=>{
+      const target=(st.scheme||[]).map(b=>Object.assign({},b));
+      const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(instant||reduce){inst.state=st;inst.scheme=target;inst.render();return}
+      const from=inst.scheme.map(b=>Object.assign({},b));
+      cancelAnimationFrame(inst.anim);const t0=performance.now(),T1=260,T2=520;
+      const step=now=>{const t=now-t0;
+        if(t<T1){const k=1-t/T1;inst.scheme=from.map(b=>Object.assign({},b,{h:b.h*k}));inst.state=Object.assign({},inst.state,{tags:[],extraTagsHidden:1});}
+        else{const k=Math.min(1,(t-T1)/T2),e=1-Math.pow(1-k,3);inst.state=Object.assign({},st,{tags:k<1?[]:st.tags});inst.scheme=target.map(b=>Object.assign({},b,{h:b.h*e}))}
+        inst.render(); if(t<T1+T2)inst.anim=requestAnimationFrame(step); else {inst.scheme=target;inst.state=st;inst.render()}};
+      inst.anim=requestAnimationFrame(step);
+    };
+    inst.render();return inst;
+  }
+  return {make,P};
 })();
+// ---- scheme library (metres on the 62 x 46 parcel) ----
+const FL=3;
+const SCHEMES={
+  profit:[{id:'s0',kind:'profit',x:2,y:8,w:58,d:30,h:6*FL}],
+  A:[{id:'s0',kind:'good',x:2,y:11,w:58,d:24,h:5*FL}],
+  B:[ // two stepped bars: one end steps down, a passage opens each bar to the courtyard, balconies and solar roofs
+    {id:'s0',kind:'good',x:4,y:4,w:20,d:12.5,h:5*FL,balc:1,pv:1},
+    {id:'s1',kind:'good',x:24,y:4,w:18,d:12.5,h:5*FL,balc:1,pv:1,seed:1},
+    {id:'s2',kind:'good',x:44,y:4,w:14,d:12.5,h:4*FL,balc:1,pv:1,seed:2},
+    {id:'s3',kind:'good',x:4,y:29.5,w:14,d:12.5,h:4*FL,balc:1,pv:1,seed:1},
+    {id:'s4',kind:'good',x:20,y:29.5,w:18,d:12.5,h:5*FL,balc:1,pv:1,seed:2},
+    {id:'s5',kind:'good',x:38,y:29.5,w:20,d:12.5,h:5*FL,balc:1,pv:1}],
+  C:[{id:'s0',kind:'good',x:4,y:4,w:54,d:11,h:4*FL,seed:1},{id:'s1',kind:'good',x:4,y:31,w:54,d:11,h:4*FL,seed:2},{id:'s2',kind:'good',x:4,y:15,w:11,d:16,h:4*FL,seed:3},{id:'s3',kind:'good',x:47,y:15,w:11,d:16,h:4*FL,seed:1}],
+  D:[{id:'s0',kind:'good',x:3,y:3,w:18,d:18,h:5*FL},{id:'s1',kind:'good',x:22,y:25,w:18,d:18,h:5*FL,seed:2},{id:'s2',kind:'good',x:41,y:3,w:18,d:18,h:5*FL,seed:1}],
+  final:[ // the winning scheme: two bars 13.9 m apart, stepped and offset, set-back top floors, balconies and solar roofs
+    {id:'s0',kind:'good',x:14,y:5,w:13,d:13,h:4*FL,balc:1},
+    {id:'s1',kind:'good',x:15.5,y:5.5,w:10,d:10.5,h:3,z0:4*FL,pv:1,seed:2},
+    {id:'s2',kind:'good',x:27,y:5,w:11,d:13,h:4*FL,balc:1,pv:1,seed:1},
+    {id:'s3',kind:'good',x:40,y:5,w:10,d:13,h:3*FL,balc:1,pv:1,seed:2},
+    {id:'s4',kind:'good',x:12,y:31.9,w:11,d:13,h:3*FL,balc:1,pv:1,seed:1},
+    {id:'s5',kind:'good',x:25,y:31.9,w:11,d:13,h:4*FL,balc:1,pv:1,seed:2},
+    {id:'s6',kind:'good',x:36,y:31.9,w:13,d:13,h:4*FL,balc:1},
+    {id:'s7',kind:'good',x:37.5,y:32.4,w:10,d:10.5,h:3,z0:4*FL,pv:1,seed:1}]
+};
+const PARK_TREES=[[4,26],[8,22],[56,26],[52,22],[10,44],[54,44],[26,27],[38,27],[22,44],[42,44],[4,4],[58,4],[28,-1.8],[34,28.5]];
+const PEOPLE=[[24,25,'#FFFFFF'],[36,26,'#FFC61A'],[37,26.6,'#FFFFFF'],[20,28,'#FFFFFF'],[44,24,'#FFC61A']];
 
-/* =========================================================================
-   The field: typological generation, elimination, then one scheme opened up
-   ========================================================================= */
-(function(){
-var cv  = document.getElementById('field');
-var ctx = cv.getContext('2d');
-var W = cv.width, H = cv.height;
-var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ---------- deterministic randomness ---------- */
-var seed = 20260924;
-function rnd(){ seed = (seed*1664525 + 1013904223) % 4294967296; return seed/4294967296; }
-function rr(a,b){ return a + rnd()*(b-a); }
-function pick(a){ return a[Math.floor(rnd()*a.length)|0]; }
-function clamp01(x){ return Math.min(1, Math.max(0, x)); }
-function ease(x){ return 1 - Math.pow(1-x, 3); }
-function easeIO(x){ return x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x+2, 3)/2; }
-
-/* ---------- the honest numbers ---------- */
-var CONSTRAINTS = 412, POSSIBILITIES = 128400000;
-var SIMULATED = Math.round(POSSIBILITIES * 0.01);
-
-/* ---------- axonometric projection, with an optional plan rotation ---------- */
-var FX = 0.866, FY = 0.34;
-var S = 1, OX = 0, OY = 0;
-var T = { rot:0, cx:0, cy:0, S:1, OX:0, OY:0 };
-function raw(x,y,z){ return [ (x-y)*FX, (x+y)*FY - z ]; }
-function P(x,y,z){
-  var px = x, py = y;
-  if (T.rot){
-    var dx = x - T.cx, dy = y - T.cy, c = Math.cos(T.rot), s = Math.sin(T.rot);
-    px = T.cx + dx*c - dy*s; py = T.cy + dx*s + dy*c;
+/* ---------- Sun lab ---------- */
+const svg=document.getElementById('sec');
+const NS='http://www.w3.org/2000/svg';
+const S=12;            // px per metre
+const G=410;           // ground y
+const FH=3;            // floor height m
+const NB_FLOORS=5;     // neighbour floors
+const DEPTH=12, LEN=40;
+let alt=42.6, altName='March';
+const $=id=>document.getElementById(id);
+function el(t,a,parent){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);(parent||svg).appendChild(e);return e}
+function draw(){
+  const floors=+$('floors').value, gap=+$('gap').value;
+  const H=floors*FH, Hn=NB_FLOORS*FH;
+  svg.innerHTML='';
+  // layout in metres: street 0..14, neighbour 16..28, gap, new building, garden
+  const x0=12;
+  const nbX=x0+16*S, nbW=DEPTH*S;
+  const nwX=nbX+nbW+gap*S, nwW=DEPTH*S;
+  const t=Math.tan(alt*Math.PI/180);
+  // sky / sun direction (sun on right)
+  const shadowLen=H/t;                       // m
+  const shadeOnFacade=Math.max(0,H-gap*t);   // m on neighbour facade
+  // ground shadow in gap
+  const shEnd=Math.max(nwX-shadowLen*S, nbX+nbW);
+  el('rect',{x:0,y:G,width:900,height:60,fill:'#ECEDF1'});
+  el('rect',{x:x0,y:G,width:14*S,height:8,fill:'#C9CCD6'});
+  // courtyard ground green
+  el('rect',{x:nbX+nbW,y:G-1,width:gap*S,height:9,fill:'#3DBE6B',opacity:.35});
+  // shadow polygon (light)
+  const tipY=G-shadeOnFacade*S;
+  el('polygon',{points:`${nwX},${G-H*S} ${nwX},${G} ${shEnd},${G} ${shEnd},${shadeOnFacade>0?tipY:G}`,fill:'#0A0A0A',opacity:.12});
+  // neighbour building
+  el('rect',{x:nbX,y:G-Hn*S,width:nbW,height:Hn*S,fill:'#E4E4E4',stroke:'#0A0A0A','stroke-width':3});
+  for(let i=1;i<NB_FLOORS;i++)el('line',{x1:nbX,y1:G-i*FH*S,x2:nbX+nbW,y2:G-i*FH*S,stroke:'#0A0A0A','stroke-width':1.5});
+  let lit=0;
+  for(let i=0;i<NB_FLOORS;i++){
+    const mid=i*FH+1.6; const sunny=mid>shadeOnFacade; if(sunny)lit++;
+    el('rect',{x:nbX+nbW-14,y:G-(i*FH+2.3)*S,width:14,height:13,fill:sunny?'#FFC61A':'#5A5A5A',stroke:'#0A0A0A','stroke-width':1.5});
+    el('rect',{x:nbX+14,y:G-(i*FH+2.3)*S,width:14,height:13,fill:'#fff',stroke:'#0A0A0A','stroke-width':1.5});
   }
-  var r = raw(px, py, z);
-  return [ T.OX + r[0]*T.S, T.OY + r[1]*T.S ];
+  // new building
+  el('rect',{x:nwX,y:G-H*S,width:nwW,height:H*S,fill:'#DDE2FF',stroke:'#0A0A0A','stroke-width':3});
+  for(let i=1;i<floors;i++)el('line',{x1:nwX,y1:G-i*FH*S,x2:nwX+nwW,y2:G-i*FH*S,stroke:'#0A0A0A','stroke-width':1.5});
+  for(let i=0;i<floors;i++){
+    for(const dx of [14,nwW-28])el('rect',{x:nwX+dx,y:G-(i*FH+2.3)*S,width:14,height:13,fill:'#8FA0FF',stroke:'#0A0A0A','stroke-width':1.5});
+  }
+  // sun ray grazing the roof edge
+  const rx=nwX, ry=G-H*S;
+  const dx=Math.cos(alt*Math.PI/180), dy=Math.sin(alt*Math.PI/180);
+  const L=Math.min((ry-30)/dy, (860-rx)/dx);
+  const sx=rx+dx*L, sy=ry-dy*L;
+  const endX=shadeOnFacade>0?nbX+nbW:shEnd, endY=shadeOnFacade>0?tipY:G;
+  el('line',{x1:sx,y1:sy,x2:endX,y2:endY,stroke:'#FFC61A','stroke-width':4,'stroke-dasharray':'10 8'});
+  el('circle',{cx:sx,cy:sy,r:22,fill:'#FFC61A',stroke:'#0A0A0A','stroke-width':3});
+  // street noise
+  el('rect',{x:x0+20,y:G-30,width:70,height:22,rx:6,fill:'#0A0A0A'});
+  el('circle',{cx:x0+36,cy:G-6,r:8,fill:'#fff',stroke:'#0A0A0A','stroke-width':3});
+  el('circle',{cx:x0+76,cy:G-6,r:8,fill:'#fff',stroke:'#0A0A0A','stroke-width':3});
+  [28,48,68].forEach(r=>el('path',{d:`M ${x0+105} ${G-20-r} A ${r} ${r} 0 0 1 ${x0+105} ${G-20+r*.6}`,fill:'none',stroke:'#0A0A0A','stroke-width':3,'stroke-dasharray':'1 9','stroke-linecap':'round'}));
+  // labels
+  const lab=(x,y,txt,anchor,col)=>{const t=el('text',{x,y,'text-anchor':anchor||'start','font-family':'IBM Plex Mono, monospace','font-size':14,'font-weight':600,fill:col||'#0A0A0A'});t.textContent=txt};
+  lab(x0+70,G+34,'Street','middle');
+  lab(nbX+nbW/2,G+34,'Neighbour','middle');
+  lab(nbX+nbW+gap*S/2,G+34,`${gap} m`,'middle','#1E7A42');
+  lab(nwX+nwW/2,G+34,'New building','middle','#1F3BFF');
+  lab(nwX+nwW/2,G-H*S-12,`${floors} fl · ${H} m`,'middle');
+  if(shadeOnFacade>0){el('line',{x1:nbX+nbW+6,y1:G,x2:nbX+nbW+6,y2:tipY,stroke:'#0A0A0A','stroke-width':2});lab(nbX+nbW+12,(G+tipY)/2,`${shadeOnFacade.toFixed(1)} m in shade`)}
+  // readouts
+  const yard=Math.max(0,Math.min(1,(gap-shadowLen)/gap));
+  $('rFloors').textContent=`${lit}/${NB_FLOORS}`;
+  $('rYard').textContent=Math.round(yard*100)+'%';
+  $('rGfa').textContent=(floors*DEPTH*LEN).toLocaleString('en-US');
+  $('rQuiet').textContent='yes';
+  $('floorsOut').textContent=floors+' floors';
+  $('gapOut').textContent=gap+' m';
+  $('seasonOut').textContent=`${altName} · ${Math.round(alt)}°`;
 }
-function resetT(){ T.rot = 0; T.cx = 0; T.cy = 0; T.S = S; T.OX = OX; T.OY = OY; }
-/* --- view space -------------------------------------------------------------
-   The projection is fixed and the model turns inside it, so which faces face the
-   camera changes with the angle. A ring of bars around a courtyard also produces
-   genuine painter's-algorithm cycles, which no single depth key can resolve, so
-   the enlarged scheme is drawn face by face with plane-side tests and a
-   topological sort (Newell). Checked against a ray-cast ground truth at 48
-   angles: zero mis-ordered pixels. */
-function rotPt(x,y){
-  if (!T.rot) return [x,y];
-  var dx = x-T.cx, dy = y-T.cy, c = Math.cos(T.rot), sn = Math.sin(T.rot);
-  return [T.cx + dx*c - dy*sn, T.cy + dx*sn + dy*c];
-}
-function rotN(nx,ny){
-  if (!T.rot) return [nx,ny];
-  var c = Math.cos(T.rot), sn = Math.sin(T.rot);
-  return [nx*c - ny*sn, nx*sn + ny*c];
-}
-function depth3(x,y,z){ var q = rotPt(x,y); return q[0] + q[1] + 2*FY*z; }
-var LIGHT = (function(){ var lx=.42, ly=1, m=Math.hypot(lx,ly); return {x:lx/m, y:ly/m}; })();
-function lerpRGB(a,b,t){
-  return [Math.round(a[0]+(b[0]-a[0])*t), Math.round(a[1]+(b[1]-a[1])*t), Math.round(a[2]+(b[2]-a[2])*t)];
-}
-var VCAM = [1, 1, 2*FY];
-var SOLID_LO = [19,14,9], SOLID_HI = [64,45,26], SOLID_TOP = [56,39,19];
+document.querySelectorAll('#season button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#season button').forEach(x=>x.setAttribute('aria-pressed','false'));
+  b.setAttribute('aria-pressed','true');alt=+b.dataset.alt;altName=b.dataset.name;draw();
+}));
+['floors','gap'].forEach(id=>$(id).addEventListener('input',draw));
+draw();
 
-function bbOf(pts){
-  var x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
-  pts.forEach(function(p){ if(p[0]<x0)x0=p[0]; if(p[0]>x1)x1=p[0]; if(p[1]<y0)y0=p[1]; if(p[1]>y1)y1=p[1]; });
-  return [x0,y0,x1,y1];
+/* ---------- Three scores ---------- */
+const PLOT=2852;
+const options=[
+  {id:'A',name:'Deep slab',desc:'one deep block, 5 floors',rects:[[2,11,58,24]],fp:1392,floors:5,eff:.86,daylight:68.4,quiet:50,gapLight:100,av:.251,
+   plus:'the most floor area to sell', minus:'a third of the floor area is far from a window, and half the flats face only the street'},
+  {id:'B',name:'Two bars',desc:'two stepped bars with passages, 4 to 5 floors',rects:[[4,4,38,12.5],[44,4,14,12.5],[4,29.5,14,12.5],[20,29.5,38,12.5]],fp:1300,gfa:6150,floors:5,eff:.83,daylight:100,quiet:100,gapLight:93,av:.345,
+   plus:'every flat gets daylight from two sides and a quiet side', minus:'about 15% less floor area to sell than the deep slab'},
+  {id:'C',name:'Courtyard',desc:'a ring around a courtyard, 4 floors',ring:[4,4,54,38,11],fp:1540,floors:4,eff:.82,daylight:100,quiet:100,gapLight:100,av:.348,
+   plus:'a quiet, sunny courtyard for everyone', minus:'it covers more ground, so less of the plot stays green'},
+  {id:'D',name:'Point houses',desc:'three small houses, 5 floors',rects:[[3,3,18,18],[22,25,18,18],[41,3,18,18]],fp:972,floors:5,eff:.78,daylight:95,quiet:100,gapLight:100,av:.356,
+   plus:'the most open, green ground, and every flat has corner windows and a quiet side', minus:'far less floor area, so the weakest return'}
+];
+options.forEach(o=>{o.gfa=o.gfa||o.fp*o.floors;o.sell=o.gfa*o.eff;o.open=100*(1-o.fp/PLOT);o.material=1/((o.daylight/100)*o.eff);o.flats=Math.round(o.sell/80)});
+const maxOf=k=>Math.max(...options.map(o=>o[k])), minOf=k=>Math.min(...options.map(o=>o[k]));
+const hi=k=>o=>100*o[k]/maxOf(k), lo=k=>o=>100*minOf(k)/o[k];
+options.forEach(o=>{
+  o.sW=(hi('daylight')(o)+hi('quiet')(o)+hi('gapLight')(o))/3;
+  o.sE=(lo('av')(o)+hi('open')(o)+lo('material')(o))/3;
+  o.sR=hi('sell')(o);
+});
+function plan(o,label){
+  const w=62,h=46,sc=4;
+  let s=`<svg viewBox="0 0 ${w*sc} ${h*sc}" role="img" aria-label="Site plan of ${o.name}: ${o.desc}"><rect x="1" y="1" width="${w*sc-2}" height="${h*sc-2}" fill="#E3F6EA" stroke="#0A0A0A" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+  if(o.rects)o.rects.forEach(r=>{s+=`<rect x="${r[0]*sc}" y="${r[1]*sc}" width="${r[2]*sc}" height="${r[3]*sc}" fill="#1F3BFF" stroke="#0A0A0A" stroke-width="2"/>`;
+    const iw=r[2]-14, ih=r[3]-14; if(iw>0&&ih>0)s+=`<rect x="${(r[0]+7)*sc}" y="${(r[1]+7)*sc}" width="${iw*sc}" height="${ih*sc}" fill="#0A0A0A" opacity=".55"/>`;});
+  if(o.ring){const [x,y,W,H,d]=o.ring;s+=`<path d="M${x*sc} ${y*sc}h${W*sc}v${H*sc}h${-W*sc}Z M${(x+d)*sc} ${(y+d)*sc}v${(H-2*d)*sc}h${(W-2*d)*sc}v${-(H-2*d)*sc}Z" fill="#1F3BFF" fill-rule="evenodd" stroke="#0A0A0A" stroke-width="2"/>`}
+  return s+'</svg>';
 }
-function bbOverlap(a,b){ return !(a[2]<b[0]-.5 || b[2]<a[0]-.5 || a[3]<b[1]-.5 || b[3]<a[1]-.5); }
-function faceSide(f,o){
-  var N=o.N, P0=o.v3[0];
-  var camSide = N[0]*VCAM[0] + N[1]*VCAM[1] + N[2]*VCAM[2];
-  if (Math.abs(camSide) < 1e-9) return 0;
-  var sgn = camSide > 0 ? 1 : -1, behind = true, front = true;
-  f.v3.forEach(function(v){
-    var d = (N[0]*(v[0]-P0[0]) + N[1]*(v[1]-P0[1]) + N[2]*(v[2]-P0[2])) * sgn;
-    if (d >  1e-7) behind = false;
-    if (d < -1e-7) front  = false;
+// rows of the at-a-glance table: label, sub, value fn, format, higher better?
+const rowsDef=[
+  {grp:'Wellbeing'},
+  {l:'Daylight',sub:'floor area within 7 m of a window',k:'daylight',f:v=>Math.round(v)+'%',hb:true},
+  {l:'Quiet side',sub:'flats with a side away from the street',k:'quiet',f:v=>v+'%',hb:true},
+  {l:'Open ground',sub:'share of the plot left unbuilt',k:'open',f:v=>Math.round(v)+'%',hb:true},
+  {grp:'Ecology'},
+  {l:'Compact shape',sub:'envelope per volume, lower = less heat loss',k:'av',f:v=>v.toFixed(2),hb:false},
+  {l:'Material use',sub:'m² built per m² of good living space',k:'material',f:v=>v.toFixed(2),hb:false},
+  {grp:'Return'},
+  {l:'Floor area to sell',sub:'square metres',k:'sell',f:v=>Math.round(v/10)*10+' m²',hb:true},
+  {l:'Flats',sub:'at about 80 m² each',k:'flats',f:v=>'≈'+v,hb:true}
+];
+function rate(r,o){
+  const vals=options.map(x=>x[r.k]);const mx=Math.max(...vals),mn=Math.min(...vals);
+  if(mx===mn)return 'g';
+  let t=(o[r.k]-mn)/(mx-mn); if(!r.hb)t=1-t;
+  return t>=.66?'g':t>=.33?'m':'p';
+}
+const nf=n=>n.toLocaleString('en-US');
+function render(){
+  const w=[+$('wW').value,+$('wE').value,+$('wR').value];const sum=(w[0]+w[1]+w[2])||1;
+  $('wWo').textContent=w[0];$('wEo').textContent=w[1];$('wRo').textContent=w[2];
+  options.forEach(o=>{o.cW=o.sW*w[0]/sum;o.cE=o.sE*w[1]/sum;o.cR=o.sR*w[2]/sum;o.total=o.cW+o.cE+o.cR});
+  const sorted=[...options].sort((a,b)=>b.total-a.total);const win=sorted[0];
+  const counted=[w[0]&&'wellbeing',w[1]&&'ecology',w[2]&&'return'].filter(Boolean);
+  const countTxt=counted.length===3?'wellbeing, ecology and return':counted.length===2?counted.join(' and '):counted[0]||'nothing';
+  const maxT=sorted[0].total||1;
+  if(window.__cmpScene&&window.__cmpWin!==win.id){window.__cmpWin=win.id;window.__cmpScene.set(cmpState(win))}
+  $('winText').innerHTML=`
+      <span class="tag">Best fit when you count ${countTxt}</span>
+      <span class="name">${win.name}</span>
+      <p class="why">Its strength: ${win.plus}.</p>
+      <p class="trade">The trade-off: ${win.minus}.</p>
+      <div class="rank-list">${sorted.map((o,i)=>`<div class="rk${i===0?' first':''}"><span class="rkn">${i+1}.</span><span>${o.name}</span><span class="rkb" title="Score ${o.total.toFixed(0)}"><i style="width:${o.cW}%;background:#FFC61A"></i><i style="width:${o.cE}%;background:#3DBE6B"></i><i style="width:${o.cR}%;background:#1F3BFF"></i></span><span class="rkv">${Math.round(o.total)}</span></div>`).join('')}</div>
+      <p class="legend-row" style="font-size:13px"><span><i class="dot" style="background:#FFC61A"></i>wellbeing</span><span><i class="dot" style="background:#3DBE6B"></i>ecology</span><span><i class="dot" style="background:#1F3BFF"></i>return</span><span class="mut">Score out of 100</span></p>`;
+  // glance table
+  let t='<thead><tr><th></th>'+options.map(o=>`<th class="${o===win?'win':''}">${plan(o)}${o.name}${o===win?' ★':''}</th>`).join('')+'</tr></thead><tbody>';
+  rowsDef.forEach(r=>{
+    if(r.grp){t+=`<tr class="grp"><th colspan="5">${r.grp}</th></tr>`;return}
+    t+=`<tr><th>${r.l}<small>${r.sub}</small></th>`+options.map(o=>`<td class="${o===win?'win':''}"><div class="cell ${rate(r,o)}">${r.f(o[r.k])}</div></td>`).join('')+'</tr>';
   });
-  return behind ? -1 : (front ? 1 : 0);
+  $('glance').innerHTML=t+'</tbody>';
+  document.querySelectorAll('.choice button').forEach(b=>{const p=b.dataset.p.split(',').map(Number);b.setAttribute('aria-pressed',p[0]===w[0]&&p[1]===w[1]&&p[2]===w[2]?'true':'false')});
 }
-function orderFaces(fs){
-  var n=fs.length, after=[], indeg=[], i, j;
-  for (i=0;i<n;i++){ after.push([]); indeg.push(0); }
-  for (i=0;i<n;i++) for (j=i+1;j<n;j++){
-    if (!bbOverlap(fs[i].bb, fs[j].bb)) continue;
-    var a, b;
-    if (faceSide(fs[i],fs[j]) === -1 || faceSide(fs[j],fs[i]) === 1){ a=i; b=j; }
-    else if (faceSide(fs[j],fs[i]) === -1 || faceSide(fs[i],fs[j]) === 1){ a=j; b=i; }
-    else if (fs[i].key <= fs[j].key){ a=i; b=j; } else { a=j; b=i; }
-    after[a].push(b); indeg[b]++;
-  }
-  var ready=[], out=[];
-  for (i=0;i<n;i++) if (!indeg[i]) ready.push(i);
-  while (ready.length){
-    var m=0;
-    for (i=1;i<ready.length;i++) if (fs[ready[i]].key < fs[ready[m]].key) m=i;
-    var k = ready.splice(m,1)[0];
-    out.push(fs[k]);
-    after[k].forEach(function(q){ if (--indeg[q] === 0) ready.push(q); });
-  }
-  if (out.length < n){
-    fs.filter(function(_,idx){ return indeg[idx] > 0; })
-      .sort(function(p,q){ return p.key - q.key; })
-      .forEach(function(f){ out.push(f); });
-  }
+['wW','wE','wR'].forEach(id=>$(id).addEventListener('input',render));
+document.querySelectorAll('.choice button').forEach(b=>b.addEventListener('click',()=>{const p=b.dataset.p.split(',');$('wW').value=p[0];$('wE').value=p[1];$('wR').value=p[2];render()}));
+render();
+
+/* ---------- the evolving site: scenes ---------- */
+const T=(x,y,z,text,bg,dx,dy,fg)=>({x,y,z,text,bg,dx,dy,fg:fg||'#0A0A0A'});
+const GOOD={green:true,trees:PARK_TREES,people:PEOPLE};
+function cmpState(o){
+  const top={A:[31,23,15],B:[31,36,15],C:[31,10,12],D:[31,34,15]}[o.id];
+  return Object.assign({},GOOD,{scheme:SCHEMES[o.id],paths:o.id==='B',tags:[T(top[0],top[1],top[2],o.name.toUpperCase(),'#1F3BFF',60,-80,'#FFFFFF')]});
+}
+// Problem
+Scene.make($('scProblem'),{label:'The site with one deep block that fills the plot and casts long shadows on its neighbours',
+  scheme:SCHEMES.profit,shadow:42.6,green:false,
+  tags:[T(31,23,18,'MAX FLOOR AREA','#C9CCD6',40,-90),T(31,23,9,'DARK CORE: 16 M FROM A WINDOW','#F4C5BE',230,40),T(-8,20,0,'SHADOW ON NEIGHBOURS','#5A5A5A',-20,-120,'#FFFFFF'),T(31,38,4,'NO QUIET SIDE','#FFF1C2',-60,90)]});
+// Compare
+window.__cmpScene=Scene.make($('scCompare'),cmpState(options[1]));window.__cmpWin='B';
+render();
+// Results
+Scene.make($('scResults'),Object.assign({},GOOD,{label:'The winning scheme: two four-storey bars with an attic, 13.9 m apart, around a green, sunny courtyard',
+  scheme:SCHEMES.final,shadow:42.6,paths:true,
+  tags:[T(31,25.4,0,'13.9 M APART · SUN IN THE COURTYARD','#FFC61A',-150,110),T(31,11,15,'100% WITHIN 7 M OF A FAÇADE','#FFFFFF',150,-70),T(54,40,0,'69% OF THE PLOT OPEN','#3DBE6B',170,60),T(31,38,15,'31 FLATS · 85% LIVING SPACE','#1F3BFF',-190,-60,'#FFFFFF')]}));
+// How it works: stepper
+const ENVELOPE={id:'env',x:5,y:5,w:52,d:36,h:15,ghost:1,col:'#FFC61A',fo:.05};
+const READ={label:'Reading the site',scheme:[],green:false,
+  extra:[{id:'gE',x:68,y:26,w:14,d:20,h:3,z0:9.01,ghost:1,col:'#8FA0FF',fo:.25},{id:'gR',x:-18,y:32,w:12,d:14,h:15,z0:0.01,ghost:1,col:'#8FA0FF',fo:.1}],
+  post:[ENVELOPE],
+  tags:[T(36,-12,18,'KEEP','#E4E4E4',0,-60),T(75,11,24,'KEEP','#E4E4E4',40,-50),T(75,36,12,'EXTEND +1 FLOOR','#8FA0FF',90,-30,'#FFFFFF'),T(-12,39,15,'REPLACE?','#5A5A5A',-50,-40,'#FFFFFF'),T(31,23,15,'DENSIFY · ZONING ENVELOPE','#1F3BFF',-10,-150,'#FFFFFF'),T(19,52,3,'TRAM STOP','#FFC61A',-70,60)]};
+function variant(i){
+  // pseudo-random compliant variants inside the 52 x 36 m envelope, max 15 m
+  let r=(i*9301+49297)%233280; const rnd=()=>{r=(r*9301+49297)%233280;return r/233280};
+  const type=i%4, out=[]; const h=()=>3*(3+Math.floor(rnd()*3));
+  if(type===0){const n=2+Math.floor(rnd()*2),d=10+rnd()*3,gap=(36-n*d)/(n-1||1);for(let k=0;k<n;k++)out.push({id:'v'+k,kind:'good',x:5+rnd()*6,y:5+k*(d+gap),w:40+rnd()*12,d,h:h(),seed:k})}
+  else if(type===1){const d=10+rnd()*3;out.push({id:'v0',kind:'good',x:5,y:5,w:52,d,h:h()},{id:'v1',kind:'good',x:5,y:41-d,w:52,d,h:h(),seed:2},{id:'v2',kind:'good',x:5,y:5+d,w:d,d:36-2*d,h:h(),seed:1})}
+  else if(type===2){const n=3+Math.floor(rnd()*2);for(let k=0;k<n;k++)out.push({id:'v'+k,kind:'good',x:5+k*(52/n)+1,y:5+(k%2)*16,w:52/n-4,d:16+rnd()*4,h:h(),seed:k})}
+  else{const w=10+rnd()*3;for(let k=0;k<3;k++)out.push({id:'v'+k,kind:'good',x:5+k*20,y:5,w,d:36,h:h(),seed:k})}
   return out;
 }
-
-/* the enlarged, rotating scheme — correct at any angle */
-function drawSolid(bars, a, xray){
-  var fs = [];
-  bars.forEach(function(b){
-    var x=b.x, y=b.y, bw=b.w, bd=b.d, bh=b.h;
-    var c = [[x,y],[x+bw,y],[x+bw,y+bd],[x,y+bd]];
-    var nrm = [[0,-1],[1,0],[0,1],[-1,0]];
-    for (var i=0;i<4;i++){
-      var n2 = rotN(nrm[i][0], nrm[i][1]);
-      if (n2[0] + n2[1] <= .0015) continue;
-      var p1 = c[i], p2 = c[(i+1)%4];
-      var q1 = rotPt(p1[0],p1[1]), q2 = rotPt(p2[0],p2[1]);
-      fs.push({
-        wall:true, p1:p1, p2:p2, h:bh, N:[n2[0], n2[1], 0],
-        v3:[[q1[0],q1[1],0],[q2[0],q2[1],0],[q2[0],q2[1],bh],[q1[0],q1[1],bh]],
-        pts:[P(p1[0],p1[1],0), P(p2[0],p2[1],0), P(p2[0],p2[1],bh), P(p1[0],p1[1],bh)],
-        key: Math.max(depth3(p1[0],p1[1],bh), depth3(p2[0],p2[1],bh)),
-        lum: Math.min(1, Math.max(0, .5 + .5*(n2[0]*LIGHT.x + n2[1]*LIGHT.y)))
-      });
-    }
-    var q = c.map(function(p){ return rotPt(p[0],p[1]); });
-    fs.push({
-      wall:false, N:[0,0,1],
-      v3: q.map(function(p){ return [p[0], p[1], bh]; }),
-      pts: c.map(function(p){ return P(p[0],p[1],bh); }),
-      key: Math.max.apply(null, c.map(function(p){ return depth3(p[0],p[1],bh); })) + .04
-    });
-  });
-  fs.forEach(function(f){ f.bb = bbOf(f.pts); });
-
-  var fa = a*(1 - xray*.9), ea = a*(.94 - .34*xray);
-  var lines = xray < .3 ? a*.3*(1 - xray/.3) : 0;
-  orderFaces(fs).forEach(function(f){
-    var rgb = f.wall ? lerpRGB(SOLID_LO, SOLID_HI, f.lum) : SOLID_TOP;
-    poly(f.pts, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + fa.toFixed(3) + ')', null, 1);
-    if (f.wall && lines > .01){
-      var n = Math.max(1, Math.round(f.h/ST));
-      ctx.save(); ctx.globalAlpha = lines; ctx.strokeStyle = '#d08a4e'; ctx.lineWidth = .55;
-      for (var k=1;k<n;k++){
-        var z = k*f.h/n;
-        var s1 = P(f.p1[0],f.p1[1],z), s2 = P(f.p2[0],f.p2[1],z);
-        ctx.beginPath(); ctx.moveTo(s1[0],s1[1]); ctx.lineTo(s2[0],s2[1]); ctx.stroke();
-      }
-      ctx.restore();
-    }
-    poly(f.pts, null, 'rgba(208,138,78,' + ea.toFixed(3) + ')', 1, 1.05);
-  });
-}
-
-/* ---------- site: two fields split by a street ---------- */
-var FIELD_A = {x:8, y:6,  w:186, d:52};
-var STREET  = {x:0, y:60, w:202, d:13};
-var FIELD_B = {x:8, y:76, w:186, d:50};
-
-/* ---------- palette ---------- */
-var C = {
-  cand: { edge:'#8b877f', wall:'#1d1e21', wall2:'#17181a', roof:'#26272b' },
-  born: { edge:'#f4efe6', wall:'#26272a', wall2:'#1e1f22', roof:'#303136' },
-  surv: { edge:'#d08a4e', wall:'#241a11', wall2:'#1b130c', roof:'#33230f' },
-  xray: { edge:'rgba(208,138,78,0.55)', wall:'rgba(208,138,78,0.03)', wall2:'rgba(208,138,78,0.02)', roof:'rgba(208,138,78,0.05)' }
+const STEPS={
+  read:{state:READ,cap:'step 1 of 4',html:`<h3>Read the site</h3><p class="lede" style="font-size:19px">Zeuxis loads the brief and flat mix, the zoning rules and the buildings around the plot from public data. Before anything new is drawn, it asks what already stands.</p><div class="context"><div><span class="chip" style="background:#E4E4E4">Keep</span><p>Good buildings stay.</p></div><div><span class="chip" style="background:#8FA0FF;color:#fff">Extend</span><p>Add a floor instead of demolishing.</p></div><div><span class="chip" style="background:#5A5A5A;color:#fff">Replace?</span><p>Only when it clearly pays off.</p></div><div><span class="chip" style="background:#1F3BFF;color:#fff">Densify</span><p>Build where streets and transit already are.</p></div></div><p class="note">Neighbours and heights load today. Scoring the existing buildings is what we build next.</p>`},
+  gen:{cap:'step 2 of 4',html:`<h3>Generate every compliant option</h3><p class="lede" style="font-size:19px">Inside the zoning envelope, Zeuxis tries bars, courtyards, point houses and everything in between, with cores and floor plans. Each one follows the rules. No number of options is fixed in advance.</p><div class="counter">Options checked: <b id="genCount">0</b></div>`},
+  score:{state:Object.assign({},GOOD,{scheme:SCHEMES.final,shadow:42.6,paths:true,tags:[T(31,11,15,'DAYLIGHT ✓ 100% ≤ 7 M','#FFC61A',150,-70),T(54,40,0,'OPEN GROUND ✓ 69%','#3DBE6B',150,60),T(31,38,15,'RETURN ✓ 31 FLATS','#1F3BFF',-170,-60,'#FFFFFF')]}),cap:'step 3 of 4',html:`<h3>Score each one three ways</h3><p class="lede" style="font-size:19px">Every option gets a wellbeing, an ecology and a return score.</p><div class="context"><div><span class="chip" style="background:#FFC61A">Wellbeing</span><p>Daylight, sun, quiet sides, open space.</p></div><div><span class="chip" style="background:#3DBE6B">Ecology</span><p>Material, energy, sealed ground.</p></div><div><span class="chip" style="background:#1F3BFF;color:#fff">Return</span><p>Flats, net-to-gross, yield.</p></div></div>`},
+  cmp:{state:Object.assign({},GOOD,{scheme:SCHEMES.final,paths:true,post:[{id:'pg',x:2,y:8,w:58,d:30,h:18,ghost:1,col:'#F4C5BE',fo:.06}],tags:[T(58,8,18,'PROFIT-ONLY OPTION','#F4C5BE',70,-60),T(31,25,0,'CHOSEN: MORE LIGHT, SAME LAND','#FFFFFF',-150,120)]}),cap:'step 4 of 4',html:`<h3>Compare side by side</h3><p class="lede" style="font-size:19px">The options sit next to each other with their trade-offs visible, while the shape can still change. Here, the chosen scheme against the profit-only block on the same plot.</p><p><a class="btn fill" href="#compare">Try the comparison →</a></p>`}
 };
-var UNIT_TYPES = [
-  { name:'1.5 rm', hex:'#d08a4e', rgb:'208,138,78' },
-  { name:'3.5 rm', hex:'#ece7df', rgb:'236,231,223' },
-  { name:'4.5 rm', hex:'#6f8794', rgb:'111,135,148' }
-];
-
-/* ---------- geometry helpers ---------- */
-function poly(pts, fill, stroke, a, lw){
-  if (a <= 0.004) return;
-  ctx.globalAlpha = a;
-  ctx.beginPath();
-  ctx.moveTo(pts[0][0], pts[0][1]);
-  for (var i=1;i<pts.length;i++) ctx.lineTo(pts[i][0], pts[i][1]);
-  ctx.closePath();
-  if (fill){ ctx.fillStyle = fill; ctx.fill(); }
-  if (stroke){ ctx.strokeStyle = stroke; ctx.lineWidth = lw || 1; ctx.stroke(); }
-  ctx.globalAlpha = 1;
+const howScene=Scene.make($('scHow'),READ);
+let genTimer=null,autoTimer=null,cur='read',count=0;
+function go(step,user){
+  cur=step;clearInterval(genTimer);
+  document.querySelectorAll('.stepper button').forEach(b=>b.setAttribute('aria-selected',b.dataset.step===step?'true':'false'));
+  $('stepText').innerHTML=STEPS[step].html;$('howCap').innerHTML='Same site · <b>'+STEPS[step].cap+'</b>';
+  if(step==='gen'){let i=0;const tick=()=>{i++;count+=37+(i*13)%29;const el=$('genCount');if(el)el.textContent=count.toLocaleString('en-US');howScene.set({scheme:variant(i),green:false,post:[ENVELOPE],tags:[T(31,23,15,'OPTION '+(1000+count)+' · COMPLIANT ✓','#FFFFFF',-10,-150)]},true)};tick();genTimer=setInterval(tick,450)}
+  else howScene.set(STEPS[step].state,!go.started);
+  go.started=true;
+  if(user){clearInterval(autoTimer);autoTimer=null}
 }
-
-/* one rectangular bar with a roof: flat|gable|hip|mono|attika */
-function drawBar(b, col, a){
-  var x=b.x, y=b.y, w=b.w, d=b.d, h=b.h, rh=b.rh||0;
-  var xc = x+w/2, yc = y+d/2;
-  poly([P(x,y+d,0),P(x+w,y+d,0),P(x+w,y+d,h),P(x,y+d,h)], col.wall,  col.edge, a);
-  poly([P(x+w,y,0),P(x+w,y+d,0),P(x+w,y+d,h),P(x+w,y,h)], col.wall2, col.edge, a);
-  if (b.roof === 'gable'){
-    if (b.ridge === 'x'){
-      poly([P(x,y+d,h),P(x+w,y+d,h),P(x+w,yc,h+rh),P(x,yc,h+rh)], col.roof, col.edge, a);
-      poly([P(x,y,h),P(x+w,y,h),P(x+w,yc,h+rh),P(x,yc,h+rh)],     col.wall2, col.edge, a*0.85);
-      poly([P(x+w,y,h),P(x+w,y+d,h),P(x+w,yc,h+rh)],              col.wall,  col.edge, a);
-    } else {
-      poly([P(x+w,y,h),P(x+w,y+d,h),P(xc,y+d,h+rh),P(xc,y,h+rh)], col.roof, col.edge, a);
-      poly([P(x,y,h),P(x,y+d,h),P(xc,y+d,h+rh),P(xc,y,h+rh)],     col.wall2, col.edge, a*0.85);
-      poly([P(x,y+d,h),P(x+w,y+d,h),P(xc,y+d,h+rh)],              col.wall,  col.edge, a);
-    }
-  } else if (b.roof === 'hip'){
-    var ins = Math.min(w,d)/2;
-    poly([P(x,y+d,h),P(x+w,y+d,h),P(x+w-ins,yc,h+rh),P(x+ins,yc,h+rh)], col.roof, col.edge, a);
-    poly([P(x+w,y,h),P(x+w,y+d,h),P(x+w-ins,yc,h+rh)],                  col.wall, col.edge, a);
-    poly([P(x,y,h),P(x+w,y,h),P(x+w-ins,yc,h+rh),P(x+ins,yc,h+rh)],     col.wall2,col.edge, a*0.8);
-  } else if (b.roof === 'mono'){
-    poly([P(x,y,h+rh),P(x+w,y,h+rh),P(x+w,y+d,h),P(x,y+d,h)], col.roof, col.edge, a);
-    poly([P(x+w,y,h),P(x+w,y,h+rh),P(x+w,y+d,h)],             col.wall, col.edge, a);
-  } else if (b.roof === 'attika'){
-    poly([P(x,y,h),P(x+w,y,h),P(x+w,y+d,h),P(x,y+d,h)], col.roof, col.edge, a);
-    var s = Math.min(2.6, Math.min(w,d)*0.16);
-    var at = {x:x+s, y:y+s, w:w-2*s, d:d-2*s, h:h+rh};
-    poly([P(at.x,at.y+at.d,h),P(at.x+at.w,at.y+at.d,h),P(at.x+at.w,at.y+at.d,at.h),P(at.x,at.y+at.d,at.h)], col.wall, col.edge, a);
-    poly([P(at.x+at.w,at.y,h),P(at.x+at.w,at.y+at.d,h),P(at.x+at.w,at.y+at.d,at.h),P(at.x+at.w,at.y,at.h)], col.wall2, col.edge, a);
-    poly([P(at.x,at.y,at.h),P(at.x+at.w,at.y,at.h),P(at.x+at.w,at.y+at.d,at.h),P(at.x,at.y+at.d,at.h)], col.roof, col.edge, a);
-  } else {
-    poly([P(x,y,h),P(x+w,y,h),P(x+w,y+d,h),P(x,y+d,h)], col.roof, col.edge, a);
-  }
-}
-
-/* ---------- the type library ---------- */
-var ST = 3.1;
-function tZeile(x,y,ang){
-  var n = 2 + (rnd()<0.5?0:1), d = rr(10,13), L = rr(34,52), g = rr(14,20);
-  var st = 3 + (rnd()<0.4?1:0), bars = [];
-  for (var i=0;i<n;i++){
-    if (ang) bars.push({x:x+i*(d+g), y:y, w:d, d:L, h:st*ST, roof:'gable', ridge:'y', rh:2.6});
-    else     bars.push({x:x, y:y+i*(d+g), w:L, d:d, h:st*ST, roof:'gable', ridge:'x', rh:2.6});
-  }
-  return {bars:bars, type:'Zeile'};
-}
-function tBlock(x,y){
-  var W_=rr(46,62), D_=rr(38,46), t=rr(12,14), st=4+(rnd()<0.5?1:0), h=st*ST;
-  return {type:'Blockrand', bars:[
-    {x:x, y:y, w:W_, d:t, h:h, roof:'flat'},
-    {x:x, y:y+D_-t, w:W_, d:t, h:h, roof:'flat'},
-    {x:x, y:y+t, w:t, d:D_-2*t, h:h, roof:'flat'},
-    {x:x+W_-t, y:y+t, w:t, d:D_-2*t, h:h, roof:'attika', rh:2.7}
-  ]};
-}
-function tPunkt(x,y){
-  var s = rr(18,23), st = 5 + Math.floor(rnd()*3);
-  return {type:'Punktbau', bars:[{x:x,y:y,w:s,d:s,h:st*ST,roof:'attika',rh:2.8}]};
-}
-function tKamm(x,y){
-  var L=rr(56,76), t=rr(12,14), st=4, h=st*ST, bars=[{x:x,y:y,w:L,d:t,h:h,roof:'flat'}];
-  var nf = 3, fl = rr(24,32);
-  for (var i=0;i<nf;i++) bars.push({x:x + 4 + i*((L-12)/nf), y:y+t, w:t, d:fl, h:(st-1)*ST, roof:'gable', ridge:'y', rh:2.4});
-  return {type:'Kamm', bars:bars};
-}
-function tGross(x,y){
-  var W_=rr(44,60), D_=rr(34,44), t=rr(15,18), st=5+Math.floor(rnd()*3), h=st*ST;
-  return {type:'Grossform', bars:[
-    {x:x, y:y, w:W_, d:t, h:h, roof:'attika', rh:2.8},
-    {x:x, y:y+t, w:t, d:D_-t, h:h*0.82, roof:'flat'},
-    {x:x+W_-t, y:y+t, w:t, d:(D_-t)*0.7, h:h*0.9, roof:'attika', rh:2.6}
-  ]};
-}
-function tReihe(x,y){
-  var n=4+Math.floor(rnd()*3), u=rr(6.5,8), d=rr(9,11), bars=[];
-  for (var i=0;i<n;i++) bars.push({x:x+i*u, y:y, w:u, d:d, h:2*ST, roof:'gable', ridge:'x', rh:2.3});
-  return {type:'Reihenhaus', bars:bars};
-}
-function tHof(x,y){
-  var s=rr(15,19), bars=[];
-  for (var i=0;i<2;i++) for (var j=0;j<2;j++)
-    bars.push({x:x+i*(s+3), y:y+j*(s+3), w:s, d:s*0.55, h:2*ST, roof:'mono', rh:1.8});
-  return {type:'Hofcluster', bars:bars};
-}
-var MAKERS = [tZeile,tBlock,tPunkt,tKamm,tGross,tReihe,tHof];
-
-/* ---------- reasons a scheme dies ---------- */
-var REASONS = ['too long','shadow','no quiet facade','over height','court too tight',
-               'ridge direction','setback','dormers over limit','roof yield','cost'];
-
-/* ---------- build the candidate field ---------- */
-var schemes = [];
-function centroid(s){
-  var cx=0, cy=0;
-  for (var k=0;k<s.bars.length;k++){ cx += s.bars[k].x + s.bars[k].w/2; cy += s.bars[k].y + s.bars[k].d/2; }
-  s.cx = cx/s.bars.length; s.cy = cy/s.bars.length;
-}
-function spawn(field, n){
-  for (var i=0;i<n;i++){
-    var mk = pick(MAKERS);
-    var s = mk(field.x + rnd()*(field.w-78), field.y + rnd()*(field.d-40), rnd()<0.45);
-    s.born = rnd()*0.92; s.killAt = 0.06 + rnd()*0.88;
-    s.reason = pick(REASONS); s.keep = false;
-    centroid(s); schemes.push(s);
-  }
-}
-spawn(FIELD_A, 22);
-spawn(FIELD_B, 21);
-
-/* ---------- the survivors: one coherent arrangement ---------- */
-var survivors = [];
-(function(){
-  var k1 = tKamm(28, 12);           k1.label='Kamm';
-  var z1 = tZeile(112, 10, false);  z1.label='Zeile';
-  var g1 = tGross(24, 84);          g1.label='Grossform';
-  var b1 = tBlock(104, 80);         b1.label='Blockrand';
-  var p1 = tPunkt(172, 96);         p1.label='Punktbau';
-  survivors = [k1,z1,g1,b1,p1];
-  survivors.forEach(function(s){
-    s.keep = true; s.born = rnd()*0.5; s.killAt = 2;
-    s.metrics = {
-      energy: Math.round(58 - rnd()*22),
-      daylight: Math.round(64 + rnd()*30),
-      cost: Math.round((rnd()*8 - 4)*10)/10,
-      fit: Math.round(80 + rnd()*18)
-    };
-    centroid(s); schemes.push(s);
-  });
-})();
-var overallScore = Math.round(survivors.reduce(function(a,s){ return a + s.metrics.fit; }, 0) / survivors.length);
-
-/* ---------- the one taken forward ---------- */
-/* the scheme taken forward is built explicitly rather than sampled: thin wings, one eaves
-   height, a real courtyard — a random Blockrand reads as a lump once it starts turning */
-(function(){
-  var W_=64, D_=48, t=12, st=5, hh=st*ST, x=104, y=78, o=survivors[3];
-  o.bars = [
-    {x:x,        y:y,        w:W_, d:t,      h:hh, roof:'flat'},
-    {x:x,        y:y+D_-t,   w:W_, d:t,      h:hh, roof:'flat'},
-    {x:x,        y:y+t,      w:t,  d:D_-2*t, h:hh, roof:'flat'},
-    {x:x+W_-t,   y:y+t,      w:t,  d:D_-2*t, h:hh, roof:'flat'}
-  ];
-  o.type = 'Blockrand'; o.label = 'Blockrand';
-  centroid(o);
-})();
-var HERO = survivors[3];
-var HERO_STOREYS = Math.round(HERO.bars[0].h / ST);
-
-/* build its floor plan: units around the perimeter, cores in the two long wings */
-var mixCount = [0,0,0], TOTAL_UNITS = 0, CORES = 0, GFA = 0;
-HERO.bars.forEach(function(b, bi){
-  var along = b.w >= b.d ? 'x' : 'y';
-  var L = along === 'x' ? b.w : b.d;
-  var k = Math.max(2, Math.round(L / 9));
-  var coreCell = (bi < 2) ? Math.floor(k/2) : -1;    // the two long wings carry the cores
-  b.cells = [];
-  for (var i=0;i<k;i++){
-    var cell = { core: i === coreCell };
-    if (along === 'x'){ cell.x = b.x + i*(b.w/k); cell.w = b.w/k; cell.y = b.y; cell.d = b.d; }
-    else              { cell.y = b.y + i*(b.d/k); cell.d = b.d/k; cell.x = b.x; cell.w = b.w; }
-    if (!cell.core){ cell.type = Math.floor(rnd()*3); }
-    b.cells.push(cell);
-  }
-  b.storeys = Math.max(1, Math.round(b.h / ST));
-  if (coreCell >= 0) CORES++;
-  b.cells.forEach(function(c){
-    if (c.core) return;
-    mixCount[c.type] += b.storeys; TOTAL_UNITS += b.storeys;
-  });
-  GFA += b.w * b.d * b.storeys;
-});
-GFA = Math.round(GFA * 1.0 / 10) * 10;
-
-/* ---------- fit the composition into the canvas ---------- */
-(function(){
-  var minX=1e9, maxX=-1e9, minY=1e9, maxY=-1e9;
-  function note(x,y,z){ var r = raw(x,y,z);
-    if(r[0]<minX)minX=r[0]; if(r[0]>maxX)maxX=r[0];
-    if(r[1]<minY)minY=r[1]; if(r[1]>maxY)maxY=r[1]; }
-  [FIELD_A, FIELD_B, STREET].forEach(function(f){
-    note(f.x,f.y,0); note(f.x+f.w,f.y,0); note(f.x,f.y+f.d,0); note(f.x+f.w,f.y+f.d,0);
-  });
-  schemes.forEach(function(s){
-    s.bars.forEach(function(b){
-      var top = b.h + (b.rh||0);
-      note(b.x,b.y,0); note(b.x+b.w,b.y,0); note(b.x,b.y+b.d,0); note(b.x+b.w,b.y+b.d,0);
-      note(b.x,b.y,top); note(b.x+b.w,b.y,top); note(b.x,b.y+b.d,top); note(b.x+b.w,b.y+b.d,top);
-    });
-  });
-  var mL=46, mR=46, mT=34, mB=64;
-  S  = Math.min((W-mL-mR)/(maxX-minX), (H-mT-mB)/(maxY-minY));
-  OX = mL - minX*S + (W-mL-mR - (maxX-minX)*S)/2;
-  OY = mT - minY*S;
-  resetT();
-})();
-
-/* the enlarged view: how far the hero can grow before it leaves the frame */
-var HERO_R = 0, HERO_TOP = 0;
-HERO.bars.forEach(function(b){
-  [[b.x,b.y],[b.x+b.w,b.y],[b.x,b.y+b.d],[b.x+b.w,b.y+b.d]].forEach(function(c){
-    HERO_R = Math.max(HERO_R, Math.hypot(c[0]-HERO.cx, c[1]-HERO.cy));
-  });
-  HERO_TOP = Math.max(HERO_TOP, b.h + (b.rh||0));
-});
-/* the dossier takes the right third, the labels the top band */
-var S_BIG = Math.min((W*0.50) / (2*HERO_R*FX), (H*0.58) / (2*HERO_R*FY + HERO_TOP));
-
-/* label a readable subset of the deaths */
-var labelled = schemes.filter(function(s){ return !s.keep; })
-                      .sort(function(a,b){ return a.killAt - b.killAt; })
-                      .filter(function(_,i){ return i % 5 === 0; });
-
-/* depth sort: far first */
-schemes.sort(function(a,b){ return (a.cx+a.cy) - (b.cx+b.cy); });
-
-/* ---------- ground ---------- */
-function ground(f, a){
-  poly([P(f.x,f.y,0),P(f.x+f.w,f.y,0),P(f.x+f.w,f.y+f.d,0),P(f.x,f.y+f.d,0)],
-       'rgba(255,255,255,0.014)', '#26262a', a);
-}
-function street(a){
-  poly([P(STREET.x,STREET.y,0),P(STREET.x+STREET.w,STREET.y,0),
-        P(STREET.x+STREET.w,STREET.y+STREET.d,0),P(STREET.x,STREET.y+STREET.d,0)],
-       'rgba(208,138,78,0.045)', '#33261c', a);
-}
-
-/* ---------- x-ray of the hero: plates, units, cores ----------
-   Every plate, cell and core wall is collected as a draw-op with its own depth
-   (via depth3, the same view-space metric drawSolid uses), then executed back
-   to front. Fixed bar/floor order left near cells drawn under far ones once
-   the scheme passed certain rotation angles — that's what made the unit mix
-   look wrong, with colours from the far side of the ring bleeding through. */
-function drawXray(a){
-  var ops = [];
-  HERO.bars.forEach(function(b){
-    for (var f=0; f<b.storeys; f++){
-      (function(f){
-        var z = f*ST, cx = b.x+b.w/2, cy = b.y+b.d/2;
-        ops.push({ dep: depth3(cx,cy,z), run: function(){
-          poly([P(b.x,b.y,z),P(b.x+b.w,b.y,z),P(b.x+b.w,b.y+b.d,z),P(b.x,b.y+b.d,z)],
-               null, 'rgba(236,231,223,0.10)', a*0.9, 0.6);
-        }});
-        b.cells.forEach(function(c){
-          if (c.core) return;
-          var u = UNIT_TYPES[c.type], ccx = c.x+c.w/2, ccy = c.y+c.d/2;
-          ops.push({ dep: depth3(ccx,ccy,z) + 0.01, run: function(){
-            poly([P(c.x,c.y,z),P(c.x+c.w,c.y,z),P(c.x+c.w,c.y+c.d,z),P(c.x,c.y+c.d,z)],
-                 'rgba(' + u.rgb + ',' + (0.17*a).toFixed(3) + ')',
-                 'rgba(' + u.rgb + ',' + (0.45*a).toFixed(3) + ')', 1, 0.6);
-          }});
-        });
-      })(f);
-    }
-    // circulation cores, full height, with stair runs
-    b.cells.forEach(function(c){
-      if (!c.core) return;
-      var topDep = depth3(c.x+c.w/2, c.y+c.d/2, b.h) + 0.02;
-      ops.push({ dep: topDep, run: function(){
-        poly([P(c.x,c.y+c.d,0),P(c.x+c.w,c.y+c.d,0),P(c.x+c.w,c.y+c.d,b.h),P(c.x,c.y+c.d,b.h)],
-             'rgba(208,138,78,0.10)', 'rgba(208,138,78,0.8)', a);
-        poly([P(c.x+c.w,c.y,0),P(c.x+c.w,c.y+c.d,0),P(c.x+c.w,c.y+c.d,b.h),P(c.x+c.w,c.y,b.h)],
-             'rgba(208,138,78,0.07)', 'rgba(208,138,78,0.8)', a);
-        ctx.globalAlpha = a*0.75; ctx.strokeStyle = '#d08a4e'; ctx.lineWidth = 0.8;
-        for (var f2=0; f2<b.storeys; f2++){
-          var p1 = P(c.x+0.8, c.y+0.8, f2*ST), p2 = P(c.x+c.w-0.8, c.y+c.d-0.8, (f2+1)*ST);
-          ctx.beginPath(); ctx.moveTo(p1[0],p1[1]); ctx.lineTo(p2[0],p2[1]); ctx.stroke();
-        }
-        ctx.globalAlpha = 1;
-      }});
-    });
-  });
-  ops.sort(function(p,q){ return p.dep - q.dep; }).forEach(function(o){ o.run(); });
-}
-
-/* ---------- HTML overlays ---------- */
-var phaseLabel = document.getElementById('phaseLabel');
-var scoreFinal = document.getElementById('scoreFinal');
-var scoreNum   = document.getElementById('scoreNum');
-var dossier    = document.getElementById('dossier');
-var kpiLayer   = document.getElementById('kpiLayer');
-var hoveredIdx = -1;
-
-var kpiEls = survivors.map(function(s, idx){
-  var pt = P(s.cx, s.cy, 0);
-  var el = document.createElement('div');
-  el.className = 'kpi';
-  el.style.left = Math.min(86, Math.max(8, pt[0]/W*100)) + '%';
-  el.style.top  = Math.min(78, pt[1]/H*100 + 2) + '%';
-  el.innerHTML =
-    '<div class="kpi-id">' + s.label + ' · ' + s.metrics.fit + '</div>' +
-    '<div class="kpi-row"><span>ENE</span><b>' + s.metrics.energy + '</b></div>' +
-    '<div class="kpi-row"><span>DAY</span><b>' + s.metrics.daylight + '%</b></div>' +
-    '<div class="kpi-row"><span>CST</span><b>' + (s.metrics.cost>0?'+':'') + s.metrics.cost + '%</b></div>';
-  el.addEventListener('mouseenter', function(){ hoveredIdx = idx; el.classList.add('hover'); render(currentT); });
-  el.addEventListener('mouseleave', function(){ hoveredIdx = -1; el.classList.remove('hover'); render(currentT); });
-  kpiLayer.appendChild(el);
-  return el;
-});
-
-document.getElementById('dId').textContent    = HERO.label;
-document.getElementById('dFit').textContent   = HERO.metrics.fit;
-document.getElementById('dFloors').textContent= HERO_STOREYS;
-document.getElementById('dGfa').textContent   = GFA.toLocaleString() + ' m²';
-document.getElementById('dUnits').textContent = TOTAL_UNITS;
-document.getElementById('dCore').textContent  = CORES + ' · perimeter';
-document.getElementById('dEne').textContent   = HERO.metrics.energy + ' kWh/m²a';
-document.getElementById('dDay').textContent   = HERO.metrics.daylight + '%';
-document.getElementById('dCost').textContent  = (HERO.metrics.cost>0?'+':'') + HERO.metrics.cost + '%';
-(function(){
-  var mixBar = document.getElementById('mixBar'), mixLegend = document.getElementById('mixLegend');
-  UNIT_TYPES.forEach(function(u, i){
-    var seg = document.createElement('i');
-    seg.style.background = u.hex; seg.style.flex = mixCount[i]; seg.style.opacity = '.85';
-    mixBar.appendChild(seg);
-    var row = document.createElement('div');
-    row.innerHTML = '<em style="background:' + u.hex + '"></em>' + u.name +
-                    '<b>' + Math.round(mixCount[i]/TOTAL_UNITS*100) + '%</b>';
-    mixLegend.appendChild(row);
-  });
-  var fg = document.getElementById('fieldGrid');
-  for (var i=0;i<50;i++) fg.appendChild(document.createElement('span'));
-})();
-
-/* ---------- phases ----------
-   0.00–0.20 generate | 0.20–0.32 evaluate | 0.32–0.54 eliminate | 0.54–0.60 five remain
-   0.60–0.66 take one forward | 0.66–0.74 enlarge | 0.74–1.00 rotate, x-ray past the half turn */
-var GEN=0.20, EV0=0.20, EV1=0.32, RD0=0.32, RD1=0.54;
-var lastPhase = '';
-function setPhase(t){
-  var label;
-  if (t < GEN)       label = 'Enumerating ' + (POSSIBILITIES/1e6).toFixed(1) + ' M geometries';
-  else if (t < RD0)  label = 'Simulating the top 1 percent';
-  else if (t < RD1)  label = 'Eliminating against the rules';
-  else if (t < 0.60) label = 'Five schemes remain';
-  else if (t < 0.66) label = 'Taking the ' + HERO.label + ' forward';
-  else if (t < 0.87) label = 'Opening the ' + HERO.label;
-  else               label = 'X-ray: circulation and unit mix';
-  if (label !== lastPhase){ phaseLabel.innerHTML = '<span class="dot"></span>' + label; lastPhase = label; }
-  phaseLabel.classList.toggle('active', t >= GEN);
-}
-
-var currentT = 0;
-
-function scene(t){
-  currentT = t;
-  ctx.clearRect(0,0,W,H);
-
-  var selectE = easeIO(clamp01((t - 0.60) / 0.06));     // the other four bow out
-  var zoom    = clamp01((t - 0.66) / 0.08);
-  var zoomE   = easeIO(zoom);
-  var fieldA  = 1 - zoomE;                              // ground, street, everything else
-  var handA   = 1 - clamp01(zoom / 0.25);               // flat-site hero hands over
-  var heroA   = clamp01(zoom / 0.25);
-  var rot     = clamp01((t - 0.74) / 0.26);
-  var xrayA   = clamp01((rot - 0.5) / 0.10);
-
-  /* ---------------- ACT ONE : the field ---------------- */
-  if (fieldA > 0.01){
-    resetT();
-    ground(FIELD_A, fieldA); street(fieldA); ground(FIELD_B, fieldA);
-
-    var gen = Math.min(1, t/GEN);
-    var red = (t-RD0)/(RD1-RD0);
-    var alive = 0, born = 0;
-
-    for (var i=0;i<schemes.length;i++){
-      var s = schemes[i], a = 0, k = 0;
-      if (s.born <= gen){
-        born++;
-        var fresh = clamp01((gen - s.born) / 0.05);      // the birth flash
-        a = 0.9;
-        if (t > RD0 && !s.keep){
-          k = clamp01((red - s.killAt) / 0.16);
-          a = 0.9*(1-k) + 0.055*k;                       // the discarded field stays as a ghost
-        }
-        if (s.keep || k < 0.5) alive++;
-
-        var col = C.cand, al = a;
-        if (fresh < 1 && !s.keep){ col = C.born; al = Math.min(1, a + 0.1); }
-        if (s.keep && t > RD0 + 0.04){ col = C.surv; al = Math.min(1, 0.9 + red*0.4); }
-        if (s === HERO){ al *= handA; if (selectE > 0.2) col = C.surv; }
-        else if (s.keep){ al *= (1 - selectE*0.92); }
-        else { al *= (1 - selectE*0.75); }
-        al *= fieldA;
-
-        if (hoveredIdx >= 0 && survivors[hoveredIdx] === s){ col = C.surv; al = Math.min(1, al + 0.25); }
-        if (al <= 0.01) continue;
-        for (var j=0;j<s.bars.length;j++) drawBar(s.bars[j], col, al);
-      }
-    }
-
-    /* evaluation sweep */
-    if (t > EV0 && t < EV1){
-      var p = (t-EV0)/(EV1-EV0), sx = p * W;
-      var g = ctx.createLinearGradient(sx-190, 0, sx+10, 0);
-      g.addColorStop(0,'rgba(208,138,78,0)');
-      g.addColorStop(0.72,'rgba(208,138,78,0.16)');
-      g.addColorStop(1,'rgba(208,138,78,0.42)');
-      ctx.fillStyle = g; ctx.fillRect(sx-190, 0, 200, H);
-      ctx.save();
-      ctx.shadowColor = '#d08a4e'; ctx.shadowBlur = 22;
-      ctx.strokeStyle = 'rgba(208,138,78,0.9)'; ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(sx,0); ctx.lineTo(sx,H); ctx.stroke();
-      ctx.restore();
-      ctx.globalAlpha = 0.85; ctx.fillStyle = '#d08a4e';
-      ctx.font = '600 12px system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
-      var st = 'SIMULATING · ' + Math.round(SIMULATED*p).toLocaleString() + ' / ' + SIMULATED.toLocaleString();
-      var stw = ctx.measureText(st).width;
-      ctx.fillText(st, Math.min(W-26-stw, Math.max(26, sx-stw/2)), 26);
-      ctx.globalAlpha = 1;
-    }
-
-    /* kill reasons */
-    if (t > RD0 && t < RD1 + 0.05){
-      ctx.font = '500 13px system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
-      for (var m=0;m<labelled.length;m++){
-        var s2 = labelled[m], dd = red - s2.killAt;
-        if (dd < -0.02 || dd > 0.14) continue;
-        var fade = dd < 0 ? (dd+0.02)/0.02 : 1 - dd/0.14;
-        var pt = P(s2.cx, s2.cy, 16);
-        ctx.globalAlpha = clamp01(fade) * 0.85 * fieldA;
-        ctx.fillStyle = '#b8564a';
-        ctx.fillText(s2.reason, pt[0]-14, pt[1]);
-        ctx.globalAlpha = 1;
-      }
-    }
-
-    /* survivor labels */
-    if (t > RD1 + 0.02){
-      var lf = Math.min(1, (t-RD1-0.02)/0.04);
-      ctx.font = '500 13px system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
-      for (var q=0;q<survivors.length;q++){
-        var sv = survivors[q], ptn = P(sv.cx, sv.cy, 26);
-        var la = sv === HERO ? handA : (1 - selectE);
-        ctx.globalAlpha = lf*0.9*la*fieldA;
-        ctx.fillStyle = '#d08a4e';
-        ctx.fillText(sv.label, ptn[0]-16, ptn[1]);
-        ctx.globalAlpha = 1;
-      }
-    }
-
-    /* the bracket that marks the one taken forward */
-    if (selectE > 0.02 && handA > 0.02){
-      var c0 = P(HERO.cx, HERO.cy, 0);
-      var rpx = HERO_R * S * 1.25, arm = 18;
-      var bx = c0[0]-rpx, by = c0[1]-rpx*0.62-24, bw2 = rpx*2, bh2 = rpx*1.24+34;
-      ctx.save();
-      ctx.globalAlpha = selectE*handA*fieldA; ctx.strokeStyle = '#d08a4e'; ctx.lineWidth = 1.2;
-      [[bx,by,1,1],[bx+bw2,by,-1,1],[bx+bw2,by+bh2,-1,-1],[bx,by+bh2,1,-1]].forEach(function(c){
-        ctx.beginPath();
-        ctx.moveTo(c[0]+c[2]*arm, c[1]); ctx.lineTo(c[0], c[1]); ctx.lineTo(c[0], c[1]+c[3]*arm);
-        ctx.stroke();
-      });
-      ctx.fillStyle = '#d08a4e'; ctx.font = '600 11px system-ui,sans-serif';
-      ctx.fillText('TAKEN FORWARD', bx, by - 9);
-      ctx.restore();
-    }
-
-    /* counter */
-    var txt;
-    if (t < GEN)      txt = Math.round(POSSIBILITIES*(t/GEN)).toLocaleString() + ' enumerated';
-    else if (t < RD0) txt = SIMULATED.toLocaleString() + ' simulated · top 1%';
-    else if (t < RD1) txt = alive + ' remaining';
-    else              txt = '5 schemes remain';
-    ctx.globalAlpha = 0.8 * fieldA;
-    ctx.fillStyle = t > RD0 + 0.02 ? '#d08a4e' : '#b8b2a8';
-    ctx.font = '500 15px system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif';
-    ctx.fillText(txt, 26, H-24);
-    ctx.globalAlpha = 1;
-  }
-
-  /* ---------------- ACT TWO : the scheme, opened ---------------- */
-  if (heroA > 0.001){
-    var r0 = raw(HERO.cx, HERO.cy, 0);
-    var fromX = OX + r0[0]*S, fromY = OY + r0[1]*S;
-    var toX = W*0.42, toY = H*0.70;
-    T.rot = rot * Math.PI * 2;                 // one full turn once it has arrived
-    T.cx = HERO.cx; T.cy = HERO.cy;
-    T.S  = S + (S_BIG - S) * zoomE;
-    var tx = fromX + (toX - fromX) * zoomE, ty = fromY + (toY - fromY) * zoomE;
-    T.OX = tx - r0[0]*T.S; T.OY = ty - r0[1]*T.S;
-
-    // plot outline, rotating with the scheme
-    var pad = 6;
-    var bb = { x0:1e9, y0:1e9, x1:-1e9, y1:-1e9 };
-    HERO.bars.forEach(function(b){
-      bb.x0 = Math.min(bb.x0, b.x); bb.y0 = Math.min(bb.y0, b.y);
-      bb.x1 = Math.max(bb.x1, b.x+b.w); bb.y1 = Math.max(bb.y1, b.y+b.d);
-    });
-    poly([P(bb.x0-pad,bb.y0-pad,0),P(bb.x1+pad,bb.y0-pad,0),P(bb.x1+pad,bb.y1+pad,0),P(bb.x0-pad,bb.y1+pad,0)],
-         'rgba(255,255,255,0.015)', '#2e2e33', heroA);
-
-    drawSolid(HERO.bars, heroA, xrayA);
-    if (xrayA > 0.01) drawXray(xrayA * heroA);
-
-    resetT();
-    ctx.globalAlpha = heroA*0.9;
-    ctx.fillStyle = '#d08a4e'; ctx.font = '600 13px system-ui,sans-serif';
-    ctx.fillText(HERO.label.toUpperCase() + ' · ' + HERO_STOREYS + ' STOREYS · ' + TOTAL_UNITS + ' UNITS · ' + CORES + ' CORES', 30, 34);
-    ctx.fillStyle = '#7d7a73'; ctx.font = '500 11px system-ui,sans-serif';
-    ctx.fillText(xrayA > 0.2 ? 'X-RAY — CIRCULATION + UNIT MIX'
-                             : 'ORBIT ' + Math.round((rot*360) % 360) + '°', 30, 52);
-    ctx.globalAlpha = 1;
-  }
-
-  /* ---------------- overlays ---------------- */
-  var tagsBase = clamp01((t - RD1 - 0.02) / 0.02);
-  kpiEls.forEach(function(el, idx){
-    var vis = survivors[idx] === HERO ? tagsBase * handA : tagsBase * (1 - selectE);
-    el.classList.toggle('show', vis > 0.02);
-    el.style.opacity = vis.toFixed(3);
-  });
-  var scoreOn = t > RD1 && t < 0.685;
-  scoreFinal.classList.toggle('show', scoreOn);
-  scoreNum.textContent = scoreOn ? overallScore + ' / 100' : '—';
-  dossier.classList.toggle('show', xrayA > 0.25);
-
-  setPhase(t);
-}
-
-/* ---------- autoplay ----------
-   Runs on its own clock rather than being scrubbed by scroll position, so the
-   sequence plays without the visitor needing to scroll through it. It starts
-   once the stage is actually on screen, loops continuously, and pauses when
-   scrolled away or the tab is hidden so it costs nothing off-screen. */
-var stage = document.getElementById('stage');
-var DURATION = 22000;              // one full cycle, ms
-var playing = false, rafId = null;
-var t0 = null, pausedAt = 0;
-
-function tick(now){
-  if (t0 === null) t0 = now - pausedAt;
-  var elapsed = now - t0;
-  var t = (elapsed % DURATION) / DURATION;
-  scene(t);
-  rafId = requestAnimationFrame(tick);
-}
-function play(){
-  if (playing) return;
-  playing = true;
-  rafId = requestAnimationFrame(tick);
-}
-function pause(now){
-  if (!playing) return;
-  playing = false;
-  if (rafId) cancelAnimationFrame(rafId);
-  if (t0 !== null && now) pausedAt = now - t0;
-}
-
-if (reduce){
-  scene(0.95);
-} else {
-  scene(0);
-  if ('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (e.isIntersecting) play();
-        else pause(performance.now());
-      });
-    }, { threshold: 0.15 });
-    io.observe(stage);
-  } else {
-    play();
-  }
-  document.addEventListener('visibilitychange', function(){
-    if (document.hidden) pause(performance.now());
-    else if (stage.getBoundingClientRect().top < window.innerHeight) play();
-  });
-  window.addEventListener('resize', function(){ if (!playing) scene(pausedAt / DURATION % 1); });
-}
-
-/* ---------- hero counters ---------- */
-function countTo(el, target, fmt, dur){
-  var t0 = null;
-  function step(ts){
-    if (t0 === null) t0 = ts;
-    var p = Math.min(1, (ts-t0)/dur);
-    el.textContent = fmt(ease(p) * target);
-    if (p < 1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-setTimeout(function(){
-  countTo(document.getElementById('statC'), CONSTRAINTS, function(v){ return Math.round(v); }, 1300);
-  countTo(document.getElementById('statP'), POSSIBILITIES, function(v){ return (v/1e6).toFixed(1) + ' M'; }, 1700);
-}, 900);
-})();
-
-/* ---------- hero line reveal ---------- */
-window.addEventListener('load', function(){
-  requestAnimationFrame(function(){
-    document.querySelectorAll('.hero .mask').forEach(function(m, i){
-      m.querySelector('i').style.transitionDelay = (0.08 + i*0.07) + 's';
-      m.classList.add('in');
-    });
-  });
-});
-
-/* ---------- statement word reveal ---------- */
-(function(){
-  var el = document.getElementById('statement');
-  if (!el) return;
-  var frag = document.createDocumentFragment();
-  Array.prototype.slice.call(el.childNodes).forEach(function(node){
-    var isText = node.nodeType === 3;
-    var tag = isText ? null : node.tagName.toLowerCase();
-    node.textContent.split(/(\s+)/).forEach(function(tok){
-      if (!tok.trim()){ frag.appendChild(document.createTextNode(' ')); return; }
-      var s = document.createElement('span'); s.className = 'word';
-      var inner = document.createElement('i');
-      if (tag){ var em = document.createElement(tag); em.textContent = tok; inner.appendChild(em); }
-      else { inner.textContent = tok; }
-      s.appendChild(inner); frag.appendChild(s);
-    });
-  });
-  el.innerHTML = ''; el.appendChild(frag);
-  el.querySelectorAll('.word > i').forEach(function(i, n){ i.style.transitionDelay = (n*0.035) + 's'; });
-})();
-
-/* ---------- progress bar + nav ---------- */
-(function(){
-  var bar = document.getElementById('scrollbar'), nav = document.getElementById('siteNav');
-  function update(){
-    var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
-    bar.style.width = (max > 0 ? (h.scrollTop/max)*100 : 0) + '%';
-    nav.classList.toggle('scrolled', h.scrollTop > 8);
-  }
-  window.addEventListener('scroll', update, { passive:true });
-  update();
-})();
-
-/* ---------- reveal on scroll ---------- */
-(function(){
-  var els = document.querySelectorAll('.reveal, #statement');
-  if (!('IntersectionObserver' in window)){ els.forEach(function(el){ el.classList.add('in'); }); return; }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold:0.15, rootMargin:'0px 0px -8% 0px' });
-  els.forEach(function(el){ io.observe(el); });
+document.querySelectorAll('.stepper button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.step,true)));
+howScene.set(READ,true);go('read',false);
+const order4=['read','gen','score','cmp'];
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){autoTimer=setInterval(()=>{if(document.querySelector('[data-panel="how"]').hidden)return;go(order4[(order4.indexOf(cur)+1)%4])},5200)}
 })();
 </script>
 </body>
